@@ -1,0 +1,4 @@
+counter Struct
+counter pro LS_START
+
+Ein Counter pro Klassifizier-Komponente
