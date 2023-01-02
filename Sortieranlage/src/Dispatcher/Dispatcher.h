@@ -9,6 +9,7 @@ using namespace std;
 class Dispatcher {
 private:
 	int fsmchid;
+	int adcChid;
 	//int channelIDhal;
 	int connectionIdHalAktorik;
 	bool run_thread;
@@ -49,8 +50,9 @@ public:
 	std::thread * isr_thread;
 
 	void start_HAL_PulsResiver_THREAD(void);
-	//geta fure die Chanel fure Pulsmesseges
+	//geta für den Channel für PulseMessages
 	int getchid();
 	void set_FSM_chid(int fsmChid);
+	void set_ADC_chID(int adcChid);
 };
 #endif

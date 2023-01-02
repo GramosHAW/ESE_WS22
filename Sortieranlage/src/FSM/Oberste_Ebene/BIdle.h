@@ -15,6 +15,10 @@ class BIdle : public BaseState {
 public:
 	bool LS_START_BLOCK() override;
 	bool TST_STOP_KURZ() override;
+	bool LS_START_FREI() override;
+
+	void entry() override;
+	void exit() override;
 
 	void showState() override;
 };

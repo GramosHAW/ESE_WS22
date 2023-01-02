@@ -61,6 +61,8 @@
 #define		PSMG_SW_HM_START					0x23
 #define		PSMG_SW_HM_STOP						0x24
 #define     PSMG_SW_HM_DATA                     0x42
+#define 	PSMG_SW_HM_CALHOE				    0x43// nicht benuzt momentan
+#define 	PSMG_SW_HM_SETWERT 		            0x44
 
 	//Sortierelement
 #define     PSMG_SE_SORT_AUSSORTIERT            0x41 // TODO ubenenean
@@ -101,8 +103,15 @@
 #define		PSMG_SW_FEHLER_QUITTI_TRUE			0x3D
 #define		PSMG_SW_FEHLER_QUITTI_FALSE			0x3E
 #define		PSMG_SW_FEHLER_ENDE					0x40
- // Interrupt
-#define 	PSMG_INTERRUPT						0xAA
+
+#define		PSMG_ESTOPP_OK_SA1					0x55
+#define		PSMG_ESTOPP_OK_SA2					0x66
+ 	// Interrupt
+#define 	PSMG_INTERRUPT						0xAA//stack owerflow!!!!!!
+	// read data
+#define		PSMG_SW_READDATA_TRUE				0x69
+
+
 
 
 

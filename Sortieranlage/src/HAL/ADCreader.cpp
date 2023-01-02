@@ -23,7 +23,11 @@ ADCreader::ADCreader() {
 	if (conID < 0) {
 		perror("Could not connect to channel!");
 	}
-	printf("ADC new\n");
+
+	//Chanel from Dispacher
+	this->reciveID = ChannelCreate(0);
+
+	//printf("ADC new\n");
 	adc = new ADC(tsc);
 
 	adc->registerAdcISR(conID, PULSE_ADC_SAMLING_DONE);
@@ -64,6 +68,7 @@ void ADCreader::receivingRoutine() {
 
 	ThreadCtl( _NTO_TCTL_IO, 0);	//Request IO privileges for this thread.
 
+	//Chanel to dipascher
 	Dispatcher* dispatcher = Dispatcher::GetInstance();
 	int connectionIdDispacher = ConnectAttach(0, 0, dispatcher->getchid(),
 	_NTO_SIDE_CHANNEL, 0);
@@ -71,46 +76,50 @@ void ADCreader::receivingRoutine() {
 	_pulse msg;
 	receivingRunning = true;
 	bool mejurStarted = false;
-	int mejurmentNumber= 0;
+	int mejurmentNumber = 0;
+	this->bandHight = 4000;
+
+	thread caliThread(&ADCreader::calibrate_Bandhight, this);
+	caliThread.detach();
 
 	printf("Message thread started.\n");
 
 	while (receivingRunning) {
+		//Interups from ADC hoensensor
 		int recvid = MsgReceivePulse(chanID, &msg, sizeof(_pulse), nullptr);
 		if (recvid < 0) {
 			perror("MsgReceivePulse failed!");
 			exit(EXIT_FAILURE);
 		}
+
 		if (recvid == 0) {	//pulse received.
-			int realhight=3000*14/msg.value.sival_int;
 			//Stop thread while it blocks.
-			if (msg.code == PULSE_STOP_THREAD) {
+			if (msg.code == PSMG_INTERRUPT) {
 				printf("Thread kill code received!\n");
 				receivingRunning = false;
 				continue;
 			}
-			if (realhight >13) {
+
+			if (msg.value.sival_int > bandHight) {
+
 				if (!mejurStarted) {
 					MsgSendPulse(connectionIdDispacher,
-					SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_HM_START,
-					0);
+					SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_HM_START, 0);
 					mejurStarted = true;
 				}
-				mejurmentNumber ++;
+				mejurmentNumber++;
 				MsgSendPulse(connectionIdDispacher,
-				SIGEV_PULSE_PRIO_INHERIT,PSMG_SW_HM_DATA,
-				realhight);
-			} else if (mejurStarted&&(mejurmentNumber>=180)) {
+				SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_HM_DATA, msg.value.sival_int);
+			} else if (mejurStarted && (mejurmentNumber >= 180)) {
 				mejurStarted = false;
-				mejurmentNumber= 0;
+				mejurmentNumber = 0;
 				MsgSendPulse(connectionIdDispacher,
-				SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_HM_STOP,
-				0);
+				SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_HM_STOP, 0);
 			}
 			//ADC interrupt value.
 			if (msg.code == PULSE_ADC_SAMLING_DONE) {
 
-				//printf("Value from adc with value %d mm\n", realhight);
+				//printf("Value from adc with value %d mm\n",msg.value.sival_int);
 //				mejurment.add
 				adc->sample();
 			}
@@ -122,3 +131,17 @@ void ADCreader::receivingRoutine() {
 	printf("Message thread stops...\n");
 }
 
+void ADCreader::calibrate_Bandhight() {
+	_pulse recivemsg;
+	//Chanel from Dispacher
+	MsgReceivePulse(reciveID, &recivemsg, sizeof(_pulse), nullptr);
+
+	if (recivemsg.code == PSMG_SW_HM_SETWERT) {
+		printf("I am set!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		this->bandHight = recivemsg.value.sival_int;
+	}
+}
+
+int ADCreader::getreciveID() {
+	return reciveID;
+}

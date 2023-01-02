@@ -66,9 +66,10 @@ void ImpulsHandler::handelFSMpuls() {
 				 MsgSendPulse(dispatcherChanel, SIGEV_PULSE_PRIO_INHERIT,
 				 PSMG_SW_AMPEL_GELB_BLINK, 2);
 				 MsgSendPulse(dispatcherChanel, SIGEV_PULSE_PRIO_INHERIT,
-				 PSMG_SW_AMPEL_ROT_BLINK, 3);
-				 break;
+				 PSMG_SW_AMPEL_ROT_BLINK, 3)
 				 */
+				 break;
+
 			case PSMG_HW_LS_SORT_FREI:
 				//TODO
 				MsgSendPulse(dispatcherChanel, SIGEV_PULSE_PRIO_INHERIT,

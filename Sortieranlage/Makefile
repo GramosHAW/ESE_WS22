@@ -13,11 +13,14 @@ TARGET = $(OUTPUT_DIR)/$(ARTIFACT)
 #Compiler definitions
 
 CC = qcc -Vgcc_nto$(PLATFORM)
-CXX = qcc -lang-c++ -Vgcc_nto$(PLATFORM) -DSIM_SHOW_SENSORS -DSIM_SHOW_ACTUATORS -DSIM_TWIN
+CXX = qcc -lang-c++ -Vgcc_nto$(PLATFORM) 
+#-DSIM_SHOW_SENSORS -DSIM_SHOW_ACTUATORS
+
 #############
 # Hier einkommentieren wenn die Tests kompiliert werden sollen!
 #CXX += -DRUN_TESTS 
 #############
+
 LD = $(CXX)
 
 #User defined include/preprocessor flags and libraries
@@ -37,7 +40,7 @@ LIBS += -lsocket
 # Wir benutzen die library für das GoogleTest framework. 
 #	Diese muss ggf. noch auf euer VM installiert werden! 
 #	Siehe readme für weitere Informationen.
-#LIBS += -lgtest
+LIBS += -lgtest
 ###########################################################
 
 #Compiler flags for build profiles

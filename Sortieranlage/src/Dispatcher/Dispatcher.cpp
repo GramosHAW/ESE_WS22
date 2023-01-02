@@ -38,14 +38,18 @@ void Dispatcher::set_FSM_chid(int fsmChid) {
 }
 
 void Dispatcher::start_HAL_PulsResiver_THREAD(void) {
-	printf("I am about to start Despacher\n");
+//	cout << "starting Dispatcher..." << endl;
 	isr_thread = new thread(&Dispatcher::handelHALpuls, this);
 //	isr_thread.detach();
-	printf("ich bin gestarted Despacher\n");
+//	cout << "Dispatcher launched! " << endl;
 }
 
 int Dispatcher::getchid() {
 	return dispatcherChannelId;
+}
+
+void Dispatcher::set_ADC_chID(int adcChid) {
+	this->adcChid = ConnectAttach(0, 0, adcChid, _NTO_SIDE_CHANNEL, 0);
 }
 
 void Dispatcher::handelHALpuls() {
@@ -62,7 +66,8 @@ void Dispatcher::handelHALpuls() {
 			switch (msg.code) {
 			//Lichtschranke///////////////////////////////////////////////////////
 			case PSMG_HW_LS_START_FREI:
-				printf("I am in despacher\n");
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_LS_START_FREI, 0);
 				//TODO
 				break;
 			case PSMG_HW_LS_START_BLOCK:
@@ -77,7 +82,7 @@ void Dispatcher::handelHALpuls() {
 				break;
 			case PSMG_HW_LS_SORT_BLOCK:
 				//TODO
-				printf("I am in despacher\n");
+				printf("I am in dispatcher \n");
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_HW_LS_SORT_BLOCK, 0);
 				break;
@@ -92,10 +97,10 @@ void Dispatcher::handelHALpuls() {
 				PSMG_HW_LS_RUTSCHE_FREI, 0);
 				break;
 			case PSMG_HW_LS_ENDE_FREI:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_LS_ENDE_FREI, 0);
 				break;
 			case PSMG_HW_LS_ENDE_BLOCK:
-				//TODO
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_HW_LS_ENDE_BLOCK, 0);
 				break;
@@ -114,33 +119,39 @@ void Dispatcher::handelHALpuls() {
 				PSMG_HW_TST_STOP_KURZ, 0);
 				break;
 			case PSMG_HW_TST_STOP_LANG:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_TST_STOP_LANG, 0);
 				break;
 			case PSMG_HW_TST_RESET_KURZ:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_TST_RESET_KURZ, 0);
 				break;
 			case PSMG_HW_TST_RESET_LANG:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_LS_ENDE_BLOCK, 0);
 				break;
-				//Metalsensor//////////////////////////////////////////////////////////////
+				//Metallsensor//////////////////////////////////////////////////////////////
 			case PSMG_HW_MSENS_METALL:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_MSENS_METALL, 0);
 				break;
 			case PSMG_HW_MSENS_KEIN_METALL:
 				//TODO
 				break;
 				//E-Stopp////////////////////////////////////////////////////////////////////
 			case PSMG_HW_E_STOPP_TRUE:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_E_STOPP_TRUE, 0);
 				break;
 			case PSMG_HW_E_STOPP_FALSE:
-				//TODO
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_E_STOPP_FALSE, 0);
+				std::cout << " !! E-STOPP HERAUSGEZOGEN !! " << std::endl;
 				break;
 				//Hohenmesser//////////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_START, 0);
-				//TODO
 				break;
 			case PSMG_SW_HM_STOP:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
@@ -169,10 +180,30 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_AMPEL_ROT_BLINK, msg.value.sival_int);
 				//TODO
 				break;
+			case PSMG_SW_AMPEL_ROT_AUS:
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_ROT_AUS, msg.value.sival_int);
+				//TODO
+				break;
 			case PSMG_SW_AMPEL_GRUEN_AUS:
 				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_AMPEL_GRUEN_AUS, msg.value.sival_int);
-				//TODO
+				break;
+			case PSMG_SW_AMPEL_GRUEN_AN:
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GRUEN_AN, msg.value.sival_int);
+				break;
+			case PSMG_SW_AMPEL_GELB_AN:
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GELB_AN, msg.value.sival_int);
+				break;
+			case PSMG_SW_AMPEL_ROT_AN:
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_ROT_AN, msg.value.sival_int);
+				break;
+			case PSMG_SW_AMPEL_GELB_AUS:
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GELB_AUS, msg.value.sival_int);
 				break;
 				//BAND///////////////////////////////////////////////////////////////////////
 			case PSMG_SW_BAND_START:
@@ -183,7 +214,6 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_BAND_STOP:
 				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_BAND_STOP, 0);
-				//TODO
 				break;
 			case PSMG_SW_BAND_SLOW_AN:
 				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
@@ -205,6 +235,22 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_SORT_DURCH, 0);
 				break;
+			case PSMG_SW_HM_SETWERT:
+				MsgSendPulse(adcChid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_HM_SETWERT, msg.value.sival_int);
+				break;
+			case PSMG_ESTOPP_OK_SA1:
+				MsgSendPulse(connectionIdHalAktorik,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+				break;
+			case PSMG_ESTOPP_OK_SA2:
+				MsgSendPulse(connectionIdHalAktorik,
+				SIGEV_PULSE_PRIO_INHERIT, PSMG_ESTOPP_OK_SA2,
+						msg.value.sival_int);
+				break;
+
 			}
 		}
 	}

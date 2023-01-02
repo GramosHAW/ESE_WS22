@@ -67,10 +67,10 @@ InterruptHandler::InterruptHandler() {
 }
 
 void InterruptHandler::start_ISR_THREAD(void) {
-	printf("I am about to start\n");
+//	cout << "starting InterruptHandler Thread..." << endl;
 	isr_thread = new thread(&InterruptHandler::init_and_start, this);
 	isr_thread->detach();
-	printf("ich bin gestarted\n");
+//	cout "InterruptHandler Thread started!" << endl;
 }
 
 /*
@@ -162,7 +162,6 @@ void InterruptHandler::wait_for_event(void) {
 					MsgSendPulse(connectionIdDispacher,
 					SIGEV_PULSE_PRIO_INHERIT, PSMG_HW_LS_START_FREI, 0);
 				} else {
-					printf("I am in hal\n");
 					MsgSendPulse(connectionIdDispacher,
 					SIGEV_PULSE_PRIO_INHERIT, PSMG_HW_LS_START_BLOCK, 0);
 				}

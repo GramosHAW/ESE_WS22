@@ -64,6 +64,8 @@ public:
 	virtual ~ADCreader();
 	void receivingRoutine();
 	void startthread();
+	int getreciveID();
+
 	/* Variables */
 
 public:
@@ -71,9 +73,12 @@ public:
 	int mejurment[200];
 	int chanID;
 	int conID;
+	int reciveID;
 private:
+	void calibrate_Bandhight();
 	TSCADC tsc;
 	ADC* adc;
+	int bandHight;
 //	std::thread& receivingThread;
 };
 

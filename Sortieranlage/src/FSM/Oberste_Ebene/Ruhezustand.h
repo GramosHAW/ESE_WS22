@@ -17,6 +17,8 @@ public:
 	bool TST_START_KURZ() override;
 	bool TST_START_LANG() override;
 
+	void entry() override;
+	void exit() override;
 	void showState() override;
 };
 

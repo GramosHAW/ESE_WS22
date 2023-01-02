@@ -7,6 +7,7 @@
 
 #include "actions.h"
 #include <iostream>
+#include "BaseState.h"
 
 Actions::~Actions(){
     std::cout << "  Actions destructor called" << std::endl;

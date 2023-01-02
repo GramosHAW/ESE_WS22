@@ -15,13 +15,11 @@
 //Aktorik *aktorik = new Aktorik();
 
 void Betrieb::entry() {
-	send_event(PSMG_SW_AMPEL_GRUEN_AN);
-	//zu ersetzen mit MSG_SEND_PULSE
-	//aktorik->ampelGruenAn();
+	send_event_payload(PSMG_SW_AMPEL_GRUEN_AN,0);
 }
 
 void Betrieb::exit() {
-	send_event(PSMG_SW_AMPEL_GRUEN_AUS);
+	send_event_payload(PSMG_SW_AMPEL_GRUEN_AUS,0);
 	//zu ersetzen mit MSG_SEND_PULSE
 	//aktorik->ampelGruenAus();
 }
@@ -42,8 +40,20 @@ bool Betrieb::TST_STOP_KURZ(){
 	return handled;
 }
 
+
+
 bool Betrieb::LS_START_BLOCK(){
 	bool handled = substateBZ->LS_START_BLOCK();
+	return handled;
+}
+
+bool Betrieb::LS_SORT_BLOCK() {
+	bool handled = substateBZ->LS_SORT_BLOCK();
+	return handled;
+}
+
+bool Betrieb::LS_RUTSCHE_BLOCK() {
+	bool handled = substateBZ->LS_RUTSCHE_BLOCK();
 	return handled;
 }
 

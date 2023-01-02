@@ -7,11 +7,24 @@
 
 #include "Ruhezustand.h"
 #include "Betrieb.h"
-#include "Service.h"
+#include "ServiceModus/Service.h"
 #include "Bidle.h"
+#include "../BaseState.h"
+#include "ServiceModus/Standby.h"
 
 void Ruhezustand::initSubState(){
 	substateBZ = new BIdle;
+
+}
+
+void Ruhezustand::entry() {
+	cout << "Ruhezustand::entry() aufgerufen" << " | AMPEL ROT BLINK" <<endl;
+	//send_event_payload(PSMG_SW_AMPEL_ROT_BLINK,3);
+}
+
+void Ruhezustand::exit(){
+	cout << "Ruhezustand::exit() aufgerufen" << " | AMPEL ROT AUS" << endl;
+	send_event_payload(PSMG_SW_AMPEL_ROT_AUS,0);
 }
 
 
@@ -27,6 +40,7 @@ bool Ruhezustand::TST_START_LANG(){
 	exit();
 	new(this) Service;
 	entry();
+	entryStartNode();
 	return true;
 }
 

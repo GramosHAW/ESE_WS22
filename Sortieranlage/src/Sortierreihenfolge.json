@@ -1,0 +1,24 @@
+{
+    "WS_Reihenfolge": [
+        {
+            "id": null,
+            "type": "flach",
+            "height": null,
+            "meanheight": null
+
+        },
+        {
+            "id": null,
+            "type": "bohrung",
+            "height": null,
+            "meanheight": null
+        },
+        {
+            "id": null,
+            "type": "bohrung_metall",
+            "height": null,
+            "meanheight": null
+        }
+    ]
+
+}
