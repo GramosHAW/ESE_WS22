@@ -40,7 +40,7 @@ LIBS += -lsocket
 # Wir benutzen die library für das GoogleTest framework. 
 #	Diese muss ggf. noch auf euer VM installiert werden! 
 #	Siehe readme für weitere Informationen.
-LIBS += -lgtest
+#LIBS += -lgtest
 ###########################################################
 
 #Compiler flags for build profiles

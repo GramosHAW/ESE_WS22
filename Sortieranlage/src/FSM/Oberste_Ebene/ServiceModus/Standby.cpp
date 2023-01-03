@@ -12,31 +12,24 @@
 #include "Kalibrierung/Kalibrierung.h"
 
 void Standby::entry() {
-	cout << " >> standby entry " << endl;
-	this->showState();
+	//substateSERV->showState();
 }
-
-//void Standby::initSubState(){
-//
-//}
 
 
 // STÜRZT KOMISCHER WEISER BEI RESET NICHT AB, (VLLT WEIL NICHT IN SA1 DRIN, SA1::TST_RESET_KURZ() nicht existent
 bool Standby::TST_RESET_KURZ() {
 	//exit();
-	new (this) DateiEinlesen;
+	new (this) Kalibrierung;
 	entry();
 	return true;
 }
 
 bool Standby::TST_START_KURZ() {
-	//exit();
-	cout << " >> in Standby [start] gedrückt" << endl;
-	new (this) Kalibrierung;
+	exit();
+	cout << "in standby start gedrückt" << endl;
+	new (this) DateiEinlesen;
 	entry();
-	entryStartNode();
 	return true;
-
 }
 
 bool Standby::TST_STOP_KURZ() {
@@ -55,6 +48,5 @@ bool Standby::TST_START_LANG() {
 }
 
 void Standby::showState() {
-	cout << " <SubState> Standby " << endl;
-	//substateSERV->showState();
+	cout << "   SubstateSERV: Standby " << endl;
 }

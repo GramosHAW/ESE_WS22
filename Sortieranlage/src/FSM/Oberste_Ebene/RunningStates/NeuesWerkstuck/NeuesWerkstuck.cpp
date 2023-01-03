@@ -35,6 +35,7 @@ void NeuesWerkstuck::exit() {
 }
 
 void NeuesWerkstuck::showState(){
-	cout << "  substateNeuesWerckstuck: NeuesWerkstuck" << endl;
+	cout << " substateNeuesWerckstuck: NeuesWerkstuck" << endl;
+	subsubstateNeuesWerckstuck->showState();
 }
 

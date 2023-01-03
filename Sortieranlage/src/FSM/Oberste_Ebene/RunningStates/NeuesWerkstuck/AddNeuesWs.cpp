@@ -17,6 +17,6 @@ void AddNeuesWs::exit() {
 }
 
 void AddNeuesWs::showState(){
-	cout << "  subsubstateHoenmesser: NeuesWerkstuck" << endl;
+	cout << " subsubstateHoenmesser: NeuesWerkstuck" << endl;
 }
 

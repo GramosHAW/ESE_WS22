@@ -14,8 +14,6 @@ class SortiererEinstellen : public BaseState {
 
 	void sortEinstellen();
 	void saveEingabe();
-	void entry() override;
-	void exit() override;
 
 	void showState() override;
 

@@ -30,6 +30,6 @@ bool HohenmesserInit::HM_START() {
 }
 
 void HohenmesserInit::showState() {
-	cout << "  subsubstateHoenmesserk: HohenmesserInit" << endl;
+	cout << " subsubstateHoenmesser: HohenmesserInit" << endl;
 }
 

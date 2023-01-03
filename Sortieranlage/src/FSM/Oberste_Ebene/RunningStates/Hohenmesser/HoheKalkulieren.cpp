@@ -17,6 +17,6 @@ void HoheKalkulieren::exit() {
 }
 
 void HoheKalkulieren::showState(){
-	cout << "  subsubstateHoenmesser: HoheKalkulieren" << endl;
+	cout << " subsubstateHoenmesser: HoheKalkulieren" << endl;
 }
 

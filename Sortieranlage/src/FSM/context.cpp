@@ -11,6 +11,7 @@
 #include "actions.h"
 #include "../HAL/InterruptHandler.h"
 #include "../Events.h"
+#include "WSW/WSWaechter.h"
 
 Context::Context(Actions *shared_action) : action(shared_action) {
 	dispatcher_thread = nullptr;
@@ -22,8 +23,13 @@ Context::Context(Actions *shared_action) : action(shared_action) {
 	state->initSubState();
 	state->entry();
 	state->showState();
+
+	this->newWSW();
+
+	this->printarray();
 	//state->setData(&data);
 	//state->setAction(shared_action);
+
 
 }
 
@@ -43,21 +49,20 @@ Context::Context(){
 	state->entry();
 	state->entryStartNode();
 	state->showState();
+	this->initarray();
+	this->newWSW();
+	this->newWSW();
+	this->newWSW();
 	//state->setData(&data);
 	//state->setAction(shared_action);
 
-	state->TST_START_LANG();
-	state->showState();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_RESET_KURZ();
-	state->showState();
-	state->HM_START();
-	//state->showState();
-	//state->TST_START_KURZ();
+//////// ZUM TESTEN DER FSM OHNE ANLAGE
+//	state->FEHLER_TRUE();
+//	state->showState();
+//	state->TST_RESET_KURZ();
+//	state->showState();
+//	state->FEHLER_BEHOBEN();
+//	state->showState();
 }
 
 Context::~Context() {
@@ -69,10 +74,37 @@ int Context::getChannelID() {
 }
 
 void Context::start_FSM_PulsResiver_THREAD(void) {
-//	cout << "starting FSM..." << endl;
+	//printf("I am about to start FSM\n");
 	this->dispatcher_thread = new thread(&Context::awaitEvent, this);
 	this->dispatcher_thread->detach();
-//	cout << ">> FSM launched!" << endl;
+	//printf("ich bin gestarted FSM\n");
+}
+
+void Context::initarray(){
+	for (int i = 0; i < 10; i++){
+		WSWarray[i] = nullptr;
+	}
+}
+
+void Context::newWSW(){
+	BaseState *WSW = new WSWaechter;
+	printf("New Waechter\n");
+	for (int i = 0; i < 10; i++){
+		if (WSWarray[i] == nullptr){
+			printarray();
+			printf("New Waechter put\n");
+			WSWarray[i] = WSW;
+			printarray();
+			break;
+		}
+	}
+}
+
+void Context::printarray(){
+	for (int i = 0; i < 10; i++){
+		printf("Content: %d \n", *WSWarray[i]);
+	}
+	printf("\n");
 }
 
 void Context::awaitEvent() {
@@ -171,10 +203,6 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_SW_READDATA_TRUE:
 				state->READDATA_TRUE();
-				state->showState();
-				break;
-			case PSMG_SW_HM_START:
-				state->HM_START();
 				state->showState();
 				break;
 			}

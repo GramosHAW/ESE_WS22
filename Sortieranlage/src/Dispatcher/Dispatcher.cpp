@@ -38,10 +38,10 @@ void Dispatcher::set_FSM_chid(int fsmChid) {
 }
 
 void Dispatcher::start_HAL_PulsResiver_THREAD(void) {
-//	cout << "starting Dispatcher..." << endl;
+	//printf("I am about to start Dispatcher\n");
 	isr_thread = new thread(&Dispatcher::handelHALpuls, this);
 //	isr_thread.detach();
-//	cout << "Dispatcher launched! " << endl;
+	//printf("Ich bin gestartet Dispatcher\n");
 }
 
 int Dispatcher::getchid() {
@@ -108,7 +108,7 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_HW_TST_START_KURZ:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_HW_TST_START_KURZ, 0);
-				printf("Start gedrückt");
+				//printf("Start gedrückt");
 				break;
 			case PSMG_HW_TST_START_LANG:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,

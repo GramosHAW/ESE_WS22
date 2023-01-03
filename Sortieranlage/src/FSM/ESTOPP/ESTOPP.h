@@ -20,7 +20,7 @@ public:
 	void showState() override;
 	void entryStartNode() override;
 	void setFlagEStopp(bool);
-	bool TST_START_KURZ() override;
+//	bool TST_START_KURZ() override;
 //	void initSubState() override;
 
 	// ## bool handled ##
@@ -28,6 +28,9 @@ public:
 	bool ESTOPP_TRUE_SA2() override;
 	bool ESTOPP_FALSE_SA1() override;
 	bool ESTOPP_FALSE_SA2() override;
+	bool ESTOPP_OK_SA1() override;
+	bool ESTOPP_OK_SA2() override;
+	bool ESTOPP_QUIT() override;
 	bool TST_RESET_KURZ() override;
 
 	bool estopp_flag;

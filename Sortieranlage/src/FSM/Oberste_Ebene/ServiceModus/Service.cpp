@@ -13,6 +13,7 @@
 
 void Service::entry() {
 	cout << "Service::entry() aufgerufen" << endl;
+	//this->showState();
 	send_event_payload(PSMG_SW_BAND_STOP,0);
 	send_event_payload(PSMG_SW_AMPEL_GRUEN_BLINK, 1);
 	//int32_t adc_value = 0;
@@ -26,14 +27,14 @@ void Service::exit() {
 }
 
 void Service::initSubState() {
-	substateSERV = new Standby;
+	//substateSERV = new Standby;
 }
 
 void Service::entryStartNode() {
-	initSubState();
-	//cout << " ENTRY START NODE STANDBY DU HOND " << endl;
+	//initSubState();
+	cout << " ENTRY START NODE STANDBY DU HOND " << endl;
 	new (substateSERV) Standby;
-	substateSERV->entry();
+	//substateSERV->entry();
 }
 
 bool Service::TST_RESET_KURZ() {
@@ -62,7 +63,7 @@ bool Service::TST_STOP_KURZ(){
 
 bool Service::TST_START_KURZ(){
 	bool handled = substateSERV->TST_START_KURZ();
-//	if (substateSERV->isSubEndState()) {
+//	if (!handled) {
 //		exit();
 //		new (this) Kalibrierung;
 //		entry();
@@ -105,8 +106,6 @@ bool Service::LS_RUTSCHE_BLOCK() {
 	bool handled = substateSERV->LS_RUTSCHE_BLOCK();
 	return handled;
 }
-
-
 
 //bool Service::LS_START_BLOCK_SA2() {
 //	bool handled = substateSERV->LS_START_BLOCK_SA2();

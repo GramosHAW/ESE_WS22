@@ -42,5 +42,6 @@ bool Hohenmesser::HM_STOP() {
 }
 
 void Hohenmesser::showState(){
-	cout << "  substateHoenmesser: Hohenmesser" << endl;
+	cout << "substateHoenmesser: Hohenmesser" << endl;
+	subsubstateHoenmesser->showState();
 }

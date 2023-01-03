@@ -22,19 +22,21 @@ public:
 	bool TST_START_LANG() override;
 	bool TST_STOP_KURZ() override;
 	bool LS_SORT_BLOCK() override;
-	//bool TST_STOP_LANG() override;
+	bool SERVICE() override;
+	bool BETRIEB() override;
+	bool RUHE() override;
 	bool ESTOPP_TRUE_SA1() override;
-	//bool ESTOPP_FALSE_SA1() override;
+	bool ESTOPP_TRUE_SA2() override;
 	bool LS_START_BLOCK() override;
 	bool LS_RUTSCHE_BLOCK() override;
 	bool BAND_FREI() override;
+	bool BAND_STATUS() override;
 	bool HM_START() override;
 	bool HM_STOP() override;
 	bool ELMNT_DURCH() override;
 	bool RUTSCHE_FREI() override;
 	bool LS_SORT_FREI() override;
-
-
+	bool FEHLER_TRUE() override;
 
 	void showState() override;
 };

@@ -14,19 +14,14 @@ class Kalibrierung : public BaseState {
 
 	void initSubState() override;
 	void entryStartNode() override;
-	void showState() override;
-	void entry() override;
-	void exit() override;
-
 	bool TST_START_KURZ() override;
 	bool TST_START_LANG() override;
-	bool TST_RESET_KURZ() override;
 	bool HM_START() override;
 	bool LS_START_BLOCK() override;
 	bool LS_SORT_BLOCK() override;
 	bool LS_ENDE_BLOCK() override;
 	bool LS_RUTSCHE_BLOCK() override;
-
+	void showState() override;
 	// bool WSW_OK() override;
 
 };

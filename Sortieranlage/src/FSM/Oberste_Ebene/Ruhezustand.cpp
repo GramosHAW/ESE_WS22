@@ -14,7 +14,7 @@
 
 void Ruhezustand::initSubState(){
 	substateBZ = new BIdle;
-
+	substateSERV = new Standby;
 }
 
 void Ruhezustand::entry() {
@@ -43,6 +43,25 @@ bool Ruhezustand::TST_START_LANG(){
 	entryStartNode();
 	return true;
 }
+
+
+bool Ruhezustand::SERVICE(){
+	exit();
+	new(this) Service;
+	entry();
+	entryStartNode();
+	return true;
+}
+
+bool Ruhezustand::BETRIEB(){
+	exit();
+	new(this) Betrieb;
+	entry();
+	entryStartNode();
+	return true;
+}
+
+
 
 void Ruhezustand::showState(){
 	cout << " SubstateSA: Ruhezustand" << endl;

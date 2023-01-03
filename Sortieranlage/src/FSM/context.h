@@ -15,6 +15,8 @@
 
 class Context {
 private:
+
+	BaseState *WSWarray[10];
 	BaseState *state;
 	Actions *action;
 	std::thread* dispatcher_thread;
@@ -25,6 +27,9 @@ public:
 	int getChannelID();
 	void start_FSM_PulsResiver_THREAD(void);
 	void awaitEvent();
+	void newWSW();
+	void printarray();
+	void initarray();
 	virtual ~Context();
 };
 

@@ -19,9 +19,6 @@ void estoppResolved::exit() {
 
 }
 
-bool estoppResolved::ESTOPP_OK() {
-	return true;
-}
 
 bool estoppResolved::ESTOPP_TRUE_SA1() {
 	exit();
@@ -36,23 +33,33 @@ bool estoppResolved::ESTOPP_TRUE_SA2() {
 	entry();
 	return true;
 }
-
+//Übergang für SA1
 bool estoppResolved::ESTOPP_OK_SA2() {
-	send_event_payload(PSMG_ESTOPP_OK_SA1,0);
+	exit();
+	new (this) estoppReset;
+	entry();
 	return true;
 }
-
-bool estoppResolved::TST_RESET_KURZ() {
-	return true;
-}
-
-bool estoppResolved::TST_START_KURZ() {
+//Übergang für SA2
+bool estoppResolved::ESTOPP_OK_SA1() {
 	exit();
 	new (this) estoppReset;
 	entry();
 	return true;
 }
 
+
+//bool estoppResolved::TST_RESET_KURZ() {
+//	return true;
+//}
+
+//bool estoppResolved::TST_START_KURZ() {
+//	exit();
+//	new (this) estoppReset;
+//	entry();
+//	return true;
+//}
+
 void estoppResolved::showState() {
-	cout << " estopp Resolved " << endl;
+	cout << " substateEST: estoppResolved " << endl;
 }

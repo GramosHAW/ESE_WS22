@@ -8,23 +8,14 @@
 #include "Kalibrierung.h"
 #include "SortiererEinstellen.h"
 
-void Kalibrierung::entry() {
-	//substateKALI->showState();
-	this->showState();
-}
-
-void Kalibrierung::exit() {
-
-}
 
 void Kalibrierung::entryStartNode(){
-	//initSubState();
 	new(substateKALI) SortiererEinstellen;
 	substateKALI->entry();
 }
 
 void Kalibrierung::initSubState() {
-	substateKALI = new SortiererEinstellen;
+
 }
 
 bool Kalibrierung::TST_START_KURZ() {
@@ -35,12 +26,6 @@ bool Kalibrierung::TST_START_LANG() {
 	bool handled = substateKALI->TST_START_LANG();
 	return handled;
 }
-
-bool Kalibrierung::TST_RESET_KURZ() {
-	bool handled = substateKALI->TST_RESET_KURZ();
-	return handled;
-}
-
 bool Kalibrierung::HM_START() {
 	bool handled = substateKALI->HM_START();
 	return handled;
@@ -64,8 +49,6 @@ bool Kalibrierung::LS_RUTSCHE_BLOCK() {
 }
 
 void Kalibrierung::showState() {
-	cout << " >> <SubState> Kalibrierung " << endl;
+	cout << "   SubstateSERV: SortiererEinstellen" << endl;
 	substateKALI->showState();
 }
-
-

@@ -10,7 +10,7 @@
 #include "fWsKalibrieren.h"
 
 void BandhoeheEinstellen::entry() {
-	this->showState();
+
 }
 
 void BandhoeheEinstellen::exit() {
@@ -25,6 +25,6 @@ bool BandhoeheEinstellen::TST_START_KURZ() {
 }
 
 void BandhoeheEinstellen::showState() {
-	cout << " >> >> <SubSubState> Bandhöhe Einstellen " << endl;
+	cout << "   SubstateKALI: Bandhöhe Einstellen " << endl;
 }
 

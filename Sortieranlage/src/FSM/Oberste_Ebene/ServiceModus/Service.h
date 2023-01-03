@@ -30,8 +30,6 @@ class Service: public BaseState {
 	bool LS_SORT_BLOCK() override;
 	bool LS_RUTSCHE_BLOCK() override;
 
-
-
 	//bool BAND_START() override;
 
 	// bool LS_START_BLOCK_SA2() override;

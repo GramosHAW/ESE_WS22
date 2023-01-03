@@ -82,7 +82,7 @@ void ADCreader::receivingRoutine() {
 	thread caliThread(&ADCreader::calibrate_Bandhight, this);
 	caliThread.detach();
 
-	printf("Message thread started.\n");
+	//printf("Message thread started.\n");
 
 	while (receivingRunning) {
 		//Interups from ADC hoensensor
