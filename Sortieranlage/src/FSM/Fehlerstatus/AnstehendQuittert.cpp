@@ -16,6 +16,20 @@ bool AnstehendQuittert::FEHLER_BEHOBEN(){
 	return true;
 }
 
+bool AnstehendQuittert::FEHLER_BEHOBEN_SA1(){
+	exit();
+	new(this) SubEnd;
+	entry();
+	return true;
+}
+
+bool AnstehendQuittert::FEHLER_BEHOBEN_SA2(){
+	exit();
+	new(this) SubEnd;
+	entry();
+	return true;
+}
+
 bool AnstehendQuittert::FEHLER_TRUE(){
 	exit();
 	new(this) AnstehendUnquitert;

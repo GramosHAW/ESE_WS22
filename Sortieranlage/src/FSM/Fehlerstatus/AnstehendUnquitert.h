@@ -13,6 +13,8 @@
 class AnstehendUnquitert : public BaseState {
 
 	bool FEHLER_BEHOBEN() override;
+	bool FEHLER_BEHOBEN_SA1() override;
+	bool FEHLER_BEHOBEN_SA2() override;
 	bool TST_RESET_KURZ() override;
 
 	bool FEHLER_QUITI() override;

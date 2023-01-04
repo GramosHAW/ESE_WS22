@@ -232,6 +232,19 @@ bool BaseState::FEHLER_WSW(){
 	return false;
 }
 
+bool BaseState::FEHLER_SA1(){
+	return false;
+}
+bool BaseState::FEHLER_SA2(){
+	return false;
+}
+bool BaseState::FEHLER_BEHOBEN_SA1(){
+	return false;
+}
+bool BaseState::FEHLER_BEHOBEN_SA2(){
+	return false;
+}
+
 //Warnungen
 bool BaseState::RUTSCHE_VOLL_SA1(){
 	return false;

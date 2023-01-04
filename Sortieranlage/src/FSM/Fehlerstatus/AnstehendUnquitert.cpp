@@ -17,6 +17,20 @@ bool AnstehendUnquitert::FEHLER_BEHOBEN(){
 	return true;
 }
 
+bool AnstehendUnquitert::FEHLER_BEHOBEN_SA1(){
+	exit();
+	new(this) GegangenUnquittiert;
+	entry();
+	return true;
+}
+
+bool AnstehendUnquitert::FEHLER_BEHOBEN_SA2(){
+	exit();
+	new(this) GegangenUnquittiert;
+	entry();
+	return true;
+}
+
 bool AnstehendUnquitert::TST_RESET_KURZ(){
 	exit();
 	new(this) AnstehendQuittert;

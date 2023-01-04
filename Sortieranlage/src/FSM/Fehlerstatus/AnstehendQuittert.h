@@ -13,6 +13,8 @@
 class AnstehendQuittert : public BaseState {
 
 	bool FEHLER_BEHOBEN() override;
+	bool FEHLER_BEHOBEN_SA1() override;
+	bool FEHLER_BEHOBEN_SA2() override;
 	bool FEHLER_TRUE() override;
 
 	void showState() override;

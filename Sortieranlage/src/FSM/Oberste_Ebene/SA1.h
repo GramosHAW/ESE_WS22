@@ -37,6 +37,9 @@ public:
 	bool RUTSCHE_FREI() override;
 	bool LS_SORT_FREI() override;
 	bool FEHLER_TRUE() override;
+	bool FEHLER_SA1() override;
+	bool FEHLER_SA2() override;
+
 
 	void showState() override;
 };

@@ -30,6 +30,33 @@ bool Fehler::FEHLER_BEHOBEN() {
 	}
 	return handled;
 }
+
+
+bool Fehler::FEHLER_BEHOBEN_SA1(){
+	bool handled = substateFEHL->FEHLER_BEHOBEN_SA1();
+	if (substateFEHL->isSubEndState()) {
+		exit();
+		new (this) SA1;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+bool Fehler::FEHLER_BEHOBEN_SA2(){
+	bool handled = substateFEHL->FEHLER_BEHOBEN_SA2();
+	if (substateFEHL->isSubEndState()) {
+		exit();
+		new (this) SA1;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+
 bool Fehler::FEHLER_QUITI() {
 	bool handled = substateFEHL->FEHLER_QUITI();
 	if (substateFEHL->isSubEndState()) {

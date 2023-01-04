@@ -15,6 +15,7 @@ bool GegangenUnquittiert::FEHLER_TRUE(){
 	entry();
 	return true;
 }
+
 bool GegangenUnquittiert::FEHLER_QUITI(){
 	exit();
 	new(this) SubEnd;

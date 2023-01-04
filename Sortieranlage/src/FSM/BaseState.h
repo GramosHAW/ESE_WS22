@@ -132,6 +132,12 @@ public:
 	virtual bool FEHLER_TRUE();
 	virtual bool FEHLER_BEHOBEN();
 	virtual bool FEHLER_WSW();
+	virtual bool FEHLER_SA1();
+	virtual bool FEHLER_SA2();
+	virtual bool FEHLER_BEHOBEN_SA1();
+	virtual bool FEHLER_BEHOBEN_SA2();
+
+
 
 	virtual bool READDATA_TRUE();
 

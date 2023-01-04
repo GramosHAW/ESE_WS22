@@ -88,6 +88,30 @@ bool SA1::FEHLER_TRUE(){
 	return handled;
 }
 
+bool SA1::FEHLER_SA1(){
+	bool handled = substateSA->FEHLER_SA1();
+	if (!handled) {
+		exit();
+		new (this) Fehler;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+bool SA1::FEHLER_SA2(){
+	bool handled = substateSA->FEHLER_SA2();
+	if (!handled) {
+		exit();
+		new (this) Fehler;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
 bool SA1::LS_START_BLOCK() {
 	bool handled = substateSA->LS_START_BLOCK();
 	return handled;
