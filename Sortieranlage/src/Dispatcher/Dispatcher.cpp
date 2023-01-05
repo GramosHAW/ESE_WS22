@@ -38,10 +38,10 @@ void Dispatcher::set_FSM_chid(int fsmChid) {
 }
 
 void Dispatcher::start_HAL_PulsResiver_THREAD(void) {
-//	cout << "starting Dispatcher..." << endl;
+	printf("I am about to start Dispatcher\n");
 	isr_thread = new thread(&Dispatcher::handelHALpuls, this);
 //	isr_thread.detach();
-//	cout << "Dispatcher launched! " << endl;
+	printf("Ich bin gestartet Dispatcher\n");
 }
 
 int Dispatcher::getchid() {

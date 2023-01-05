@@ -31,30 +31,30 @@ void Ausortieren::initSubState() {
 }
 
 bool Ausortieren::BAND_FREI() {
-	bool handled = substateAussortieren->BAND_FREI();
+	bool handled = subsubstateAussortieren->BAND_FREI();
 	return handled;
 }
 
 bool Ausortieren::LS_SORT_BLOCK() {
-	bool handled = substateAussortieren->LS_SORT_BLOCK();
+	bool handled = subsubstateAussortieren->LS_SORT_BLOCK();
 	return handled;
 }
 
 bool Ausortieren::LS_SORT_FREI() {
-	bool handled = substateAussortieren->LS_SORT_FREI();
+	bool handled = subsubstateAussortieren->LS_SORT_FREI();
 	return handled;
 }
 bool Ausortieren::ELMNT_AUSSORT() {
-	bool handled = substateAussortieren->ELMNT_AUSSORT();
+	bool handled = subsubstateAussortieren->ELMNT_AUSSORT();
 	return handled;
 }
 
 bool Ausortieren::ELMNT_DURCH() {
-	bool handled = substateAussortieren->ELMNT_DURCH();
+	bool handled = subsubstateAussortieren->ELMNT_DURCH();
 	return handled;
 }
 
-bool Ausortieren::RUTSCHE_FREI() {
-	bool handled = substateAussortieren->RUTSCHE_FREI();
+bool Ausortieren::LS_RUTSCHE_FREI() {
+	bool handled = subsubstateAussortieren->RUTSCHE_FREI();
 	return handled;
 }

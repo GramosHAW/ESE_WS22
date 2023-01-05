@@ -13,8 +13,7 @@ TARGET = $(OUTPUT_DIR)/$(ARTIFACT)
 #Compiler definitions
 
 CC = qcc -Vgcc_nto$(PLATFORM)
-CXX = qcc -lang-c++ -Vgcc_nto$(PLATFORM) 
-#-DSIM_SHOW_SENSORS -DSIM_SHOW_ACTUATORS
+CXX = qcc -lang-c++ -Vgcc_nto$(PLATFORM) -DSIM_SHOW_SENSORS -DSIM_SHOW_ACTUATORS -DSIM_SHOW_ACTUATORS
 
 #############
 # Hier einkommentieren wenn die Tests kompiliert werden sollen!

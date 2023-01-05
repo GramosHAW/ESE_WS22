@@ -24,7 +24,6 @@ Context::Context(Actions *shared_action) : action(shared_action) {
 	state->showState();
 	//state->setData(&data);
 	//state->setAction(shared_action);
-
 }
 
 Context::Context(){
@@ -45,19 +44,6 @@ Context::Context(){
 	state->showState();
 	//state->setData(&data);
 	//state->setAction(shared_action);
-
-	state->TST_START_LANG();
-	state->showState();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_START_KURZ();
-	state->TST_RESET_KURZ();
-	state->showState();
-	state->HM_START();
-	//state->showState();
-	//state->TST_START_KURZ();
 }
 
 Context::~Context() {
@@ -69,10 +55,10 @@ int Context::getChannelID() {
 }
 
 void Context::start_FSM_PulsResiver_THREAD(void) {
-//	cout << "starting FSM..." << endl;
+	printf("I am about to start FSM\n");
 	this->dispatcher_thread = new thread(&Context::awaitEvent, this);
 	this->dispatcher_thread->detach();
-//	cout << ">> FSM launched!" << endl;
+	printf("ich bin gestarted FSM\n");
 }
 
 void Context::awaitEvent() {
@@ -149,10 +135,6 @@ void Context::awaitEvent() {
 				state->BAND_STOP();
 				state->showState();
 				break;
-//			case PSMG_SW_BAND_START:
-//				state->BAND_START();
-//				state->showState();
-//				break;
 			case PSMG_HW_TST_RESET_KURZ:
 				state->TST_RESET_KURZ();
 				state->showState();
@@ -168,15 +150,7 @@ void Context::awaitEvent() {
 			case PSMG_ESTOPP_OK_SA2:
 				state->ESTOPP_OK_SA2();
 				state->showState();
-				break;
-			case PSMG_SW_READDATA_TRUE:
-				state->READDATA_TRUE();
-				state->showState();
-				break;
-			case PSMG_SW_HM_START:
-				state->HM_START();
-				state->showState();
-				break;
+
 			}
 		}
 	}

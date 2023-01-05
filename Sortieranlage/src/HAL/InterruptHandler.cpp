@@ -67,10 +67,10 @@ InterruptHandler::InterruptHandler() {
 }
 
 void InterruptHandler::start_ISR_THREAD(void) {
-//	cout << "starting InterruptHandler Thread..." << endl;
+	printf("I am about to start\n");
 	isr_thread = new thread(&InterruptHandler::init_and_start, this);
 	isr_thread->detach();
-//	cout "InterruptHandler Thread started!" << endl;
+	printf("ich bin gestarted\n");
 }
 
 /*

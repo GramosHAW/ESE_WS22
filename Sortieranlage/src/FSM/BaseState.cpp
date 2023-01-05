@@ -10,19 +10,13 @@
 #include "Oberste_Ebene/BIdle.h"
 #include "../Dispatcher/Dispatcher.h"
 #include "ESTOPP/estoppStart.h"
-#include "Oberste_Ebene/ServiceModus/Standby.h"
-#include "Oberste_Ebene/ServiceModus/Kalibrierung/SortiererEinstellen.h"
-#include "Oberste_Ebene/ServiceModus/Zeiten/BandAnfang.h"
+
 
 void BaseState::initSubState(){
     substateSA = new Ruhezustand;
     substateSA->initSubState();
     substateBZ = new BIdle;
     substateEST = new estoppStart;
-    substateSERV = new Standby;
-    //substateSERV->initSubState();
-    substateKALI = new SortiererEinstellen;
-    substateZEIT = new BandAnfang;
 
 
 
@@ -109,6 +103,12 @@ bool BaseState::LS_START_BLOCK() {
 bool BaseState::LS_START_FREI() {
 	return false;
 }
+bool BaseState::BAND_FREI_SA2(){
+	return false;
+}
+bool BaseState::LS_START_BLOCK_SA2(){
+	return false;
+}
 bool BaseState::LS_SORT_BLOCK() {
 	return false;
 }
@@ -133,6 +133,14 @@ bool BaseState::HM_START(){
 	return false;
 }
 bool BaseState::HM_STOP(){
+	return false;
+}
+
+//////////////////////////Metalsensor
+bool BaseState::MSENS_METALL(){
+	return false;
+}
+bool BaseState::MSENS_METALL_OHNE(){
 	return false;
 }
 
@@ -170,10 +178,6 @@ bool BaseState::BAND_STOP() {
 	return false;
 }
 
-//bool BaseState::BAND_START() {
-//	return false;
-//}
-
 bool BaseState::SERVICE() {
 	return false;
 }
@@ -195,6 +199,10 @@ bool BaseState::ELMNT_DURCH(){
 bool BaseState::RUTSCHE_FREI(){
 	return false;
 }
+bool BaseState::RUTSCHE_VOLL_SA1(){
+	return false;
+}
+
 
 /////////////////////////FEHLER
 
@@ -205,12 +213,6 @@ bool BaseState::FEHLER_TRUE() {
 	return false;
 }
 bool BaseState::FEHLER_BEHOBEN() {
-	return false;
-}
-
-///////////////////////// READ DATA
-
-bool BaseState::READDATA_TRUE(){
 	return false;
 }
 
