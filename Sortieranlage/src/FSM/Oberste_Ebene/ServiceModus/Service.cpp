@@ -8,17 +8,14 @@
 #include "Service.h"
 #include "../Ruhezustand.h"
 #include "../../BaseState.h"
-#include "Standby.h"
-#include "Kalibrierung/Kalibrierung.h"
 
 void Service::entry() {
 	cout << "Service::entry() aufgerufen" << endl;
+
 	//this->showState();
 	send_event_payload(PSMG_SW_BAND_STOP,0);
-	send_event_payload(PSMG_SW_AMPEL_GRUEN_BLINK, 1);
-	//int32_t adc_value = 0;
-	//float adc_mean = 0;
 
+	send_event_payload(PSMG_SW_AMPEL_GRUEN_BLINK, 1);
 }
 
 void Service::exit() {
@@ -112,8 +109,8 @@ bool Service::LS_RUTSCHE_BLOCK() {
 //	return handled;
 //}
 
+
 void Service::showState(){
 	cout << " SubstateSA: Service" << endl;
-	substateSERV->showState();
 }
 

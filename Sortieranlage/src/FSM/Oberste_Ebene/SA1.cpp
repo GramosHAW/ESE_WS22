@@ -63,6 +63,7 @@ bool SA1::ESTOPP_TRUE_SA1() {
 	return handled;
 }
 
+
 bool SA1::ESTOPP_TRUE_SA2() {
 	bool handled = substateSA->ESTOPP_TRUE_SA2();
 	if (!handled) {
@@ -112,8 +113,41 @@ bool SA1::FEHLER_SA2(){
 	return handled;
 }
 
+
+//Lichtehernke
+
 bool SA1::LS_START_BLOCK() {
 	bool handled = substateSA->LS_START_BLOCK();
+	return handled;
+}
+
+bool SA1::LS_RUTSCHE_FREI() {
+	bool handled = substateSA->LS_RUTSCHE_FREI();
+	return handled;
+}
+
+bool SA1::BAND_FREI_SA2() {
+	bool handled = substateSA->BAND_FREI_SA2();
+	return handled;
+}
+
+bool SA1::LS_START_BLOCK_SA2() {
+	bool handled = substateSA->LS_START_BLOCK_SA2();
+	return handled;
+}
+
+bool SA1::LS_ENDE_BLOCK() {
+	bool handled = substateSA->LS_ENDE_BLOCK();
+	return handled;
+}
+
+bool SA1::LS_ENDE_FREI() {
+	bool handled = substateSA->LS_ENDE_FREI();
+	return handled;
+}
+
+bool SA1::RUTSCHE_VOLL_SA1() {
+	bool handled = substateSA->RUTSCHE_VOLL_SA1();
 	return handled;
 }
 
@@ -127,6 +161,7 @@ void SA1::showState() {
 	substateSA->showState();
 }
 
+//Hoenmesser
 bool SA1::HM_START() {
 	bool handled = substateSA->HM_START();
 	return handled;
@@ -134,6 +169,17 @@ bool SA1::HM_START() {
 
 bool SA1::HM_STOP() {
 	bool handled = substateSA->HM_STOP();
+	return handled;
+}
+
+//Metalsensor
+bool SA1::MSENS_METALL() {
+	bool handled = substateSA->MSENS_METALL();
+	return handled;
+}
+
+bool SA1::MSENS_METALL_OHNE() {
+	bool handled = substateSA->MSENS_METALL_OHNE();
 	return handled;
 }
 
@@ -171,4 +217,7 @@ bool SA1::BAND_STATUS(){
 	return handled;
 }
 
+bool SA1::ELMNT_AUSSORT() {
+	bool handled = substateSA - ELMNT_AUSSORT();
+	return handled;
 

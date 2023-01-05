@@ -10,11 +10,13 @@
 
 #include "../../BaseState.h"
 
-class Service: public BaseState {
+class Service : public BaseState {
+	bool TST_STOP_KURZ() override;
 
 	void showState() override;
 	void entry() override;
 	void exit() override;
+
 	void initSubState() override;
 	void entryStartNode() override;
 
@@ -35,6 +37,7 @@ class Service: public BaseState {
 	// bool LS_START_BLOCK_SA2() override;
 public:
 	bool readdata_flag;
+
 };
 
 
