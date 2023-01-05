@@ -71,6 +71,7 @@ void InterruptHandler::start_ISR_THREAD(void) {
 	isr_thread = new thread(&InterruptHandler::init_and_start, this);
 	isr_thread->detach();
 	printf("ich bin gestarted\n");
+
 }
 
 /*

@@ -10,13 +10,23 @@
 #include "Oberste_Ebene/BIdle.h"
 #include "../Dispatcher/Dispatcher.h"
 #include "ESTOPP/estoppStart.h"
+#include "Oberste_Ebene/ServiceModus/Standby.h"
+#include "Oberste_Ebene/ServiceModus/Kalibrierung/SortiererEinstellen.h"
+#include "Oberste_Ebene/ServiceModus/Zeiten/BandAnfang.h"
+#include "Fehlerstatus/AnstehendUnquitert.h"
+
 
 
 void BaseState::initSubState(){
     substateSA = new Ruhezustand;
     substateSA->initSubState();
-    substateBZ = new BIdle;
+//  substateBZ = new BIdle;
     substateEST = new estoppStart;
+    substateSERV = new Standby;
+//	substateSERV->initSubState();
+    substateKALI = new SortiererEinstellen;
+ // substateZEIT = new BandAnfang;
+    substateFEHL = new AnstehendUnquitert;
 
 
 
@@ -71,6 +81,9 @@ void BaseState::connect_send() {
 	ConnectDetach(coid);
 
 }
+
+
+
 
 bool BaseState::TST_START_KURZ() {
 	return false;
@@ -128,6 +141,10 @@ bool BaseState::LS_ENDE_FREI() {
 	return false;
 }
 
+bool BaseState::LS_ENDE_BLOCK_SA2(){
+	return false;
+}
+
 ///////////////////////////Hoenmesser
 bool BaseState::HM_START(){
 	return false;
@@ -164,8 +181,11 @@ bool BaseState::ESTOPP_OK_SA1() {
 	return false;
 }
 
-
 bool BaseState::ESTOPP_OK_SA2() {
+	return false;
+}
+
+bool BaseState::ESTOPP_QUIT(){
 	return false;
 }
 ///////////////////////LOGIC MSG
@@ -188,6 +208,10 @@ bool BaseState::RUHE() {
 	return false;
 }
 
+bool BaseState::BAND_STATUS(){
+	return false;
+}
+
 bool BaseState::ELMNT_AUSSORT(){
 	return false;
 }
@@ -204,6 +228,10 @@ bool BaseState::RUTSCHE_VOLL_SA1(){
 }
 
 
+bool BaseState::WSW_OK(){
+	return false;
+}
+
 /////////////////////////FEHLER
 
 bool BaseState::FEHLER_QUITI() {
@@ -215,6 +243,45 @@ bool BaseState::FEHLER_TRUE() {
 bool BaseState::FEHLER_BEHOBEN() {
 	return false;
 }
+
+
+bool BaseState::FEHLER_WSW(){
+	return false;
+}
+
+bool BaseState::FEHLER_SA1(){
+	return false;
+}
+bool BaseState::FEHLER_SA2(){
+	return false;
+}
+bool BaseState::FEHLER_BEHOBEN_SA1(){
+	return false;
+}
+bool BaseState::FEHLER_BEHOBEN_SA2(){
+	return false;
+}
+
+//Warnungen
+bool BaseState::RUTSCHE_VOLL_SA1(){
+	return false;
+}
+bool BaseState::RUTSCHE_VOLL_SA2(){
+	return false;
+}
+bool BaseState::RUTSCHE_VOLL_BEIDE(){
+	return false;
+}
+bool BaseState::WS_FLIPPED(){
+	return false;
+}
+
+///////////////////////// READ DATA
+
+bool BaseState::READDATA_TRUE(){
+	return false;
+}
+
 
 void BaseState::showState() {
 	cout << "You hit rock bottom!!!" << endl;

@@ -18,12 +18,11 @@ class estoppResolved : public BaseState {
 	void exit() override;
 	void setFlagEStopp(bool);
 
-	bool ESTOPP_OK() override;
+	bool ESTOPP_OK_SA1() override;
 	bool ESTOPP_OK_SA2() override;
 	bool ESTOPP_TRUE_SA1() override;
 	bool ESTOPP_TRUE_SA2() override;
-	bool TST_RESET_KURZ() override;
-	bool TST_START_KURZ();
+//	bool TST_RESET_KURZ() override;
 	void showState() override;
 
 };

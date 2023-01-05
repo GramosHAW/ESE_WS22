@@ -16,6 +16,8 @@ class Betrieb : public BaseState {
 	bool TST_STOP_KURZ() override;
 	bool LS_START_BLOCK() override;
 	bool BAND_FREI() override;
+	bool RUHE() override;
+	bool BAND_STATUS() override;
 	//bool BAND_STOP() override;
 
 	bool LS_SORT_BLOCK() override;

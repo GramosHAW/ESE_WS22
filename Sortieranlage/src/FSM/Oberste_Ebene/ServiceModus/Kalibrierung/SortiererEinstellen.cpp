@@ -10,15 +10,8 @@
 #include "fWsKalibrieren.h"
 #include "BandhoeheEinstellen.h"
 
-void SortiererEinstellen::entry() {
-	this->showState();
-}
-
-void SortiererEinstellen::exit() {
-
-}
-
 void SortiererEinstellen::sortEinstellen() {
+
 }
 
 bool SortiererEinstellen::TST_START_KURZ() {
@@ -49,6 +42,6 @@ void SortiererEinstellen::saveEingabe() {
 }
 
 void SortiererEinstellen::showState() {
-	cout << " >> >> <SubSubState> SortiererEinstellen " << endl;
+	cout << "   SubstateKALI: SortiererEinstellen" << endl;
 }
 

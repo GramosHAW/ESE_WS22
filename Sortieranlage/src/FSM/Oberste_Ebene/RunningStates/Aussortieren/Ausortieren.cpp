@@ -17,7 +17,8 @@ void Ausortieren::exit() {
 }
 
 void Ausortieren::showState() {
-	cout << "  substateAussortieren: Ausortieren" << endl;
+	cout << "substateAussortieren: Ausortieren" << endl;
+	subsubstateAussortieren->showState();
 }
 
 void Ausortieren::entryStartNode() {

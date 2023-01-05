@@ -8,6 +8,7 @@
 #include "SA1.h"
 #include "Ruhezustand.h"
 #include "../ESTOPP/ESTOPP.h"
+#include "../Fehlerstatus/Fehler.h"
 
 void SA1::entry() {
 	// MSG_SEND_PULSE (BAND_START)
@@ -53,7 +54,6 @@ bool SA1::LS_RUTSCHE_BLOCK() {
 bool SA1::ESTOPP_TRUE_SA1() {
 	bool handled = substateSA->ESTOPP_TRUE_SA1();
 	if (!handled) {
-//			substateSA->ESTOPP_TRUE_SA1();
 		exit();
 		new (this) ESTOPP;
 		entry();
@@ -63,7 +63,59 @@ bool SA1::ESTOPP_TRUE_SA1() {
 	return handled;
 }
 
+
+bool SA1::ESTOPP_TRUE_SA2() {
+	bool handled = substateSA->ESTOPP_TRUE_SA2();
+	if (!handled) {
+		exit();
+		new (this) ESTOPP;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+
+bool SA1::FEHLER_TRUE(){
+	bool handled = substateSA->FEHLER_TRUE();
+	if (!handled) {
+		exit();
+		new (this) Fehler;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+bool SA1::FEHLER_SA1(){
+	bool handled = substateSA->FEHLER_SA1();
+	if (!handled) {
+		exit();
+		new (this) Fehler;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+bool SA1::FEHLER_SA2(){
+	bool handled = substateSA->FEHLER_SA2();
+	if (!handled) {
+		exit();
+		new (this) Fehler;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
+
+
 //Lichtehernke
+
 bool SA1::LS_START_BLOCK() {
 	bool handled = substateSA->LS_START_BLOCK();
 	return handled;
@@ -145,7 +197,27 @@ bool SA1::LS_SORT_FREI() {
 	return handled;
 }
 
+bool SA1::SERVICE(){
+	bool handled = substateSA->SERVICE();
+	return handled;
+}
+
+bool SA1::BETRIEB(){
+	bool handled = substateSA->BETRIEB();
+	return handled;
+}
+
+bool SA1::RUHE(){
+	bool handled = substateSA->RUHE();
+	return handled;
+}
+
+bool SA1::BAND_STATUS(){
+	bool handled = substateSA->BAND_STATUS();
+	return handled;
+}
+
 bool SA1::ELMNT_AUSSORT() {
 	bool handled = substateSA - ELMNT_AUSSORT();
 	return handled;
-}
+

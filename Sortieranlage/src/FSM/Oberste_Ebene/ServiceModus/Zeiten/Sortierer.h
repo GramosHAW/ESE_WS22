@@ -11,10 +11,6 @@
 #include "../../../BaseState.h"
 
 class Sortierer : public BaseState {
-	void entry() override;
-	void exit() override;
-	void showState() override;
-	bool LS_ENDE_BLOCK() override;
 };
 
 

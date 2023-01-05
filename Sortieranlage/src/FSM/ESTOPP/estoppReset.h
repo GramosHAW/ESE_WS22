@@ -13,10 +13,14 @@
 #include "ESTOPP.h"
 
 class estoppReset : public BaseState {
-	bool TST_RESET_KURZ() override;
 	void entry() override;
 	void exit() override;
-	bool ESTOPP_FALSE_SA1() override;
+
+	bool ESTOPP_TRUE_SA1() override;
+	bool ESTOPP_TRUE_SA2() override;
+	bool TST_RESET_KURZ() override;
+	bool ESTOPP_QUIT() override;
+
 	void showState() override;
 };
 

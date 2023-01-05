@@ -17,8 +17,8 @@ void ESTOPP::setFlagEStopp(bool flag) {
 
 void ESTOPP::entryStartNode() {
 	new (substateEST) estoppStart;
-	cout << "estoppStart startNode" << endl;
-	//substateEST->entry();
+
+	substateEST->entry();
 }
 
 //void ESTOPP::initSubState(){
@@ -59,7 +59,15 @@ bool ESTOPP::ESTOPP_FALSE_SA2() {
 	return handled;
 }
 
-// ## TEST ## NOCH ZU VERLAGERN ZU ESTOPP-RESET
+bool ESTOPP::ESTOPP_OK_SA1(){
+	bool handled = substateEST->ESTOPP_OK_SA1();
+	return handled;
+}
+
+bool ESTOPP::ESTOPP_OK_SA2(){
+	bool handled = substateEST->ESTOPP_OK_SA2();
+	return handled;
+}
 
 bool ESTOPP::TST_RESET_KURZ() {
 	bool handled = substateEST->TST_RESET_KURZ();
@@ -73,25 +81,24 @@ bool ESTOPP::TST_RESET_KURZ() {
 	return handled;
 }
 
-bool ESTOPP::TST_START_KURZ() {
-	bool handled = substateEST->TST_START_KURZ();
+bool ESTOPP::ESTOPP_QUIT(){
+	bool handled = substateEST->ESTOPP_QUIT();
+	if (substateEST->isSubEndState()) {
+		exit();
+		new (this) SA1;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
 	return handled;
 }
 
-/*
- void ESTOPP::entryStartNode() {
- new (substateEST) estoppStart;
- substateEST->entry();
- }
- */
-/*
- bool ESTOPP::ESTOPP_TRUE_SA1() {
- bool handled = true;
- return handled;
- }
- */
+//bool ESTOPP::TST_START_KURZ() {
+//	bool handled = substateEST->TST_START_KURZ();
+//	return handled;
+//}
 
 void ESTOPP::showState() {
-	cout << " ESTOPP STATE " << endl;
+	cout << "State: EStopp" << endl;
 }
 

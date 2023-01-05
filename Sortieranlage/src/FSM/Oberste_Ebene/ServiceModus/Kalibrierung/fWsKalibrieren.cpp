@@ -9,7 +9,7 @@
 #include "WsKalibrieren.h"
 
 void fWsKalibrieren::entry(){
-	this->showState();
+
 }
 
 void fWsKalibrieren::exit(){
@@ -24,7 +24,7 @@ bool fWsKalibrieren::TST_START_KURZ() {
 }
 
 void fWsKalibrieren::showState() {
-	cout << " >> >> <SubSubState> fWsKalibrieren " << endl;
+	cout << "   SubstateKALI: fWsKalibrieren " << endl;
 }
 
 

@@ -23,5 +23,5 @@ bool DatenEmpfangen::HM_STOP() {
 }
 
 void DatenEmpfangen::showState() {
-	cout << "  subsubstateHoenmesser: DatenEmpfangen" << endl;
+	cout << " subsubstateHoenmesser: DatenEmpfangen" << endl;
 }

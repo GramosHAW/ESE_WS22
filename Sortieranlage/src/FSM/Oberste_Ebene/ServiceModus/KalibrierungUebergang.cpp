@@ -16,7 +16,7 @@ void KalibrierungUebergang::exit() {
 }
 
 void KalibrierungUebergang::showState() {
-	cout << " <SubState> KalibrierungsÜbergang " << endl;
+	cout << "   SubstateSERV: KalibrierungsÜbergang " << endl;
 }
 
 //bool KalibrierungUebergang::LS_START_BLOCK_SA2() {

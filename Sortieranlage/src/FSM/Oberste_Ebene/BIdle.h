@@ -13,12 +13,14 @@
 
 class BIdle : public BaseState {
 public:
-	bool LS_START_BLOCK() override;
-	bool TST_STOP_KURZ() override;
-	bool LS_START_FREI() override;
-
 	void entry() override;
 	void exit() override;
+
+	bool LS_START_BLOCK() override;
+	bool TST_STOP_KURZ() override;
+	//bool LS_START_FREI() override;
+	bool RUHE() override;
+	bool BAND_STATUS() override;
 
 	void showState() override;
 };

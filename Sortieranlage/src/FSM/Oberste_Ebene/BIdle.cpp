@@ -8,6 +8,7 @@
 
 #include "BIdle.h"
 #include "Running.h"
+#include "Respond.h"
 #include "../SubEnd.h"
 
 
@@ -23,18 +24,20 @@ void BIdle::exit() {
 
 }
 
-bool BIdle::LS_START_FREI(){
-	exit();
-	new(this) BIdle;
-	entry();
-	return true;
-}
+//bool BIdle::LS_START_FREI(){
+//	exit();
+//	new(this) BIdle;
+//	entry();
+//	return true;
+//}
 
 bool BIdle::LS_START_BLOCK(){
-	exit();
-	new(this) Running;
-	entry();
-	return true;
+	if(true){ //Nur für SA1
+		exit();
+		new(this) Running;
+		entry();
+		return true;
+	}
 }
 
 bool BIdle::TST_STOP_KURZ(){
@@ -42,6 +45,22 @@ bool BIdle::TST_STOP_KURZ(){
 	new(this) SubEnd;
 	entry();
 	return true;
+}
+
+bool BIdle::RUHE(){
+	exit();
+	new(this) SubEnd;
+	entry();
+	return true;
+}
+
+bool BIdle::BAND_STATUS(){
+	if (true){ //Nur für SA2
+		exit();
+		new(this) Respond;
+		entry();
+		return true;
+	}
 }
 
 void BIdle::showState(){

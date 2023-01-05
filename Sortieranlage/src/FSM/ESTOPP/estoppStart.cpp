@@ -25,47 +25,34 @@ void estoppStart::exit() {
 }
 
 bool estoppStart::ESTOPP_TRUE_SA1() {
-	bool handled = substateEST->ESTOPP_TRUE_SA1();
-	return handled;
+	exit();
+	new(this) estoppStart;
+	entry();
+	return true;
+}
+
+bool estoppStart::ESTOPP_TRUE_SA2() {
+	exit();
+	new(this) estoppStart;
+	entry();
+	return true;
 }
 
 bool estoppStart::ESTOPP_FALSE_SA1() {
 	exit();
-	cout << " hELLo " << endl;
 	new(this) estoppResolved;
 	entry();
-
 	return true;
 }
 
 bool estoppStart::ESTOPP_FALSE_SA2() {
-	return false;
+	exit();
+	new(this) estoppResolved;
+	entry();
+	return true;
 }
 
-bool estoppStart::TST_STOP_KURZ() {
-	return false;
-}
-
-bool estoppStart::TST_START_KURZ() {
-	return false;
-}
 
 void estoppStart::showState(){
-	cout << " estoppStart STATE " << endl;
-}
-
-
-// ## TEST ## NOCH ZU VERLAGERN ZU ESTOPPRESET
-
-bool estoppStart::TST_RESET_KURZ() {
-	bool handled = substateEST->TST_RESET_KURZ();
-		if(substateEST->isSubEndState()) {
-			exit();
-			new(this) SA1;
-			entry();
-			//entryStartNode();
-			handled = true;
-		}
-	return handled;
-
+	cout << " substateEST: STATE " << endl;
 }

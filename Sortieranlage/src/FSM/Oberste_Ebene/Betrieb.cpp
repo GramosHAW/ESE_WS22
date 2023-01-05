@@ -40,6 +40,17 @@ bool Betrieb::TST_STOP_KURZ(){
 	return handled;
 }
 
+bool Betrieb::RUHE(){
+	bool handled = substateBZ->RUHE();
+		if(substateBZ->isSubEndState()){
+			exit();
+			new(this) Ruhezustand;
+			entry();
+			handled = true;
+		}
+	return handled;
+}
+
 
 
 bool Betrieb::LS_START_BLOCK(){
@@ -59,6 +70,11 @@ bool Betrieb::LS_RUTSCHE_BLOCK() {
 
 bool Betrieb::BAND_FREI(){
 	bool handled = substateBZ->BAND_FREI();
+	return handled;
+}
+
+bool Betrieb::BAND_STATUS(){
+	bool handled = substateBZ->BAND_STATUS();
 	return handled;
 }
 

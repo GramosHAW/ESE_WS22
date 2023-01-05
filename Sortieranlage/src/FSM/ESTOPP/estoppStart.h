@@ -13,12 +13,10 @@
 
 class estoppStart : public BaseState {
 	bool ESTOPP_TRUE_SA1() override;
+	bool ESTOPP_TRUE_SA2() override;
 	bool ESTOPP_FALSE_SA1() override;
 	bool ESTOPP_FALSE_SA2() override;
 	void showState() override;
-	bool TST_RESET_KURZ() override;
-	bool TST_START_KURZ() override;
-	bool TST_STOP_KURZ() override;
 
 	void entry() override;
 	void exit() override;

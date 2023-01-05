@@ -20,5 +20,5 @@ bool CheckSA2::TST_STOP_KURZ() {
 }
 
 void CheckSA2::showState() {
-	cout << " <SubState> CheckSA2 " << endl;
+	cout << "   SubstateSERV: CheckSA2 " << endl;
 }

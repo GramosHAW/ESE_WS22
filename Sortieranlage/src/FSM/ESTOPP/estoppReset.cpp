@@ -7,7 +7,7 @@
 
 
 #include "estoppReset.h"
-#include "../Oberste_Ebene/Ruhezustand.h"
+#include "estoppStart.h"
 #include "../SubEnd.h"
 
 
@@ -20,9 +20,18 @@ void estoppReset::exit() {
 
 }
 
-bool estoppReset::ESTOPP_FALSE_SA1() {
-	bool handled = substateEST->ESTOPP_FALSE_SA1();
-	return handled;
+bool estoppReset::ESTOPP_TRUE_SA1() {
+	exit();
+	new (this) estoppStart;
+	entry();
+	return true;
+}
+
+bool estoppReset::ESTOPP_TRUE_SA2() {
+	exit();
+	new (this) estoppStart;
+	entry();
+	return true;
 }
 
 bool estoppReset::TST_RESET_KURZ() {
@@ -32,6 +41,13 @@ bool estoppReset::TST_RESET_KURZ() {
 	return true;
 }
 
+bool estoppReset::ESTOPP_QUIT(){
+	exit();
+	new (this) SubEnd;
+	entry();
+	return true;
+}
+
 void estoppReset::showState() {
-	cout << " RESET STATE " << endl;
+	cout << " substateEST: estoppReset" << endl;
 }

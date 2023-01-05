@@ -21,22 +21,28 @@ public:
 	bool TST_START_KURZ() override;
 	bool TST_START_LANG() override;
 	bool TST_STOP_KURZ() override;
-	//bool TST_STOP_LANG() override;
-	//bool ESTOPP_FALSE_SA1() override;
+
+	bool SERVICE() override;
+	bool BETRIEB() override;
+	bool RUHE() override;
 	bool ESTOPP_TRUE_SA1() override;
+	bool ESTOPP_TRUE_SA2() override;
+
 
 	//Lichtschrenke
-	bool LS_SORT_FREI() override;
 	bool LS_SORT_BLOCK() override;
-
 	bool LS_START_BLOCK_SA2() override;
 	bool LS_START_BLOCK() override;
+  bool LS_SORT_FREI() override;
 	bool LS_RUTSCHE_BLOCK() override;
 	bool LS_RUTSCHE_FREI() override;
 	bool LS_ENDE_BLOCK() override;
 	bool LS_ENDE_FREI() override;
 
+
 	bool BAND_FREI() override;
+	bool BAND_STATUS() override;
+
 
 	//Hoenmesser
 	bool HM_START() override;
@@ -49,7 +55,13 @@ public:
 	bool ELMNT_DURCH() override;
 	bool BAND_FREI_SA2() override;
 	bool RUTSCHE_FREI() override;
-	bool RUTSCHE_VOLL_SA1() override;
+
+	
+	bool FEHLER_TRUE() override;
+	bool FEHLER_SA1() override;
+	bool FEHLER_SA2() override;
+
+	bool RUTSCHE_VOLL_SA1() override; //überprüfen ob noterndig
 
 	bool ELMNT_AUSSORT() override;
 

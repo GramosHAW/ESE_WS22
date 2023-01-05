@@ -8,8 +8,6 @@
 #include "DateiEinlesen.h"
 
 void DateiEinlesen::entry() {
-	// tyoeDataRead();
-	this->showState();
 }
 
 
@@ -19,5 +17,5 @@ void DateiEinlesen::timeOut() {
 }
 
 void DateiEinlesen::showState() {
-	cout << " <SubState> DateiEinlesen " << endl;
+	cout << "   SubstateSERV: DateiEinlesen " << endl;
 }

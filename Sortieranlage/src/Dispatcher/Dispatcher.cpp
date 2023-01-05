@@ -108,7 +108,7 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_HW_TST_START_KURZ:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_HW_TST_START_KURZ, 0);
-				printf("Start gedrückt");
+				//printf("Start gedrückt");
 				break;
 			case PSMG_HW_TST_START_LANG:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
