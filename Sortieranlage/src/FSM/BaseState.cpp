@@ -263,9 +263,11 @@ bool BaseState::FEHLER_BEHOBEN_SA2(){
 }
 
 //Warnungen
+/*
 bool BaseState::RUTSCHE_VOLL_SA1(){
 	return false;
 }
+*/
 bool BaseState::RUTSCHE_VOLL_SA2(){
 	return false;
 }

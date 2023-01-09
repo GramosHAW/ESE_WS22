@@ -8,6 +8,7 @@
 #include "Service.h"
 #include "../Ruhezustand.h"
 #include "../../BaseState.h"
+#include "Standby.h"
 
 void Service::entry() {
 	cout << "Service::entry() aufgerufen" << endl;

@@ -11,9 +11,9 @@
 #include "../../BaseState.h"
 
 class Wait : public BaseState {
-
+public:
 	bool LS_ENDE_BLOCK() override;
-	void showState() override;
+	//void showState() override;
 };
 
 

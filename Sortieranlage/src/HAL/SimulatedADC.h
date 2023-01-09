@@ -16,6 +16,8 @@
 #include <thread>
 #include <chrono>
 
+#include "../Dispatcher/Dispatcher.h"
+#include "../Events.h"
 #include "simqnxgpioapi.h"
 #include "simqnxirqapi.h"
 
@@ -82,10 +84,11 @@ private:
 	thread receivingThread;
 
 	/* Prototypes */
-	const struct sigevent* adcISR(void* arg, int id);
+	static const struct sigevent* adcISR(void* arg, int id);
 
 	void receivingRoutine();
 
+	sigevent* getevent();
 	void adc_enable_interrupt(void);
 	void adc_disable_interrupt(void);
 	void adc_clear_interrupt(void);

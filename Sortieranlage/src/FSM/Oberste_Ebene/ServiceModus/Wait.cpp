@@ -15,8 +15,9 @@ bool Wait::LS_ENDE_BLOCK() {
 	entry();
 	return true;
 }
-
+/*
 void Wait::showState() {
 	cout << "   SubstateSERV: Wait " << endl;
 }
+*/
 

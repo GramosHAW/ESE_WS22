@@ -109,6 +109,10 @@
  // Interrupt
 #define 	PSMG_INTERRUPT						0xAA//stack owerflow!!!!!!
 
+//Data
+
+#define     PSMG_SW_READDATA_TRUE              0x67
+
 
 
 

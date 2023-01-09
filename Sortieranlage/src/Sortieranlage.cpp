@@ -11,7 +11,6 @@
 #include "FSM/ImpulsHandler.h"
 #include "FSM/context.h"
 
-
 #include <iostream>
 #include <stdio.h>
 #include <errno.h>
@@ -23,11 +22,11 @@
 #include <thread>
 #include <chrono>
 
-#include "HAL/ADCreader.h"
+//#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
 #include "simqnxirqapi.h"
 #include "Events.h"
-
+#include "HAL/SimulatedADC.h"
 
 #include "simqnxgpioapi.h" // must be last include !!!
 
@@ -35,36 +34,38 @@
 
 using namespace std::chrono;
 
-Sortieranlage::Sortieranlage(){
-};
+Sortieranlage::Sortieranlage() {
+}
+;
 
 Sortieranlage::~Sortieranlage() {
 
-};
+}
+;
 
 int main() {
-
-	ADCreader adcreader;
+	SimulatedADC* simADC = new SimulatedADC();
+	simADC->startthread();
+	//ADCreader adcreader;
 	Sortieranlage sortiranlage;
 	Context* context = new Context();
 
 	Dispatcher* dispatcher = Dispatcher::GetInstance();
 	dispatcher->set_FSM_chid(context->getChannelID());
 	InterruptHandler* irh = InterruptHandler::GetInstance();
-    Aktorik* akt = Aktorik::GetInstance();
+	Aktorik* akt = Aktorik::GetInstance();
 
-
-    context->start_FSM_PulsResiver_THREAD();
+	context->start_FSM_PulsResiver_THREAD();
 	dispatcher->start_HAL_PulsResiver_THREAD();
-	dispatcher->set_ADC_chID(adcreader.getreciveID());
+	//dispatcher->set_ADC_chID(adcreader.getreciveID());TODO
 	irh->start_ISR_THREAD();
 	akt->start_aktorik_PulsResiver_THREAD();
-	adcreader.startthread();
+	//adcreader.startthread();
 
-
-	while(1){
+	while (1) {
 	}
 	return 0;
-};
+}
+;
 
 //#endif

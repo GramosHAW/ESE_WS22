@@ -11,7 +11,7 @@
 #include "../../BaseState.h"
 
 class Service : public BaseState {
-	bool TST_STOP_KURZ() override;
+	//bool TST_STOP_KURZ() override;
 
 	void showState() override;
 	void entry() override;
