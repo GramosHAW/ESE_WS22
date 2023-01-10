@@ -1,9 +1,4 @@
-/*
- * threadsafeQueue.h
- *
- *  Created on: 10 Jan 2023
- *      Author: Sami
- */
+
 
 #ifndef SRC_QUEUE_THREADSAFEQUEUE_H_
 #define SRC_QUEUE_THREADSAFEQUEUE_H_
