@@ -27,13 +27,14 @@
 
 //Machine
 #include <sys/neutrino.h>
-#include <hw/inout.h>
+//#include <hw/inout.h>
 #include <stdint.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 #include <sys/netmgr.h>
 #include <sys/siginfo.h>
 #include <sys/dispatch.h>
 #include <sys/types.h>
+
 
 // in der simulation: start 8, stop 9 reset 10 estop 11
 //#include "../utilities.h"

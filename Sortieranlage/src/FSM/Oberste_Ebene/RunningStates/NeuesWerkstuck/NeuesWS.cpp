@@ -22,6 +22,6 @@ void NeuesWs::exit(){
 }
 
 void NeuesWs::showState(){
-	cout << " subsubstateHoenmesser: NeuesWs" << endl;
+	cout << " subsubstateNeuesWerckstuck: NeuesWs" << endl;
 }
 

@@ -169,9 +169,9 @@ void SimulatedADC::receivingRoutine() {
 
 			//ADC interrupt value.
 			if (msg.code == PULSE_ADC_SAMLING_DONE) {
-				printf("Value from adc with value %d!\n", msg.value);
+				//printf("Value from adc with value %d!\n", msg.value);
 
-				if (msg.value.sival_int > 3642) {
+				if (msg.value.sival_int > 3641) {
 
 					if (!mejurStarted) {
 						MsgSendPulse(connectionIdDispacher,

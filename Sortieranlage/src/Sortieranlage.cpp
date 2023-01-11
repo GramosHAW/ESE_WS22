@@ -24,11 +24,12 @@
 
 //#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
-#include "simqnxirqapi.h"
-#include "Events.h"
 #include "HAL/SimulatedADC.h"
-
+#include "Events.h"
+#include "simstarterqnx.h"
+#include "simqnxirqapi.h"
 #include "simqnxgpioapi.h" // must be last include !!!
+
 
 //#ifndef RUN_TESTS
 
@@ -61,7 +62,7 @@ int main() {
 	irh->start_ISR_THREAD();
 	akt->start_aktorik_PulsResiver_THREAD();
 	//adcreader.startthread();
-
+	simulationStarter->startSimulation();
 	while (1) {
 	}
 	return 0;

@@ -30,5 +30,5 @@ void NeuesWsIdle::exit() {
 }
 
 void NeuesWsIdle::showState(){
-	cout << " subsubstateHoenmesser: NeuesWsIdle" << endl;
+	cout << " subsubstateNeuesWerckstuck: NeuesWsIdle" << endl;
 }

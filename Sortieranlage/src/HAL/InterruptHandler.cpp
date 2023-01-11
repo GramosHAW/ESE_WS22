@@ -23,14 +23,16 @@
 
 //Machine
 #include <sys/neutrino.h>
-#include <hw/inout.h>
+//#include <hw/inout.h>
 #include <stdint.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 #include <sys/netmgr.h>
 #include <sys/siginfo.h>
 #include <sys/dispatch.h>
 #include <sys/types.h>
 #include "../Dispatcher/Dispatcher.h"
+#include "../Simulation/simulationadapterqnx/simqnxirqapi.h"
+#include "../Simulation/simulationadapterqnx/simqnxgpioapi.h"
 
 time_t timer1;
 time_t timer2;
@@ -151,6 +153,7 @@ void InterruptHandler::wait_for_event(void) {
 		if (GPIOINT0B == GPIOINT0B) // Check Interrupt Source
 		{
 			uint32_t triggered_events = gpio_port->GetIRQSTATUS_1();
+			printf("Value from HAL with value %d!\n", triggered_events);
 			uint32_t data_in = gpio_port->ReadDataIn();
 			gpio_port->ClearIRQ_1(triggered_events);
 			// UNMASK THE IRQ

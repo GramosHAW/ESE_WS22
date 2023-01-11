@@ -7,6 +7,8 @@
 
 #include "Aktorik.h"
 #include "../Events.h"
+
+
 Aktorik* Aktorik::m_pInstance { nullptr };
 std::mutex Aktorik::mutex_;
 Aktorik *Aktorik::GetInstance() {

@@ -38,7 +38,8 @@
 #include <sys/siginfo.h>
 #include <sys/dispatch.h>
 #include <sys/types.h>
-
+#include "../Simulation/simulationadapterqnx/simqnxirqapi.h"
+#include "../Simulation/simulationadapterqnx/simqnxgpioapi.h"
 
 
 
