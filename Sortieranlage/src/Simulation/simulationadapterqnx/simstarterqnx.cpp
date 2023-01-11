@@ -42,9 +42,9 @@ SimulationStarterQNX::SimulationStarterQNX() {
     handler = new SimItemHandling();
     if (handler != nullptr) {
 #ifndef SIM_TWIN_B
-
+    	/*
         handler->addAction(SimItemHandlingAction(5000, ItemKinds::flat));
-        /*
+
         handler->addAction(
                 SimItemHandlingAction(16000,
                         SimItemHandlingActionKind::removeallslide));

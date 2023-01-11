@@ -49,10 +49,10 @@ Context::Context(){
 	state->entry();
 	state->entryStartNode();
 	state->showState();
-	this->initarray();
-	this->newWSW();
-	this->newWSW();
-	this->newWSW();
+//	this->initarray();
+//	this->newWSW();
+//	this->newWSW();
+//	this->newWSW();
 	//state->setData(&data);
 	//state->setAction(shared_action);
 

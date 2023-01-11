@@ -27,9 +27,9 @@
 
 //Machine
 #include <sys/neutrino.h>
-#include <hw/inout.h>
+//#include <hw/inout.h>
 #include <stdint.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 #include <sys/netmgr.h>
 #include <sys/siginfo.h>
 #include <sys/dispatch.h>

@@ -23,14 +23,17 @@
 
 //Machine
 #include <sys/neutrino.h>
-#include <hw/inout.h>
+//#include <hw/inout.h>
 #include <stdint.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 #include <sys/netmgr.h>
 #include <sys/siginfo.h>
 #include <sys/dispatch.h>
 #include <sys/types.h>
 #include "../Dispatcher/Dispatcher.h"
+#include "../Simulation/simulationadapterqnx/simqnxirqapi.h"
+#include "../Simulation/simulationadapterqnx/simqnxgpioapi.h"
+
 
 time_t timer1;
 time_t timer2;

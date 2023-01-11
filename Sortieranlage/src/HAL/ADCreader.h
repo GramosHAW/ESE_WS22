@@ -21,6 +21,8 @@
 #include "ADC_Sources/TSCADC.h"
 #include "ADC_Sources/ADC.h"
 #include "../Sortieranlage.h"
+#include "../Simulation/simulationadapterqnx/simqnxirqapi.h"
+#include "../Simulation/simulationadapterqnx/simqnxgpioapi.h"
 /*
 #include "simqnxgpioapi.h"
 #include "simqnxirqapi.h"

@@ -28,7 +28,7 @@
 #include "simqnxirqapi.h"
 #include "Events.h"
 
-
+#include "simstarterqnx.h"
 #include "simqnxgpioapi.h" // must be last include !!!
 
 //#ifndef RUN_TESTS
@@ -44,7 +44,7 @@ Sortieranlage::~Sortieranlage() {
 
 int main() {
 
-	ADCreader adcreader;
+	//ADCreader adcreader;
 	Sortieranlage sortiranlage;
 	Context* context = new Context();
 
@@ -56,12 +56,13 @@ int main() {
 
     context->start_FSM_PulsResiver_THREAD();
 	dispatcher->start_HAL_PulsResiver_THREAD();
-	dispatcher->set_ADC_chID(adcreader.getreciveID());
+	//dispatcher->set_ADC_chID(adcreader.getreciveID());
 	irh->start_ISR_THREAD();
 	akt->start_aktorik_PulsResiver_THREAD();
-	adcreader.startthread();
+	//adcreader.startthread();
 
 
+	simulationStarter->startSimulation();
 	while(1){
 	}
 	return 0;
