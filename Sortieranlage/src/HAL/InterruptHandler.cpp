@@ -153,7 +153,7 @@ void InterruptHandler::wait_for_event(void) {
 		if (GPIOINT0B == GPIOINT0B) // Check Interrupt Source
 		{
 			uint32_t triggered_events = gpio_port->GetIRQSTATUS_1();
-			printf("Value from HAL with value %d!\n", triggered_events);
+			//printf("Value from HAL with value %d!\n", triggered_events);
 			uint32_t data_in = gpio_port->ReadDataIn();
 			gpio_port->ClearIRQ_1(triggered_events);
 			// UNMASK THE IRQ
