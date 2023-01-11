@@ -30,7 +30,6 @@ Context::Context(Actions *shared_action) : action(shared_action) {
 	//state->setData(&data);
 	//state->setAction(shared_action);
 
-
 }
 
 Context::Context(){
@@ -56,6 +55,7 @@ Context::Context(){
 	//state->setData(&data);
 	//state->setAction(shared_action);
 
+
 //////// ZUM TESTEN DER FSM OHNE ANLAGE
 //	state->FEHLER_TRUE();
 //	state->showState();
@@ -63,6 +63,7 @@ Context::Context(){
 //	state->showState();
 //	state->FEHLER_BEHOBEN();
 //	state->showState();
+
 }
 
 Context::~Context() {
@@ -71,13 +72,6 @@ Context::~Context() {
 }
 int Context::getChannelID() {
 	return channelID;
-}
-
-void Context::start_FSM_PulsResiver_THREAD(void) {
-	//printf("I am about to start FSM\n");
-	this->dispatcher_thread = new thread(&Context::awaitEvent, this);
-	this->dispatcher_thread->detach();
-	//printf("ich bin gestarted FSM\n");
 }
 
 void Context::initarray(){
@@ -105,6 +99,15 @@ void Context::printarray(){
 		printf("Content: %d \n", *WSWarray[i]);
 	}
 	printf("\n");
+}
+
+
+void Context::start_FSM_PulsResiver_THREAD(void) {
+	printf("I am about to start FSM\n");
+	this->dispatcher_thread = new thread(&Context::awaitEvent, this);
+	this->dispatcher_thread->detach();
+	printf("ich bin gestarted FSM\n");
+
 }
 
 void Context::awaitEvent() {
@@ -181,10 +184,6 @@ void Context::awaitEvent() {
 				state->BAND_STOP();
 				state->showState();
 				break;
-//			case PSMG_SW_BAND_START:
-//				state->BAND_START();
-//				state->showState();
-//				break;
 			case PSMG_HW_TST_RESET_KURZ:
 				state->TST_RESET_KURZ();
 				state->showState();

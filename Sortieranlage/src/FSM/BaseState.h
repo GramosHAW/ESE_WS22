@@ -27,6 +27,7 @@ protected:
 	BaseState *substateBZ;
 	BaseState *substateEST;
 
+
 	BaseState *substateSERV;
 	BaseState *substateKALI;
 	BaseState *substateZEIT;
@@ -51,6 +52,8 @@ protected:
 	BaseState *substateUbergabe;
 	BaseState *subsubstateUbergabe;
 
+	BaseState *substateEntnahme;
+	BaseState *subsubstateEntnahme;
 
 
 
@@ -91,6 +94,8 @@ public:
 	//Lichtschranken
 	virtual bool LS_START_BLOCK();
 	virtual bool LS_START_FREI();
+
+	virtual bool LS_START_BLOCK_SA2();
 	virtual bool LS_SORT_BLOCK();
 	virtual bool LS_SORT_FREI();
 	virtual bool LS_RUTSCHE_BLOCK();
@@ -103,6 +108,9 @@ public:
 	virtual bool HM_START();
 	virtual bool HM_STOP();
 
+	//Metalsensor
+	virtual bool MSENS_METALL();
+	virtual bool MSENS_METALL_OHNE();
 
 	//EStopp
 	virtual bool ESTOPP_TRUE_SA1();
@@ -116,8 +124,8 @@ public:
 
 	//logic Msg
 	virtual bool BAND_FREI();
+	virtual bool BAND_FREI_SA2();
 	virtual bool BAND_STOP();
-	//virtual bool BAND_START();
 	virtual bool SERVICE();
 	virtual bool BETRIEB();
 	virtual bool RUHE();
@@ -125,6 +133,7 @@ public:
 	virtual bool ELMNT_AUSSORT();
 	virtual bool ELMNT_DURCH();
 	virtual bool RUTSCHE_FREI();
+
 	virtual bool WSW_OK();
 
 	//Fehler
@@ -139,6 +148,7 @@ public:
 
 
 
+
 	virtual bool READDATA_TRUE();
 
 
@@ -147,6 +157,7 @@ public:
 	virtual bool RUTSCHE_VOLL_SA2();
 	virtual bool RUTSCHE_VOLL_BEIDE();
 	virtual bool WS_FLIPPED();
+
 
 	//Dev
 	virtual void showState();

@@ -16,6 +16,7 @@
 #include "Fehlerstatus/AnstehendUnquitert.h"
 
 
+
 void BaseState::initSubState(){
     substateSA = new Ruhezustand;
     substateSA->initSubState();
@@ -26,6 +27,7 @@ void BaseState::initSubState(){
     substateKALI = new SortiererEinstellen;
  // substateZEIT = new BandAnfang;
     substateFEHL = new AnstehendUnquitert;
+
 
 
 
@@ -114,6 +116,12 @@ bool BaseState::LS_START_BLOCK() {
 bool BaseState::LS_START_FREI() {
 	return false;
 }
+bool BaseState::BAND_FREI_SA2(){
+	return false;
+}
+bool BaseState::LS_START_BLOCK_SA2(){
+	return false;
+}
 bool BaseState::LS_SORT_BLOCK() {
 	return false;
 }
@@ -142,6 +150,14 @@ bool BaseState::HM_START(){
 	return false;
 }
 bool BaseState::HM_STOP(){
+	return false;
+}
+
+//////////////////////////Metalsensor
+bool BaseState::MSENS_METALL(){
+	return false;
+}
+bool BaseState::MSENS_METALL_OHNE(){
 	return false;
 }
 
@@ -182,10 +198,6 @@ bool BaseState::BAND_STOP() {
 	return false;
 }
 
-//bool BaseState::BAND_START() {
-//	return false;
-//}
-
 bool BaseState::SERVICE() {
 	return false;
 }
@@ -211,6 +223,10 @@ bool BaseState::ELMNT_DURCH(){
 bool BaseState::RUTSCHE_FREI(){
 	return false;
 }
+bool BaseState::RUTSCHE_VOLL_SA1(){
+	return false;
+}
+
 
 bool BaseState::WSW_OK(){
 	return false;
@@ -227,6 +243,7 @@ bool BaseState::FEHLER_TRUE() {
 bool BaseState::FEHLER_BEHOBEN() {
 	return false;
 }
+
 
 bool BaseState::FEHLER_WSW(){
 	return false;
@@ -264,6 +281,7 @@ bool BaseState::WS_FLIPPED(){
 bool BaseState::READDATA_TRUE(){
 	return false;
 }
+
 
 void BaseState::showState() {
 	cout << "You hit rock bottom!!!" << endl;

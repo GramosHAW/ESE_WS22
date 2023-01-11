@@ -17,6 +17,7 @@ void ESTOPP::setFlagEStopp(bool flag) {
 
 void ESTOPP::entryStartNode() {
 	new (substateEST) estoppStart;
+
 	substateEST->entry();
 }
 

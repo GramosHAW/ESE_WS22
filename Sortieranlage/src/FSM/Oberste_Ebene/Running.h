@@ -18,17 +18,33 @@ class Running: public BaseState {
 	void entry() override;
 	void exit() override;
 
-	bool LS_ENDE_BLOCK() override;
+	bool BAND_FREI_SA2() override;
+	//Lichtschreank
 
+	bool LS_START_BLOCK_SA2() override;
 	bool LS_RUTSCHE_BLOCK() override;
+	bool LS_RUTSCHE_FREI() override;
 	bool LS_START_BLOCK() override;
+	bool LS_SORT_FREI() override;
 	bool LS_SORT_BLOCK() override;
+	bool LS_ENDE_BLOCK() override;
+	bool LS_ENDE_FREI() override;
+
 	bool TST_STOP_KURZ() override;
+
+	//Hoenmesser
 	bool HM_START() override;
 	bool HM_STOP() override;
+
+	//Metalsensor
+	bool MSENS_METALL() override;
+	bool MSENS_METALL_OHNE() override;
+
 	bool ELMNT_DURCH() override;
-	bool RUTSCHE_FREI() override;
-	bool LS_SORT_FREI() override;
+	bool ELMNT_AUSSORT() override;
+
+	//bool RUTSCHE_FREI() override;
+	bool RUTSCHE_VOLL_SA1() override;
 
 };
 

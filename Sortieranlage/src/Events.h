@@ -106,10 +106,9 @@
 
 #define		PSMG_ESTOPP_OK_SA1					0x55
 #define		PSMG_ESTOPP_OK_SA2					0x66
- 	// Interrupt
+ // Interrupt
 #define 	PSMG_INTERRUPT						0xAA//stack owerflow!!!!!!
-	// read data
-#define		PSMG_SW_READDATA_TRUE				0x69
+
 
 
 

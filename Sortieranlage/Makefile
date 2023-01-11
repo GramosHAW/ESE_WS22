@@ -15,6 +15,7 @@ TARGET = $(OUTPUT_DIR)/$(ARTIFACT)
 CC = qcc -Vgcc_nto$(PLATFORM)
 CXX = qcc -lang-c++ -Vgcc_nto$(PLATFORM) -DSIM_SHOW_SENSORS -DSIM_SHOW_ACTUATORS -DSIM_REPORT -DSIM_EXT_CTRL -DSIM_MANUAL_START
 
+
 #############
 # Hier einkommentieren wenn die Tests kompiliert werden sollen!
 #CXX += -DRUN_TESTS 

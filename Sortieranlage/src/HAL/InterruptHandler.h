@@ -48,7 +48,7 @@
 #define LS_SWITCH	    0x00000020  // pin 5 low when puck is at the switch
 #define METALL_DETECTED	0x00000080  // pin 7 high when Metall detected
 #define SWITCH          0x00004000  // pin 14 high when switch opened
-#define LS_RUTSCHE		0x00008000  // pin 15 low when LB blocked
+#define LS_RUTSCHE			0x00008000  // pin 15 low when LB blocked
 #define LS_END 			0x00100000  // pin 20 low when LB blocked
 #define START_BUTTON	0x00400000  // pin 22 high when button pressed
 #define STOP_BUTTON		0x00800000  // pin 23 low when button pressed
