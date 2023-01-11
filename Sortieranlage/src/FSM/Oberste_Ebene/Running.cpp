@@ -34,21 +34,27 @@ void Running::exit() {
 
 void Running::initSubState() {
 	substateNeuesWerckstuck = new NeuesWerkstuck;
+	//substateNeuesWerckstuck->entry();
 	substateNeuesWerckstuck->entryStartNode();
 
 	substateHoenmesser = new Hohenmesser();
+	//substateHoenmesser->entry();
 	substateHoenmesser->entryStartNode();
 
 	substateAussortieren = new Ausortieren();
+	//substateAussortieren->entry();
 	substateAussortieren->entryStartNode();
 
 	substateRutsche = new Rutsche();
+	//substateRutsche->entry();
 	substateRutsche->entryStartNode();
 
 	substateMetallsensor = new Metallsensor();
+	//substateMetallsensor->entry();
 	substateMetallsensor->entryStartNode();
 
 	substateUbergabe = new Ubergabe();
+	//substateUbergabe->entry();
 	substateUbergabe->entryStartNode();
 }
 
@@ -78,27 +84,12 @@ bool Running::BAND_FREI() {
 bool Running::LS_ENDE_BLOCK() {
 	//TODO Sa1 oder Sa2
 	bool handled = substateUbergabe->LS_ENDE_BLOCK();
-	if (handled) {
-		exit();
-		new (this) BIdle;
-		entry();
-	}
 	handled = substateEntnahme->LS_ENDE_BLOCK();
-	if (handled) {
-		exit();
-		new (this) BIdle;
-		entry();
-	}
 	return handled;
 }
 
 bool Running::LS_RUTSCHE_BLOCK() {
 	bool handled = substateRutsche->LS_RUTSCHE_BLOCK();
-	if (handled) {
-		exit();
-		new (this) BIdle;
-		entry();
-	}
 	return handled;
 }
 
@@ -115,11 +106,6 @@ bool Running::LS_START_BLOCK_SA2() {
 bool Running::LS_SORT_BLOCK() {
 	bool handled = substateAussortieren->LS_SORT_BLOCK();
 	//TODO nicht sicher ob der if state da sein muss
-	if (handled) {
-		exit();
-		new (this) BIdle;
-		entry();
-	}
 	return handled;
 }
 
