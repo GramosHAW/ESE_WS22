@@ -44,7 +44,7 @@ Sortieranlage::~Sortieranlage() {
 }
 ;
 
-int main() {
+int main(int argc, char *argv[]) {
 	SimulatedADC* simADC = new SimulatedADC();
 	simADC->startthread();
 	//ADCreader adcreader;
@@ -55,6 +55,10 @@ int main() {
 	dispatcher->set_FSM_chid(context->getChannelID());
 	InterruptHandler* irh = InterruptHandler::GetInstance();
 	Aktorik* akt = Aktorik::GetInstance();
+	ExternDispatcher* externDispatcher = new ExternDispatcher();
+	dispatcher->set_Extern_Ch_Id(externDispatcher->getchid());
+	std::thread externDispatcherThread(&ExternDispatcher::startThread,
+			externDispatcher, argv[1], argv[2]);
 
 	context->start_FSM_PulsResiver_THREAD();
 	dispatcher->start_HAL_PulsResiver_THREAD();

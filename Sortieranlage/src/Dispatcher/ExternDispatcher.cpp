@@ -10,54 +10,49 @@
 ExternDispatcher::ExternDispatcher() {
 	this->tExtern = nullptr;
 	this->run_thread = true;
-	// TODO Auto-generated constructor stub
+	this->externChid = ChannelCreate(0);
+	this->server_coid=0;
 
 }
 
 ExternDispatcher::~ExternDispatcher() {
-	// TODO Auto-generated destructor stub
 }
 
-void ExternDispatcher::client(std::promise<int> && p) {
-	system("slay gns");
-	system("gns -c");
-	int server_coid;
+void ExternDispatcher::client(const char* attach_point) {
+	do {
+		this->server_coid = name_open(attach_point, NAME_FLAG_ATTACH_GLOBAL);
+
+	} while (server_coid == -1);
+	printf("Connected to server! \n");
+
+	return;
+}
+
+int ExternDispatcher::sendMsg(const char* payload, int server_coid,
+		char *returnMsg) {
+	iov_t iov[3]; // multi part msg
 	header_t header;
 	app_header_t app_header;
-	iov_t iov[3]; // multi part msg
-	char r_msg[512]; // buffer for the answer
-	char const *payload0 = "Hallo Welt!";
-	if ((server_coid = name_open(ATTACH_POINT, NAME_FLAG_ATTACH_GLOBAL))
-			== -1) {
-		p.set_value(NO_SERVER);
-		return;
-	}
-	printf("Connected to server! \n");
-	p.set_value(CONNECTION_OK); //TODO: Define Variable CONNECTION_OK
-	printf("Client preparing message to send.. \n");
-	int payload_size = strlen(payload0) + 1; // +1 due to string end (\0)
+	int payload_size = strlen(payload) + 1; // +1 due to string end (\0)
 	header.type = STR_MSG; // define msg type
 	header.subtype = 0x00;
 	app_header.size = payload_size; // fill application header
 	app_header.count = 0;
 	SETIOV(iov + 0, &header, sizeof(header));
 	SETIOV(iov + 1, &app_header, sizeof(app_header));
-	SETIOV(iov + 2, payload0, payload_size);
+	SETIOV(iov + 2, payload, payload_size);
 	printf("Client sending msg..\n");
-	// send msg
-	if (-1 == MsgSendvs(server_coid, iov, 3, r_msg, sizeof(r_msg))) {
-		perror("Client: MsgSend failed");
+	if (0 < MsgSendvs(server_coid, iov, 3, returnMsg, sizeof(returnMsg))) {
+		perror("Cleint:MsgSend failed");
 		exit(EXIT_FAILURE);
 	}
-	printf("Client: Answer from server: %s \n", r_msg);
-	name_close(server_coid);
-	return;
+	return 0;
 }
-int ExternDispatcher::server() {
-	system("gns -s");
+int ExternDispatcher::server(const char* attach_point) {
 	name_attach_t *attach;
 	// Create a unique global name known within the network
-	if ((attach = name_attach(NULL, ATTACH_POINT, NAME_FLAG_ATTACH_GLOBAL)) == NULL) {
+	if ((attach = name_attach(NULL, attach_point, NAME_FLAG_ATTACH_GLOBAL))
+			== NULL) {
 		perror("Server: name_attach failed");
 		return EXIT_FAILURE;
 	}
@@ -106,6 +101,8 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		/* A pulse sent by one of your processes or a
 		 * _PULSE_CODE_COIDDEATH or _PULSE_CODE_THREADDEATH
 		 * from the kernel? */
+		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT, hdr.code,
+				0);
 		printf("Server received some pulse msg.\n");
 		break;
 	}
@@ -148,27 +145,51 @@ void ExternDispatcher::handle_app_msg(header_t hdr, int rcvid) {
 	}
 }
 
-int ExternDispatcher::startThread(void) {
-	printf("Hello from start thread..\n");
-	std::promise<int> retClient;
-	auto futureClient = retClient.get_future();
-	std::thread t(&ExternDispatcher::client, this, std::move(retClient));
-	t.join();
-	int clientRetVal = futureClient.get();
-	if (clientRetVal == NO_SERVER) {
-		printf("Channel doesnt exist.. Starting server function.. \n");
-		//std::promise<int> retServer;
-		//auto futureServer = retServer.get_future();
-		std::thread t(&ExternDispatcher::server, this);
-		t.join();
-		//int serverRetVal = futureServer.get();
-	}
-	return 0;
+int ExternDispatcher::getchid() {
+	return this->externChid;
 }
-/*
- int ExternDispatcher::startThread(void) {
- std::thread t(&ExternDispatcher::server, this );
- t.join();
- return 0;
- }*/
+
+void ExternDispatcher::startThread(const char* attachPointClient,
+		const char* attachPointServer) {
+	if (strcmp(attachPointClient, "barfoo") == 0) {
+		system("slay gns");
+		system("gns -c");
+	} else {
+		system("slay gns");
+		system("gns -s");
+	}
+	printf("Hello from start thread..\n");
+	std::thread client(&ExternDispatcher::client, this, attachPointClient);
+	std::thread server(&ExternDispatcher::server, this, attachPointServer);
+	Dispatcher* dispatcher = Dispatcher::GetInstance();
+	this->dispatcherServer = ConnectAttach(0, 0, dispatcher->getchid(),
+	_NTO_SIDE_CHANNEL, 0);
+	if (dispatcherServer == -1) {
+		fprintf(stderr,
+				"InterruptHandler: Error connecting to Dispacher channel in Extern %d\n",
+				errno);
+		exit(1);
+	}
+	_pulse msg;
+	while (1) {
+		int rcvid = MsgReceivePulse(externChid, &msg, sizeof(_pulse), NULL);
+		//int rcvid = MsgReceivePulse(dispatcherServer, &msg, sizeof(_pulse), NULL);
+		printf("2start button in extern \n");
+		if (rcvid != -1) {
+			switch (msg.code) {
+			case PSMG_HW_TST_START_KURZ:
+				printf("start button in extern \n");
+				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BETRIEB, msg.value.sival_int);
+				break;
+			default:
+				printf("Extern received some sort of msg");
+			}
+		}
+
+	}
+	client.join();
+	server.join();
+	return;
+}
 

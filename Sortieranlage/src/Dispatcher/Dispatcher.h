@@ -10,6 +10,7 @@ class Dispatcher {
 private:
 	int fsmchid;
 	int adcChid;
+	int externChId;
 	//int channelIDhal;
 	int connectionIdHalAktorik;
 	bool run_thread;
@@ -54,5 +55,6 @@ public:
 	int getchid();
 	void set_FSM_chid(int fsmChid);
 	void set_ADC_chID(int adcChid);
+	void set_Extern_Ch_Id(int channelId);
 };
 #endif
