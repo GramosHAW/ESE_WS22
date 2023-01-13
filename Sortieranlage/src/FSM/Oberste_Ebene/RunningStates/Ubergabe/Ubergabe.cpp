@@ -22,6 +22,7 @@ void Ubergabe::showState() {
 
 void Ubergabe::initSubState() {
 	subsubstateUbergabe = new UbergabeInit;
+	subsubstateUbergabe->setData(data);
 }
 
 void Ubergabe::entryStartNode() {

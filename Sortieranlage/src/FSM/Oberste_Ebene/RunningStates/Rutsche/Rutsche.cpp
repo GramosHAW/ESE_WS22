@@ -21,6 +21,7 @@ void Rutsche::showState() {
 
 void Rutsche::initSubState() {
 	subsubstateRutsche = new RutscheInit;
+	subsubstateRutsche->setData(data);
 }
 
 void Rutsche::entryStartNode() {
