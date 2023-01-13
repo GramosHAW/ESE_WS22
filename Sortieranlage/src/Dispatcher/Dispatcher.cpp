@@ -33,7 +33,6 @@ Dispatcher::Dispatcher() {
 				errno);
 		exit(1);
 	}
-
 }
 
 void Dispatcher::set_FSM_chid(int fsmChid) {
@@ -72,7 +71,6 @@ void Dispatcher::handelHALpuls() {
 		//std::cout << sizeof(msg);
 		if (rcvid != -1) {
 			//printf("by Dispatcher resived %d\n", msg.value);
-
 			switch (msg.code) {
 			//Lichtschranke///////////////////////////////////////////////////////
 			case PSMG_HW_LS_START_FREI:
@@ -150,13 +148,34 @@ void Dispatcher::handelHALpuls() {
 				break;
 				//E-Stopp////////////////////////////////////////////////////////////////////
 			case PSMG_HW_E_STOPP_TRUE:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_TRUE, 0);
-				break;
+				if(true){ // für SA1
+					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_E_STOPP_TRUE_SA1, 0);
+					break;
+				}else{ // für SA2
+					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_E_STOPP_TRUE_SA2, 0);
+					break;
+				}
 			case PSMG_HW_E_STOPP_FALSE:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_FALSE, 0);
-				std::cout << " !! E-STOPP HERAUSGEZOGEN !! " << std::endl;
+				if(true){ // für SA1
+					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_FALSE_SA1, 0);
+					break;
+				}else{ //Für SA2
+					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_FALSE_SA2, 0);
+					break;
+				}
+			case PSMG_ESTOPP_OK_SA1:
+				MsgSendPulse(connectionIdHalAktorik,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+				break;
+			case PSMG_ESTOPP_OK_SA2:
+				MsgSendPulse(connectionIdHalAktorik,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
 				break;
 				//Hohenmesser//////////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
@@ -250,17 +269,6 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
-			case PSMG_ESTOPP_OK_SA1:
-				MsgSendPulse(connectionIdHalAktorik,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
-				break;
-			case PSMG_ESTOPP_OK_SA2:
-				MsgSendPulse(connectionIdHalAktorik,
-				SIGEV_PULSE_PRIO_INHERIT, PSMG_ESTOPP_OK_SA2,
-						msg.value.sival_int);
-				break;
-
 			}
 		}
 	}

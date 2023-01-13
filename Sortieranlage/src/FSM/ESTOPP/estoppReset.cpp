@@ -22,6 +22,10 @@ void estoppReset::exit() {
 
 bool estoppReset::ESTOPP_TRUE_SA1() {
 	exit();
+	if(true){ //SA1
+		data->setFlagEStopp(true);
+		data->showFlags();
+	}
 	new (this) estoppStart;
 	entry();
 	return true;
@@ -29,6 +33,10 @@ bool estoppReset::ESTOPP_TRUE_SA1() {
 
 bool estoppReset::ESTOPP_TRUE_SA2() {
 	exit();
+	if(true){ //SA2
+		data->setFlagEStopp(true);
+		data->showFlags();
+	}
 	new (this) estoppStart;
 	entry();
 	return true;

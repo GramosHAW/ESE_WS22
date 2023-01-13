@@ -10,6 +10,7 @@
 
 #include "actions.h"
 #include "basestate.h"
+#include "contextdata.h"
 #include "../Dispatcher/dispatcher.h"
 #include <thread>
 
@@ -19,8 +20,10 @@ private:
 	BaseState *WSWarray[10];
 	BaseState *state;
 	Actions *action;
+	ContextData data;
 	std::thread* dispatcher_thread;
 	unsigned char channelID;
+
 public:
 	Context(Actions *shared_action);
 	Context();

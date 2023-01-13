@@ -22,6 +22,7 @@ void BaseState::initSubState(){
     substateSA->initSubState();
 //  substateBZ = new BIdle;
     substateEST = new estoppStart;
+    substateEST->setData(data);
     substateSERV = new Standby;
 //	substateSERV->initSubState();
     substateKALI = new SortiererEinstellen;

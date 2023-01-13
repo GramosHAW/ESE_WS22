@@ -31,6 +31,10 @@
 	//E-Stopp
 #define		PSMG_HW_E_STOPP_TRUE				0x13
 #define		PSMG_HW_E_STOPP_FALSE				0x14
+#define 	PSMG_HW_E_STOPP_TRUE_SA1			0x50
+#define 	PSMG_HW_E_STOPP_TRUE_SA2			0x51
+#define 	PSMG_HW_E_STOPP_FALSE_SA1			0x52
+#define 	PSMG_HW_E_STOPP_FALSE_SA2			0x53
 	//Unbekannte Ws
 #define		PSMG_HW_UNKNOWN_WS					0x15
 
