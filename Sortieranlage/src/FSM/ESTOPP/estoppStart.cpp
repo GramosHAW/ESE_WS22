@@ -15,44 +15,73 @@
 
 
 void estoppStart::entry(){
-	substateEST->showState();
+
 }
 
 void estoppStart::exit() {
-	cout << " ESTOPP::exit() | " << endl;
 	//send_event_payload(PSMG_SW_AMPEL_ROT_AUS,0);
 	//send_event_payload(PSMG_SW_BAND_START, 0);
 }
 
 bool estoppStart::ESTOPP_TRUE_SA1() {
-	exit();
-	new(this) estoppStart;
-	entry();
-	return true;
+	if(true){ // Wenn SA1
+		exit();
+		data->setFlagEStopp(true);
+		data->showFlags();
+		new(this) estoppStart;
+		entry();
+		return true;
+	}
 }
 
 bool estoppStart::ESTOPP_TRUE_SA2() {
-	exit();
-	new(this) estoppStart;
-	entry();
-	return true;
+	if(true){ // Wenn SA2
+		exit();
+		data->setFlagEStopp(true);
+		data->showFlags();
+		new(this) estoppStart;
+		entry();
+		return true;
+	}
 }
 
 bool estoppStart::ESTOPP_FALSE_SA1() {
-	exit();
-	new(this) estoppResolved;
-	entry();
-	return true;
+	if(true){ //wenn SA1
+		exit();
+		data->setFlagEStopp(false);
+		data->showFlags();
+		new(this) estoppResolved;
+		entry();
+		return true;
+	} else { //wenn SA2
+		if(!data->getEStopp()){
+			exit();
+			new(this) estoppResolved;
+			entry();
+			return true;
+		}
+	}
 }
 
 bool estoppStart::ESTOPP_FALSE_SA2() {
-	exit();
-	new(this) estoppResolved;
-	entry();
-	return true;
+	if(true){ //wenn SA2
+		exit();
+		data->setFlagEStopp(false);
+		data->showFlags();
+		new(this) estoppResolved;
+		entry();
+		return true;
+	} else { //wenn SA1
+		if(!data->getEStopp()){
+			exit();
+			new(this) estoppResolved;
+			entry();
+			return true;
+		}
+	}
 }
 
 
 void estoppStart::showState(){
-	cout << " substateEST: STATE " << endl;
+	cout << " substateEST: estoppStart " << endl;
 }

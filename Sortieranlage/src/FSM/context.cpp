@@ -38,21 +38,23 @@ Context::Context(){
 
 	channelID = ChannelCreate(0);
 	if (channelID == -1) {
-			fprintf(stderr, "FSM: Error creating FSM Channel %d\n",
-			errno);
-			exit(1);
-		}
+		fprintf(stderr, "FSM: Error creating FSM Channel %d\n",
+		errno);
+		exit(1);
+	}
 	action = nullptr;
 	state = new SA1();
+	state->setData(&data);
+
 	state->initSubState();
 	state->entry();
 	state->entryStartNode();
 	state->showState();
-	this->initarray();
-	this->newWSW();
-	this->newWSW();
-	this->newWSW();
-	//state->setData(&data);
+
+//	this->initarray();
+//	this->newWSW();
+//	this->newWSW();
+//	this->newWSW();
 	//state->setAction(shared_action);
 
 
@@ -172,12 +174,20 @@ void Context::awaitEvent() {
 				state->BAND_FREI();
 				state->showState();
 				break;
-			case PSMG_HW_E_STOPP_TRUE:
+			case PSMG_HW_E_STOPP_TRUE_SA1:
 				state->ESTOPP_TRUE_SA1();
 				state->showState();
 				break;
-			case PSMG_HW_E_STOPP_FALSE:
+			case PSMG_HW_E_STOPP_TRUE_SA2:
+				state->ESTOPP_TRUE_SA2();
+				state->showState();
+				break;
+			case PSMG_HW_E_STOPP_FALSE_SA1:
 				state->ESTOPP_FALSE_SA1();
+				state->showState();
+				break;
+			case PSMG_HW_E_STOPP_FALSE_SA2:
+				state->ESTOPP_FALSE_SA2();
 				state->showState();
 				break;
 			case PSMG_SW_BAND_STOP:

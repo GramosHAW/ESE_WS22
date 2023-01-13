@@ -11,22 +11,13 @@
 #include "../Oberste_Ebene/SA1.h"
 #include "../Oberste_Ebene/Ruhezustand.h"
 
-void ESTOPP::setFlagEStopp(bool flag) {
-	estopp_flag = flag;
-}
 
 void ESTOPP::entryStartNode() {
 	new (substateEST) estoppStart;
-
 	substateEST->entry();
 }
 
-//void ESTOPP::initSubState(){
-//	substateEST = new estoppStart;
-//}
-
 void ESTOPP::entry() {
-
 	cout << " ESTOPP::entry() | AMPEL ROT AN BLINK, 6hz" << endl;
 	send_event_payload(PSMG_SW_AMPEL_ROT_BLINK, 6);
 	send_event_payload(PSMG_SW_BAND_STOP, 0);
@@ -100,5 +91,6 @@ bool ESTOPP::ESTOPP_QUIT(){
 
 void ESTOPP::showState() {
 	cout << "State: EStopp" << endl;
+	substateEST->showState();
 }
 

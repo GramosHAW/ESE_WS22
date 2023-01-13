@@ -5,6 +5,16 @@
  *      Author: Admin
  */
 
+#include "contextdata.h"
+#include <iostream>
 
+using namespace std;
 
+void ContextData::setFlagEStopp(bool flag) {
+	this->estopp_true = flag;
+}
+
+void ContextData::showFlags(){
+	cout << "EStop Flag:" << estopp_true << endl;
+}
 

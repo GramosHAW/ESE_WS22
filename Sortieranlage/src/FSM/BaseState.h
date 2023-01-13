@@ -9,6 +9,7 @@
 #define SRC_FSM_BASESTATE_H_
 
 #include "actions.h"
+#include "contextdata.h"
 #include "../Events.h"
 
 #include <iostream>
@@ -20,9 +21,9 @@ using namespace std;
 class BaseState {
 protected:
 
-
-
+	ContextData *data;
 	Actions *action;
+
 	BaseState *substateSA;
 	BaseState *substateBZ;
 	BaseState *substateEST;
@@ -63,10 +64,8 @@ protected:
 	std::thread *thread_basestate_pmsg;
 
 public:
-	virtual ~BaseState() {
-	}
-	;
-	//void setData(ContextData *data){this->data = data;};
+	virtual ~BaseState() {}
+	void setData(ContextData *data){this->data = data;}
 	//void setAction(Actions *action){this->action = action;};
 
 	void send_event(int);

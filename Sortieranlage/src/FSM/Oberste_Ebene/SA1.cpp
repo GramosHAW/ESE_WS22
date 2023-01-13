@@ -54,6 +54,11 @@ bool SA1::LS_RUTSCHE_BLOCK() {
 bool SA1::ESTOPP_TRUE_SA1() {
 	bool handled = substateSA->ESTOPP_TRUE_SA1();
 	if (!handled) {
+	if(true){ // Wenn SA1
+		data->showFlags();
+		data->setFlagEStopp(true);
+		data->showFlags();
+	}
 		exit();
 		new (this) ESTOPP;
 		entry();
@@ -67,6 +72,10 @@ bool SA1::ESTOPP_TRUE_SA1() {
 bool SA1::ESTOPP_TRUE_SA2() {
 	bool handled = substateSA->ESTOPP_TRUE_SA2();
 	if (!handled) {
+		if(true){ // Wenn SA2
+			data->setFlagEStopp(true);
+			data->showFlags();
+		}
 		exit();
 		new (this) ESTOPP;
 		entry();

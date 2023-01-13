@@ -9,6 +9,8 @@
 #define SRC_FSM_CONTEXTDATA_H_
 
 
+
+
 class ContextData {
 private:
 	int chID_disp;
@@ -16,13 +18,14 @@ private:
 
 	int mittelwert;
 
-	bool estopp_true;
-	bool anderer_estopp_true;
+	bool estopp_true = false;
 	bool rutsche_voll;
-	bool andere_rutsche_voll;
 
 	//ADC_Controller* adc_controller;
-
+public:
+	void setFlagEStopp(bool);
+	void showFlags();
+	bool getEStopp(){return this->estopp_true;}
 };
 
 
