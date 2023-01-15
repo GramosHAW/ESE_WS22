@@ -21,6 +21,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include "Reihenfolge.h"
 
 //#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
@@ -36,6 +37,7 @@
 using namespace std::chrono;
 
 Sortieranlage::Sortieranlage() {
+
 }
 ;
 
@@ -63,6 +65,13 @@ int main() {
 	akt->start_aktorik_PulsResiver_THREAD();
 	//adcreader.startthread();
 	simulationStarter->startSimulation();
+
+	Reihenfolge* rf = new Reihenfolge;
+	rf->setReihenfolge("type A","type B", "type C", "Reihenfolge.txt");
+	rf->readDatei("Reihenfolge.txt");
+	rf->getQueue();
+
+
 	while (1) {
 	}
 	return 0;
