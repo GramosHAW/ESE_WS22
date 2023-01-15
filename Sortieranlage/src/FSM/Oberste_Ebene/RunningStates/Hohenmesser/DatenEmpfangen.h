@@ -17,6 +17,7 @@ public:
 
 	void showState() override;
 
+	bool HM_DATA(int data) override;
 	bool HM_STOP() override;
 };
 

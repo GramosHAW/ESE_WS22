@@ -13,11 +13,10 @@
 #include "../Events.h"
 #include "WSW/WSWaechter.h"
 
-Context::Context(Actions *shared_action) : action(shared_action) {
+Context::Context(Actions *shared_action) :
+		action(shared_action) {
 	dispatcher_thread = nullptr;
 	channelID = ChannelCreate(0);
-
-
 
 	state = new SA1();
 	state->initSubState();
@@ -32,9 +31,8 @@ Context::Context(Actions *shared_action) : action(shared_action) {
 
 }
 
-Context::Context(){
+Context::Context() {
 	this->dispatcher_thread = nullptr;
-
 
 	channelID = ChannelCreate(0);
 	if (channelID == -1) {
@@ -57,7 +55,6 @@ Context::Context(){
 //	this->newWSW();
 	//state->setAction(shared_action);
 
-
 //////// ZUM TESTEN DER FSM OHNE ANLAGE
 //	state->FEHLER_TRUE();
 //	state->showState();
@@ -76,17 +73,17 @@ int Context::getChannelID() {
 	return channelID;
 }
 
-void Context::initarray(){
-	for (int i = 0; i < 10; i++){
+void Context::initarray() {
+	for (int i = 0; i < 10; i++) {
 		WSWarray[i] = nullptr;
 	}
 }
 
-void Context::newWSW(){
+void Context::newWSW() {
 	BaseState *WSW = new WSWaechter;
 	printf("New Waechter\n");
-	for (int i = 0; i < 10; i++){
-		if (WSWarray[i] == nullptr){
+	for (int i = 0; i < 10; i++) {
+		if (WSWarray[i] == nullptr) {
 			printarray();
 			printf("New Waechter put\n");
 			WSWarray[i] = WSW;
@@ -96,13 +93,12 @@ void Context::newWSW(){
 	}
 }
 
-void Context::printarray(){
-	for (int i = 0; i < 10; i++){
+void Context::printarray() {
+	for (int i = 0; i < 10; i++) {
 		printf("Content: %d \n", *WSWarray[i]);
 	}
 	printf("\n");
 }
-
 
 void Context::start_FSM_PulsResiver_THREAD(void) {
 	printf("I am about to start FSM\n");
@@ -116,12 +112,13 @@ void Context::awaitEvent() {
 
 	_pulse msg;
 
-	while(1){
+	while (1) {
 		//printf("Hallo\n");
 		int rcvid = MsgReceivePulse(channelID, &msg, sizeof(_pulse), NULL);
 		//printf("Pulse: %d\n", msg.code);
-		if(rcvid != -1) {
-			switch(msg.code) {
+		if (rcvid != -1) {
+			switch (msg.code) {
+			//TASTEN////////////////////////////////////////////////////////
 			case PSMG_HW_TST_START_KURZ:
 				state->TST_START_KURZ();
 				state->showState();
@@ -138,6 +135,7 @@ void Context::awaitEvent() {
 				state->TST_STOP_LANG();
 				state->showState();
 				break;
+				//LICHTSCHREKE//////////////////////////////////////////////////
 			case PSMG_HW_LS_START_FREI:
 				state->LS_START_FREI();
 				state->showState();
@@ -170,10 +168,7 @@ void Context::awaitEvent() {
 				state->LS_ENDE_BLOCK();
 				state->showState();
 				break;
-			case PSMG_SW_BAND_FREI:
-				state->BAND_FREI();
-				state->showState();
-				break;
+				//ESTOP//////////////////////////////////////////////////////////
 			case PSMG_HW_E_STOPP_TRUE_SA1:
 				state->ESTOPP_TRUE_SA1();
 				state->showState();
@@ -188,6 +183,11 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_HW_E_STOPP_FALSE_SA2:
 				state->ESTOPP_FALSE_SA2();
+				state->showState();
+				break;
+				//Sofwere//////////////////////////////////////////////////////
+			case PSMG_SW_BAND_FREI:
+				state->BAND_FREI();
 				state->showState();
 				break;
 			case PSMG_SW_BAND_STOP:
@@ -214,6 +214,23 @@ void Context::awaitEvent() {
 				state->READDATA_TRUE();
 				state->showState();
 				break;
+			//Hoenmesser////////////////////////////////////////////////////////
+			case PSMG_SW_HM_START:
+				cout << " HM -starting reding  mesurment" << endl;
+				state->HM_START();
+				break;
+			case PSMG_SW_HM_STOP:
+				cout << " HM -stoping reding  mesurment" << endl;
+				state->HM_STOP();
+				break;
+			case PSMG_SW_HM_DATA:
+				cout << " HM -Messung wert:" << msg.value.sival_int << endl;
+				state->HM_DATA(msg.value.sival_int);
+				//TODO
+				break;
+			//DEFOULT/////////////////////////////////////////////////////
+			default:
+				cout << "FSM sais: SAY WAAAAAAAAT?????????????" << endl;
 			}
 		}
 	}

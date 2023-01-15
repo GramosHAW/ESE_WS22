@@ -54,25 +54,8 @@ bool SA1::LS_RUTSCHE_BLOCK() {
 bool SA1::ESTOPP_TRUE_SA1() {
 	bool handled = substateSA->ESTOPP_TRUE_SA1();
 	if (!handled) {
-	if(true){ // Wenn SA1
-		data->showFlags();
-		data->setFlagEStopp(true);
-		data->showFlags();
-	}
-		exit();
-		new (this) ESTOPP;
-		entry();
-		entryStartNode();
-		handled = true;
-	}
-	return handled;
-}
-
-
-bool SA1::ESTOPP_TRUE_SA2() {
-	bool handled = substateSA->ESTOPP_TRUE_SA2();
-	if (!handled) {
-		if(true){ // Wenn SA2
+		if (true) { // Wenn SA1
+			data->showFlags();
 			data->setFlagEStopp(true);
 			data->showFlags();
 		}
@@ -85,8 +68,23 @@ bool SA1::ESTOPP_TRUE_SA2() {
 	return handled;
 }
 
+bool SA1::ESTOPP_TRUE_SA2() {
+	bool handled = substateSA->ESTOPP_TRUE_SA2();
+	if (!handled) {
+		if (true) { // Wenn SA2
+			data->setFlagEStopp(true);
+			data->showFlags();
+		}
+		exit();
+		new (this) ESTOPP;
+		entry();
+		entryStartNode();
+		handled = true;
+	}
+	return handled;
+}
 
-bool SA1::FEHLER_TRUE(){
+bool SA1::FEHLER_TRUE() {
 	bool handled = substateSA->FEHLER_TRUE();
 	if (!handled) {
 		exit();
@@ -98,7 +96,7 @@ bool SA1::FEHLER_TRUE(){
 	return handled;
 }
 
-bool SA1::FEHLER_SA1(){
+bool SA1::FEHLER_SA1() {
 	bool handled = substateSA->FEHLER_SA1();
 	if (!handled) {
 		exit();
@@ -110,7 +108,7 @@ bool SA1::FEHLER_SA1(){
 	return handled;
 }
 
-bool SA1::FEHLER_SA2(){
+bool SA1::FEHLER_SA2() {
 	bool handled = substateSA->FEHLER_SA2();
 	if (!handled) {
 		exit();
@@ -121,7 +119,6 @@ bool SA1::FEHLER_SA2(){
 	}
 	return handled;
 }
-
 
 //Lichtehernke
 
@@ -181,6 +178,11 @@ bool SA1::HM_STOP() {
 	return handled;
 }
 
+bool SA1::HM_DATA(int data) {
+	bool handled = substateSA->HM_DATA(data);
+	return handled;
+}
+
 //Metalsensor
 bool SA1::MSENS_METALL() {
 	bool handled = substateSA->MSENS_METALL();
@@ -206,22 +208,22 @@ bool SA1::LS_SORT_FREI() {
 	return handled;
 }
 
-bool SA1::SERVICE(){
+bool SA1::SERVICE() {
 	bool handled = substateSA->SERVICE();
 	return handled;
 }
 
-bool SA1::BETRIEB(){
+bool SA1::BETRIEB() {
 	bool handled = substateSA->BETRIEB();
 	return handled;
 }
 
-bool SA1::RUHE(){
+bool SA1::RUHE() {
 	bool handled = substateSA->RUHE();
 	return handled;
 }
 
-bool SA1::BAND_STATUS(){
+bool SA1::BAND_STATUS() {
 	bool handled = substateSA->BAND_STATUS();
 	return handled;
 }

@@ -9,14 +9,20 @@
 #include "../../RunningStates/Hohenmesser/HoheKalkulieren.h"
 
 void DatenEmpfangen::entry() {
-	send_event(PSMG_SW_BAND_SLOW_AN);
 }
+
 void DatenEmpfangen::exit() {
-	send_event(PSMG_SW_BAND_SLOW_AUS);
+}
+
+bool  DatenEmpfangen::HM_DATA(int messdata) {
+	//data->mejurments[data->numberOFmejurments] = messdata;
+	//data->numberOFmejurments += 1;
+	return true;
 }
 
 bool DatenEmpfangen::HM_STOP() {
 	exit();
+	send_event(PSMG_SW_BAND_SLOW_AUS);
 	new (this) HoheKalkulieren;
 	entry();
 	return true;

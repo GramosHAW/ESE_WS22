@@ -171,7 +171,7 @@ void SimulatedADC::receivingRoutine() {
 			if (msg.code == PULSE_ADC_SAMLING_DONE) {
 				//printf("Value from adc with value %d!\n", msg.value);
 
-				if (msg.value.sival_int > 3641) {
+				if (msg.value.sival_int < 3640) {
 
 					if (!mejurStarted) {
 						MsgSendPulse(connectionIdDispacher,
@@ -182,7 +182,7 @@ void SimulatedADC::receivingRoutine() {
 					MsgSendPulse(connectionIdDispacher,
 					SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_HM_DATA,
 							msg.value.sival_int);
-				} else if (mejurStarted && (mejurmentNumber >= 180)) {
+				} else if (mejurStarted) {
 					mejurStarted = false;
 					mejurmentNumber = 0;
 					MsgSendPulse(connectionIdDispacher,

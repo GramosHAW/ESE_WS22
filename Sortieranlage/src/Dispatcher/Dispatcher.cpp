@@ -179,15 +179,18 @@ void Dispatcher::handelHALpuls() {
 				break;
 				//Hohenmesser//////////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
+				//cout << " HM -starting reding  mesurment" << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_START, 0);
 				break;
 			case PSMG_SW_HM_STOP:
+				//cout << " HM -stoping reding  mesurment" << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_STOP, 0);
 				//TODO
 				break;
 			case PSMG_SW_HM_DATA:
+				//cout << " HM -Messung wert:" << msg.value.sival_int << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_DATA, msg.value.sival_int);
 				//TODO
@@ -269,6 +272,8 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
+			default:
+				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
 			}
 		}
 	}

@@ -23,6 +23,7 @@ public:
 	bool BAND_FREI() override;
 	bool HM_START() override;
 	bool HM_STOP() override;
+	bool HM_DATA(int data) override;
 };
 
 

@@ -15,6 +15,8 @@ public:
 	void entry() override;
 	void exit() override;
 	void showState() override;
+private:
+	void addtoQueue();
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNING_STATES_NEUESWS_H_ */

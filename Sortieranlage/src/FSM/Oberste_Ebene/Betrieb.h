@@ -10,7 +10,7 @@
 
 #include "../BaseState.h"
 
-class Betrieb : public BaseState {
+class Betrieb: public BaseState {
 	void entryStartNode() override;
 
 	bool TST_STOP_KURZ() override;
@@ -24,10 +24,13 @@ class Betrieb : public BaseState {
 	bool LS_RUTSCHE_BLOCK() override;
 	void showState() override;
 
+	//Hoenmesser
+	bool HM_START() override;
+	bool HM_STOP() override;
+	bool HM_DATA(int data) override;
+
 	void entry() override;
 	void exit() override;
 };
-
-
 
 #endif /* SRC_FSM_OBERSTE_EBENE_BETRIEB_H_ */
