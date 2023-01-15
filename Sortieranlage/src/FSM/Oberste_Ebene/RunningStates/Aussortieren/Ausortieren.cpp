@@ -29,6 +29,7 @@ void Ausortieren::entryStartNode() {
 
 void Ausortieren::initSubState() {
 	subsubstateAussortieren = new AussortierenInit;
+	subsubstateAussortieren->setData(data);
 }
 
 bool Ausortieren::BAND_FREI() {

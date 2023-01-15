@@ -35,26 +35,32 @@ void Running::exit() {
 void Running::initSubState() {
 	substateNeuesWerckstuck = new NeuesWerkstuck;
 	//substateNeuesWerckstuck->entry();
+	substateNeuesWerckstuck->setData(data);
 	substateNeuesWerckstuck->entryStartNode();
 
 	substateHoenmesser = new Hohenmesser();
 	//substateHoenmesser->entry();
+	substateHoenmesser->setData(data);
 	substateHoenmesser->entryStartNode();
 
 	substateAussortieren = new Ausortieren();
 	//substateAussortieren->entry();
+	substateAussortieren->setData(data);
 	substateAussortieren->entryStartNode();
 
 	substateRutsche = new Rutsche();
 	//substateRutsche->entry();
+	substateRutsche->setData(data);
 	substateRutsche->entryStartNode();
 
 	substateMetallsensor = new Metallsensor();
 	//substateMetallsensor->entry();
+	substateMetallsensor->setData(data);
 	substateMetallsensor->entryStartNode();
 
 	substateUbergabe = new Ubergabe();
 	//substateUbergabe->entry();
+	substateUbergabe->setData(data);
 	substateUbergabe->entryStartNode();
 }
 

@@ -5,11 +5,11 @@
  *      Author: The Hive
  */
 #include "../../RunningStates/Hohenmesser/Hohenmesser.h"
-
 #include "../../RunningStates/Hohenmesser/HohenmesserInit.h"
 
 void Hohenmesser::initSubState(){
 	subsubstateHoenmesser = new HohenmesserInit;
+	subsubstateHoenmesser->setData(data);
 }
 
 void Hohenmesser::entryStartNode() {

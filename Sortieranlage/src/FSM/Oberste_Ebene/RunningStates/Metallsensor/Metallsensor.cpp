@@ -6,7 +6,7 @@
  */
 
 #include "Metallsensor.h"
-#include "MetallsensorInit.h"
+#include "WaitForMetal.h"
 
 void Metallsensor::entry() {
 	showState();
@@ -21,12 +21,13 @@ void Metallsensor::showState() {
 }
 
 void Metallsensor::initSubState() {
-	subsubstateMetallsensor = new MetallsensorInit;
+	subsubstateMetallsensor = new WaitForMetal;
+	subsubstateMetallsensor->setData(data);
 }
 
 void Metallsensor::entryStartNode() {
 	initSubState();
-	new (subsubstateMetallsensor) MetallsensorInit;
+	new (subsubstateMetallsensor) WaitForMetal;
 	subsubstateMetallsensor->entry();
 }
 
@@ -37,10 +38,5 @@ bool Metallsensor::BAND_FREI() {
 
 bool Metallsensor::MSENS_METALL() {
 	bool handled = subsubstateMetallsensor->MSENS_METALL();
-	return handled;
-}
-
-bool Metallsensor::MSENS_METALL_OHNE() {
-	bool handled = subsubstateMetallsensor->MSENS_METALL_OHNE();
 	return handled;
 }

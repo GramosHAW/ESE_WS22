@@ -22,7 +22,6 @@ public:
 
 	bool BAND_FREI() override;
 	bool MSENS_METALL() override;
-	bool MSENS_METALL_OHNE() override;
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNINGSTATES_METALLSENSOR_METALLSENSOR_H_ */

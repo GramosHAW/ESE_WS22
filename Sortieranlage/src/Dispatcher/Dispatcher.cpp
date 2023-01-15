@@ -14,6 +14,9 @@ Dispatcher *Dispatcher::GetInstance() {
 }
 Dispatcher::Dispatcher() {
 	this->isr_thread = nullptr;
+	this->fsmchid = -1;
+	this->adcChid = -1;
+	this->externChId = -1;
 	this->run_thread = true;
 	this->dispatcherChannelId = ChannelCreate(0);
 	if (dispatcherChannelId == -1) {
@@ -36,6 +39,9 @@ void Dispatcher::set_FSM_chid(int fsmChid) {
 	this->fsmchid = fsmChid;
 }
 
+void Dispatcher::set_Extern_Ch_Id(int channelId){
+	this->externChId = channelId;
+}
 void Dispatcher::start_HAL_PulsResiver_THREAD(void) {
 	printf("I am about to start Dispatcher\n");
 	isr_thread = new thread(&Dispatcher::handelHALpuls, this);
@@ -55,6 +61,10 @@ void Dispatcher::handelHALpuls() {
 	_pulse msg;
 	this->fsmchid = ConnectAttach(0, 0, fsmchid,
 	_NTO_SIDE_CHANNEL, 0);
+	this->externChId = ConnectAttach(0, 0, externChId, _NTO_SIDE_CHANNEL, 0);
+	if (externChId == -1){
+		printf("Failure to connect extern Channel");
+	}
 	while (true) {
 		int rcvid = MsgReceivePulse(dispatcherChannelId, &msg, sizeof(_pulse),
 		NULL);

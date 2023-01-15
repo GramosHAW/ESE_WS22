@@ -22,6 +22,7 @@ void Entnahme::showState() {
 
 void Entnahme::initSubState() {
 	subsubstateEntnahme = new EntnahmeInit;
+	subsubstateEntnahme->setData(data);
 }
 
 void Entnahme::entryStartNode() {

@@ -8,12 +8,12 @@
 #ifndef SRC_DISPATCHER_EXTERNDISPATCHER_H_
 #define SRC_DISPATCHER_EXTERNDISPATCHER_H_
 
-#define ATTACH_POINT "foobarService" //TODO: Better name
+#define ATTACH_POINT_SORTIERANlAGE_A "SortieranlageA"
+#define ATTACH_POINT_SORTIERANlAGE_B "SortieranlageB"
 #define NO_SERVER 0xAA
 #define CONNECTION_OK 0xA0
 #define STR_MSG (_IO_MAX + 1)
 #define DATA_MSG (_IO_MAX + 2)
-
 
 #include <stdio.h>
 #include <errno.h>
@@ -25,22 +25,33 @@
 #include <sys/iofunc.h>
 #include <thread>
 #include <future>
-
+#include "Dispatcher.h"
+#include <sys/neutrino.h>
+#include <sys/netmgr.h>
+#include "../Events.h"
 class ExternDispatcher {
+
 public:
 	ExternDispatcher();
 	virtual ~ExternDispatcher();
-	 int startThread();
+	void startThread(const char* attachPointClient,
+			const char* attachPointServer);
+	int getchid();
 private:
-	void client(std::promise<int>&&);
-	int server();
+	void client(const char*);
+	int server(const char*);
+	int sendMsg(const char* payload, int server_coid, char *returnMsg);
 	std::thread *tExtern;
 	bool run_thread;
 	typedef struct _pulse header_t;
+	int externChid;
+
+	int server_coid;
+	int dispatcherServer;
 
 	static void handle_app_msg(header_t hdr, int rcvid);
 	static void handle_ONX_IO_msg(header_t hdr, int rcvid);
-	static void handle_pulse(header_t hdr, int rcvid);
+	void handle_pulse(header_t hdr, int rcvid);
 };
 typedef struct _pulse header_t;
 /* Second header: used by application - if required */
