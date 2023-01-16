@@ -24,10 +24,9 @@ void BaseState::initSubState(){
 //  substateBZ = new BIdle;
     substateEST = new estoppStart;
     substateEST->setData(data);
-    substateSERV = new Standby;
-    cout << data << " :data basestate" << endl;
-    substateSERV->setData(data);
 
+    substateSERV = new Standby;
+    substateSERV->setData(data);
 
 //	substateSERV->initSubState();
     substateKALI = new SortiererEinstellen;

@@ -38,12 +38,8 @@ public:
 		int id;
 		int heightSA1;
 		int heightSA2;
-		//std::string Typ;
-		/*
-		werkstueck() {
-
-		}
-		*/
+		Werkstucktup tup;
+		int flipt = 0; //auf 1 sezen wenn der WS fipted
 	};
 
 	ThreadsafeQueue<werkstueck*> Q1; //Queue bis zum Hoenmesser
