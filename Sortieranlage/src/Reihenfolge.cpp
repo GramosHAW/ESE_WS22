@@ -7,13 +7,16 @@
 
 #include "Reihenfolge.h"
 
+
 Reihenfolge::Reihenfolge() {
-	reihenfolge = nullptr ;
+	//Reihenfolge* reihenfolge = new Reihenfolge();
+	//ThreadsafeQueue q = new ThreadsafeQueue();
+
 
 }
 
 Reihenfolge::~Reihenfolge() {
-	//delete reihenfolge;
+	delete reihenfolge;
 }
 
 void Reihenfolge::setReihenfolge(string a, string b, string c, string file) {
@@ -22,6 +25,7 @@ void Reihenfolge::setReihenfolge(string a, string b, string c, string file) {
 	datei.open(file, ios::trunc | ios::in);
 
 	//reihenfolge->push(a);
+	//q->push(a);
 	datei << a << "\n";
 	//reihenfolge->push(b);
 	datei << b << "\n";

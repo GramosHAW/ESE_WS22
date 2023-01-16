@@ -14,6 +14,7 @@
 #include <queue>
 #include <iostream>
 #include <fstream>
+#include "Queue/ThreadsafeQueue.h"
 
 
 using namespace std;
@@ -21,8 +22,9 @@ using namespace std;
 class Reihenfolge {
 
 private:
-	queue<std::string>* reihenfolge;
+	queue<string>* reihenfolge;
 	ofstream datei;
+	//ThreadsafeQueue<string>* q;
 public:
 	Reihenfolge();
 	virtual ~Reihenfolge();

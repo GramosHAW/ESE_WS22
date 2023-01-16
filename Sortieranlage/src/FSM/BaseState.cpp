@@ -24,6 +24,7 @@ void BaseState::initSubState(){
     substateEST = new estoppStart;
     substateEST->setData(data);
     substateSERV = new Standby;
+    substateSERV->setData(data);
 //	substateSERV->initSubState();
     substateKALI = new SortiererEinstellen;
  // substateZEIT = new BandAnfang;
