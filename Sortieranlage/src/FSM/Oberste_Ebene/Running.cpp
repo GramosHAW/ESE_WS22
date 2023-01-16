@@ -136,6 +136,7 @@ void Running::showState() {
 }
 
 bool Running::LS_START_BLOCK() {
+	cout << " Start BLOCK in Running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 	bool handled = substateNeuesWerckstuck->LS_START_BLOCK();
 	return handled;
 }

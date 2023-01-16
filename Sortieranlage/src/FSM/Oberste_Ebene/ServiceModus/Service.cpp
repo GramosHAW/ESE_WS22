@@ -31,7 +31,7 @@ void Service::initSubState() {
 void Service::entryStartNode() {
 	//initSubState();
 	cout << " ENTRY START NODE STANDBY DU HOND " << endl;
-	new (substateSERV) Standby;
+	new (this) Standby;
 	//substateSERV->entry();
 }
 

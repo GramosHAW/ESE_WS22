@@ -15,6 +15,7 @@ bool NeuesWsIdle::LS_START_BLOCK() {
 	entry();
 	return true;
 }
+
 bool NeuesWsIdle::BAND_FREI() {
 	exit();
 	new(this) SubEnd;

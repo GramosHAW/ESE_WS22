@@ -13,7 +13,6 @@
 
 
 void NeuesWs::entry() {
-	//TODO - createQue, addtoQueue,createWSW
 	addtoQueue();
 	//showState();
 	exit();
