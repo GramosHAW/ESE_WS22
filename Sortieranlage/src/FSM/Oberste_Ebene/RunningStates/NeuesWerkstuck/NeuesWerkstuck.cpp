@@ -19,6 +19,7 @@ void NeuesWerkstuck::entryStartNode() {
 }
 
 bool NeuesWerkstuck::LS_START_BLOCK() {
+	cout << " Start BLOCK in NeuesWerkstuck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 	bool handled = subsubstateNeuesWerckstuck->LS_START_BLOCK();
 	return handled;
 }

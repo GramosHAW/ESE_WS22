@@ -24,9 +24,12 @@ void BaseState::initSubState(){
 //  substateBZ = new BIdle;
     substateEST = new estoppStart;
     substateEST->setData(data);
+
     substateSERV = new Standby;
+    substateSERV->setData(data);
 //	substateSERV->initSubState();
     substateKALI = new SortiererEinstellen;
+    substateKALI->setData(data);
  // substateZEIT = new BandAnfang;
     substateFEHL = new AnstehendUnquitert;
 
