@@ -11,7 +11,6 @@
 #include "../../../../Queue/ThreadsafeQueue.h"
 #include "../../../contextdata.h"
 
-
 void NeuesWs::entry() {
 	addtoQueue();
 	//showState();
@@ -31,4 +30,6 @@ void NeuesWs::showState() {
 void NeuesWs::addtoQueue() {
 	cout << " NeuesWs added new" << endl;
 	data->Q1.push(new ContextData::werkstueck);
+	data->Q1.front()->id = data->wsID;
+	data->wsID += 1;
 }

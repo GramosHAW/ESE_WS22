@@ -34,3 +34,13 @@ bool CheckSort::ELMNT_DURCH() {
 	entry();
 	return true;
 }
+
+void CheckSort::sort(){
+	if(data->getrutsche_voll1()){
+
+	}
+	else if(data->getrutsche_voll2()){
+
+	}
+
+}

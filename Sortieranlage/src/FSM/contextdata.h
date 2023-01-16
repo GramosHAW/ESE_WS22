@@ -18,13 +18,17 @@ private:
 	int mittelwert;
 
 	bool estopp_true = false;
-	bool rutsche_voll;
+	bool rutsche_voll1 = false;
+	bool rutsche_voll2 = false;
+	//bool rutsche_voll;
 
 	//ADC_Controller* adc_controller;
 public:
 	//FOR metalsensor
 	int mejurments[200];
 	int numberOFmejurments = 0;
+	int wsID = 1;
+
 
 	enum Werkstucktup{
 			flach,
@@ -49,9 +53,17 @@ public:
 
 	werkstueck* create_new_werckstuck();
 	void setFlagEStopp(bool);
+	void setrutsche_voll1(bool);
+	void setrutsche_voll2(bool);
 	void showFlags();
 	bool getEStopp() {
 		return this->estopp_true;
+	}
+	bool getrutsche_voll1() {
+			return this->rutsche_voll1;
+	}
+	bool getrutsche_voll2() {
+				return this->rutsche_voll2;
 	}
 };
 
