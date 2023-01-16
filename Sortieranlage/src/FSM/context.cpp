@@ -35,7 +35,6 @@ Context::Context(Actions *shared_action) : action(shared_action) {
 Context::Context(){
 	this->dispatcher_thread = nullptr;
 
-
 	channelID = ChannelCreate(0);
 	if (channelID == -1) {
 		fprintf(stderr, "FSM: Error creating FSM Channel %d\n",
