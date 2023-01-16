@@ -10,15 +10,20 @@
 #include "CheckSA2.h"
 #include "../../SubEnd.h"
 #include "Kalibrierung/Kalibrierung.h"
+#include "DateiEinlesen.h"
 
 void Standby::entry() {
 	//substateSERV->showState();
 }
 
+void Standby::exit() {
+
+}
+
 
 // STÜRZT KOMISCHER WEISER BEI RESET NICHT AB, (VLLT WEIL NICHT IN SA1 DRIN, SA1::TST_RESET_KURZ() nicht existent
 bool Standby::TST_RESET_KURZ() {
-	//exit();
+	exit();
 	new (this) Kalibrierung;
 	entry();
 	return true;

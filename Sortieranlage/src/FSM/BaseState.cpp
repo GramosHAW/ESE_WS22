@@ -25,9 +25,13 @@ void BaseState::initSubState(){
     substateEST = new estoppStart;
     substateEST->setData(data);
     substateSERV = new Standby;
+    cout << data << " :data basestate" << endl;
     substateSERV->setData(data);
+
+
 //	substateSERV->initSubState();
     substateKALI = new SortiererEinstellen;
+    substateKALI->setData(data);
  // substateZEIT = new BandAnfang;
     substateFEHL = new AnstehendUnquitert;
 

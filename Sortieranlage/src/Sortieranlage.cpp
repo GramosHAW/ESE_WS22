@@ -22,6 +22,7 @@
 #include <thread>
 #include <chrono>
 #include "Reihenfolge.h"
+#include "FSM/Oberste_Ebene/ServiceModus/DateiEinlesen.h"
 
 //#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
@@ -67,17 +68,17 @@ int main(int argc, char *argv[]) {
 	irh->start_ISR_THREAD();
 	akt->start_aktorik_PulsResiver_THREAD();
 	//adcreader.startthread();
-<<<<<<< HEAD
+
 	simulationStarter->startSimulation();
 
-	Reihenfolge* rf = new Reihenfolge;
-	rf->setReihenfolge("type A","type B", "type C", "Reihenfolge.txt");
-	rf->readDatei("Reihenfolge.txt");
-	rf->getQueue();
+	//Reihenfolge* rf = new Reihenfolge;
+	//rf->setReihenfolge('f','m','h', "Reihenfolge.txt");
+	//rf->readDatei("Reihenfolge.txt");
+	//rf->getQueue();
+	//DateiEinlesen* dt = new DateiEinlesen;
+//	dt->setReihenfolge('f', 'h', 'l', "Reihefolge.txt");
 
 
-=======
->>>>>>> 62033aa81a9db006c00dc7cc41689f8ae25bded9
 	while (1) {
 	}
 	return 0;

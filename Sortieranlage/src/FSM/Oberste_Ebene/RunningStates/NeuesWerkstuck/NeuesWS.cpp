@@ -28,6 +28,7 @@ void NeuesWs::showState() {
 }
 
 void NeuesWs::addtoQueue() {
-	//ContextData::werkstueck* newWS = data->create_new_werckstuck();
-	//data->Q1.push(data->create_new_werckstuck());
+	ContextData::werkstueck* newWS = data->create_new_werckstuck();
+
+	data->Q1.push(data->create_new_werckstuck());
 }

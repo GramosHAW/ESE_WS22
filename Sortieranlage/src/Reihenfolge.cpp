@@ -6,11 +6,11 @@
  */
 
 #include "Reihenfolge.h"
+#include "FSM/contextdata.h"
 
 
 Reihenfolge::Reihenfolge() {
 	//Reihenfolge* reihenfolge = new Reihenfolge();
-	//ThreadsafeQueue q = new ThreadsafeQueue();
 
 
 }
@@ -21,10 +21,13 @@ Reihenfolge::~Reihenfolge() {
 
 void Reihenfolge::setReihenfolge(string a, string b, string c, string file) {
 
+	ContextData::Werkstucktup wstyp;
 
 	datei.open(file, ios::trunc | ios::in);
 
 	//reihenfolge->push(a);
+
+	//data->Qreihenfolge.push(wstyp = ContextData::flach);
 	//q->push(a);
 	datei << a << "\n";
 	//reihenfolge->push(b);

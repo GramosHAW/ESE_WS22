@@ -15,6 +15,8 @@
 #include <iostream>
 #include <fstream>
 #include "Queue/ThreadsafeQueue.h"
+#include "FSM/contextdata.h"
+#include "FSM/basestate.h"
 
 
 using namespace std;
