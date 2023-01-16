@@ -34,6 +34,7 @@ bool Betrieb::TST_STOP_KURZ(){
 		if(substateBZ->isSubEndState()){
 			exit();
 			new(this) Ruhezustand;
+			send_event_payload(PSMG_SW_RUHE, 0);
 			entry();
 			handled = true;
 		}
