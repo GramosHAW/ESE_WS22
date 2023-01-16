@@ -17,6 +17,7 @@ void Ruhezustand::initSubState(){
 	substateBZ = new BIdle;
 	substateBZ->setData(data);
 	substateSERV = new Standby;
+    substateSERV->setData(data);
 }
 
 void Ruhezustand::entry() {
