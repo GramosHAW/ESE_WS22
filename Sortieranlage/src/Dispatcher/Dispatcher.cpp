@@ -155,33 +155,35 @@ void Dispatcher::handelHALpuls() {
 				break;
 				//E-Stopp////////////////////////////////////////////////////////////////////
 			case PSMG_HW_E_STOPP_TRUE:
-				if(true){ // für SA1
-					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_HW_E_STOPP_TRUE_SA1, 0);
-					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_HW_E_STOPP_TRUE_SA1, 0);
-					break;
-				}else{ // für SA2
+#ifdef SIM_TWIN_B
 					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 							PSMG_HW_E_STOPP_TRUE_SA2, 0);
 					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
 							PSMG_HW_E_STOPP_TRUE_SA2, 0);
 					break;
-				}
+#else
+					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_TRUE_SA1, 0);
+					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_TRUE_SA1, 0);
+					break;
+#endif
 			case PSMG_HW_E_STOPP_FALSE:
-				if(true){ // für SA1
-					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_HW_E_STOPP_FALSE_SA1, 0);
-					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_HW_E_STOPP_FALSE_SA1, 0);
-					break;
-				}else{ //Für SA2
-					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_HW_E_STOPP_FALSE_SA2, 0);
-					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_HW_E_STOPP_FALSE_SA2, 0);
-					break;
-				}
+#ifdef SIM_TWIN_B
+				//Für SA2
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_E_STOPP_FALSE_SA2, 0);
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_E_STOPP_FALSE_SA2, 0);
+				break;
+#else
+				// für SA1
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_E_STOPP_FALSE_SA1, 0);
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_HW_E_STOPP_FALSE_SA1, 0);
+				break;
+#endif
 			case PSMG_HW_E_STOPP_TRUE_SA1:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_HW_E_STOPP_TRUE_SA1, 0);
@@ -199,37 +201,45 @@ void Dispatcher::handelHALpuls() {
 						PSMG_HW_E_STOPP_FALSE_SA2, 0);
 				break;
 			case PSMG_ESTOPP_OK_SA1:
-				if(true){//SA1
-					MsgSendPulse(externChId,
+
+#ifdef SIM_TWIN_B
+				//SA2
+				MsgSendPulse(fsmchid,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
-				} else {//SA2
-					MsgSendPulse(fsmchid,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
-				}
+#else
+				//SA1
+				MsgSendPulse(externChId,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+#endif
 				break;
 			case PSMG_ESTOPP_OK_SA2:
-				if(true){//SA2
+#ifdef SIM_TWIN_B
+				//SA2
 					MsgSendPulse(externChId,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
-				} else {//SA1
+#else				//SA1
 					MsgSendPulse(fsmchid,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
-				}
+
+#endif
 				break;
 			case PSMG_SW_ESTOPP_QUIT:
-				if(true){
-					MsgSendPulse(externChId,
-							SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_SW_ESTOPP_QUIT_SA1, msg.value.sival_int);
-				} else {
-					MsgSendPulse(externChId,
-							SIGEV_PULSE_PRIO_INHERIT,
-							PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
-				}
+				//SA1
+
+#ifdef SIM_TWIN_B
+				MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
+#else
+				MsgSendPulse(externChId,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_ESTOPP_QUIT_SA1, msg.value.sival_int);
+#endif
+
 				break;
 			case PSMG_SW_ESTOPP_QUIT_SA1:
 				MsgSendPulse(fsmchid,
@@ -261,15 +271,16 @@ void Dispatcher::handelHALpuls() {
 				break;
 				///////////LOGIK FÜR ANDERE SEITE///////////////////////////////////////////////
 			case PSMG_SW_BETRIEB:
-				if(true){
-					MsgSendPulse(externChId,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_BETRIEB_SA1, msg.value.sival_int);
-				} else {
-					MsgSendPulse(externChId,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_BETRIEB_SA2, msg.value.sival_int);
-				}
+//SA1
+#ifdef SIM_TWIN_B
+				MsgSendPulse(externChId,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BETRIEB_SA2, msg.value.sival_int);
+#else
+				MsgSendPulse(externChId,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BETRIEB_SA1, msg.value.sival_int);
+#endif
 				break;
 			case PSMG_SW_BETRIEB_SA1:
 				MsgSendPulse(fsmchid,
@@ -282,14 +293,16 @@ void Dispatcher::handelHALpuls() {
 					PSMG_SW_BETRIEB, msg.value.sival_int);
 				break;
 			case PSMG_SW_RUHE:
-				if(true){
-					MsgSendPulse(externChId,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_RUHE_SA1, msg.value.sival_int);
-				} else {
+#ifdef SIM_TWIN_B
 					MsgSendPulse(externChId,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_SW_RUHE_SA2, msg.value.sival_int);
+#else
+					//SA1
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_RUHE_SA1, msg.value.sival_int);
+#endif
 				}
 				break;
 			case PSMG_SW_RUHE_SA1:
@@ -303,15 +316,18 @@ void Dispatcher::handelHALpuls() {
 					PSMG_SW_RUHE, msg.value.sival_int);
 				break;
 			case PSMG_SW_SERVICE:
-				if(true){
-					MsgSendPulse(externChId,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_SERVICE_SA1, msg.value.sival_int);
-				} else {
+
+
+#ifdef SIM_TWIN_B
 					MsgSendPulse(externChId,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_SW_SERVICE_SA2, msg.value.sival_int);
-				}
+#else //SA1
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_SERVICE_SA1, msg.value.sival_int);
+#endif
+
 				break;
 			case PSMG_SW_SERVICE_SA1:
 				MsgSendPulse(fsmchid,
@@ -330,15 +346,18 @@ void Dispatcher::handelHALpuls() {
 					PSMG_SW_BAND_FREI, msg.value.sival_int);
 				break;
 			case PSMG_SW_BAND_FREI_SA2:
-				if(true){ //SA2
+					//SA2
+#ifdef SIM_TWIN_B
 					MsgSendPulse(externChId,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
-				} else {
+
+#else
 					MsgSendPulse(fsmchid,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
-				}
+
+#endif
 				break;
 				//TO AKTORIK///////////////////////////////////////////////////////////////////////
 				//AMPEL////////////////////////////////////////////////////////////////////
@@ -421,7 +440,7 @@ void Dispatcher::handelHALpuls() {
 				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
 			}
 		}
-	}
+		}
 
 }
 
