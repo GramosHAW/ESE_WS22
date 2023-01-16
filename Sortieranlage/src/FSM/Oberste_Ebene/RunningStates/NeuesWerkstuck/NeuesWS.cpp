@@ -9,6 +9,8 @@
 #include "NeuesWs.h"
 #include "NeuesWsIdle.h"
 #include "../../../../Queue/ThreadsafeQueue.h"
+#include "../../../contextdata.h"
+
 
 void NeuesWs::entry() {
 	//TODO - createQue, addtoQueue,createWSW
@@ -28,6 +30,6 @@ void NeuesWs::showState() {
 }
 
 void NeuesWs::addtoQueue() {
-	//ContextData::werkstueck* newWS = data->create_new_werckstuck();
-	//data->Q1.push(data->create_new_werckstuck());
+	cout << " NeuesWs added new" << endl;
+	data->Q1.push(new ContextData::werkstueck);
 }

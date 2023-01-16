@@ -111,7 +111,6 @@ bool Running::LS_START_BLOCK_SA2() {
 
 bool Running::LS_SORT_BLOCK() {
 	bool handled = substateAussortieren->LS_SORT_BLOCK();
-	//TODO nicht sicher ob der if state da sein muss
 	return handled;
 }
 

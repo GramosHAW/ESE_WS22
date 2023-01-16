@@ -240,15 +240,15 @@ void Context::awaitEvent() {
 				break;
 			//Hoenmesser////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
-				cout << " HM -starting reding  mesurment" << endl;
+				//cout << " HM -starting reding  mesurment" << endl;
 				state->HM_START();
 				break;
 			case PSMG_SW_HM_STOP:
-				cout << " HM -stoping reding  mesurment" << endl;
+				//cout << " HM -stoping reding  mesurment" << endl;
 				state->HM_STOP();
 				break;
 			case PSMG_SW_HM_DATA:
-				cout << " HM -Messung wert:" << msg.value.sival_int << endl;
+				//cout << " HM -Messung wert:" << msg.value.sival_int << endl;
 				state->HM_DATA(msg.value.sival_int);
 				//TODO
 				break;

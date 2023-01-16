@@ -16,6 +16,8 @@ public:
 	void exit() override;
 
 	void showState() override;
+private:
+	void addtoQueue();
 };
 
 
