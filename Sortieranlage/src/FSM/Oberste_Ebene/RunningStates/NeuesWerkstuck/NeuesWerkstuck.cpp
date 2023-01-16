@@ -9,6 +9,7 @@
 
 void NeuesWerkstuck::initSubState(){
 	subsubstateNeuesWerckstuck = new NeuesWs;
+	subsubstateNeuesWerckstuck->setData(data);
 }
 
 void NeuesWerkstuck::entryStartNode() {

@@ -153,6 +153,9 @@ bool BaseState::HM_START(){
 bool BaseState::HM_STOP(){
 	return false;
 }
+bool BaseState::HM_DATA(int data) {
+	return false;
+}
 
 //////////////////////////Metalsensor
 bool BaseState::MSENS_METALL(){

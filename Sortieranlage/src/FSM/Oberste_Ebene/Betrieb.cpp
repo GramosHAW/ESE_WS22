@@ -78,7 +78,21 @@ bool Betrieb::BAND_STATUS(){
 	return handled;
 }
 
+//Hoenmesser
+bool Betrieb::HM_START() {
+	bool handled = substateBZ->HM_START();
+	return handled;
+}
 
+bool Betrieb::HM_STOP() {
+	bool handled = substateBZ->HM_STOP();
+	return handled;
+}
+
+bool Betrieb::HM_DATA(int data) {
+	bool handled = substateBZ->HM_DATA(data);
+	return handled;
+}
 
 void Betrieb::showState(){
 	cout << " SubstateSA: Betrieb" << endl;

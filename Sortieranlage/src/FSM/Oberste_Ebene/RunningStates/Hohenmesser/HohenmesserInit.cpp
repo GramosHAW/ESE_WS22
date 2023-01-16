@@ -24,6 +24,7 @@ bool HohenmesserInit::BAND_FREI() {
 
 bool HohenmesserInit::HM_START() {
 	exit();
+	send_event(PSMG_SW_BAND_SLOW_AN);
 	new (this) DatenEmpfangen;
 	entry();
 	return true;

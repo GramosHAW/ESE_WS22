@@ -5,11 +5,11 @@
  *      Author: The Hive
  */
 #include "../../RunningStates/Hohenmesser/Hohenmesser.h"
-
 #include "../../RunningStates/Hohenmesser/HohenmesserInit.h"
 
-void Hohenmesser::initSubState(){
+void Hohenmesser::initSubState() {
 	subsubstateHoenmesser = new HohenmesserInit;
+	subsubstateHoenmesser->setData(data);
 }
 
 void Hohenmesser::entryStartNode() {
@@ -36,12 +36,17 @@ bool Hohenmesser::HM_START() {
 	return handled;
 }
 
+bool Hohenmesser::HM_DATA(int data) {
+	bool handled = subsubstateHoenmesser->HM_DATA(data);
+	return handled;
+}
+
 bool Hohenmesser::HM_STOP() {
 	bool handled = subsubstateHoenmesser->HM_STOP();
 	return handled;
 }
 
-void Hohenmesser::showState(){
+void Hohenmesser::showState() {
 	cout << "substateHoenmesser: Hohenmesser" << endl;
 	subsubstateHoenmesser->showState();
 }

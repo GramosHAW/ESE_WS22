@@ -47,6 +47,7 @@ public:
 	//Hoenmesser
 	bool HM_START() override;
 	bool HM_STOP() override;
+	bool HM_DATA(int data) override;
 
 	//Metalsensor
 	bool MSENS_METALL() override;
