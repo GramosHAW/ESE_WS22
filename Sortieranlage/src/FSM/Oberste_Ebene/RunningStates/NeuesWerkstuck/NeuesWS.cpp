@@ -8,20 +8,26 @@
 #include "AddNeuesWs.h"
 #include "NeuesWs.h"
 #include "NeuesWsIdle.h"
+#include "../../../../Queue/ThreadsafeQueue.h"
 
-void NeuesWs::entry(){
-	//TODO - createQue, addQue,createWSW
-	showState();
+void NeuesWs::entry() {
+	//TODO - createQue, addtoQueue,createWSW
+	addtoQueue();
+	//showState();
 	exit();
 	new (this) NeuesWsIdle;
 	entry();
 }
 
-void NeuesWs::exit(){
+void NeuesWs::exit() {
 
 }
 
-void NeuesWs::showState(){
+void NeuesWs::showState() {
 	cout << " subsubstateNeuesWerckstuck: NeuesWs" << endl;
 }
 
+void NeuesWs::addtoQueue() {
+	//ContextData::werkstueck* newWS = data->create_new_werckstuck();
+	//data->Q1.push(data->create_new_werckstuck());
+}

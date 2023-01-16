@@ -152,6 +152,11 @@ bool Running::HM_STOP() {
 	return handled;
 }
 
+bool Running::HM_DATA(int data) {
+	bool handled = substateHoenmesser->HM_DATA(data);
+	return handled;
+}
+
 //Metalsensor
 bool Running::MSENS_METALL() {
 	bool handled = substateMetallsensor->MSENS_METALL();

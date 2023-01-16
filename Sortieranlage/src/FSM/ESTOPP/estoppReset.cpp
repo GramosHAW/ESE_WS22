@@ -44,6 +44,7 @@ bool estoppReset::ESTOPP_TRUE_SA2() {
 
 bool estoppReset::TST_RESET_KURZ() {
 	exit();
+	send_event_payload(PSMG_SW_ESTOPP_QUIT, 0);
 	new (this) SubEnd;
 	entry();
 	return true;

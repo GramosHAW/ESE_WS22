@@ -177,13 +177,47 @@ void ExternDispatcher::startThread(const char* attachPointClient,
 		printf("2start button in extern \n");
 		if (rcvid != -1) {
 			switch (msg.code) {
-			case PSMG_HW_TST_START_KURZ:
-				printf("start button in extern \n");
-				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_BETRIEB, msg.value.sival_int);
-				break;
+//			case PSMG_HW_TST_START_KURZ:
+//				printf("start button in extern \n");
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_SW_BETRIEB, msg.value.sival_int);
+//				break;
+//			case PSMG_HW_E_STOPP_TRUE_SA1:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_HW_E_STOPP_TRUE_SA1, msg.value.sival_int);
+//				break;
+//			case PSMG_HW_E_STOPP_TRUE_SA2:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_HW_E_STOPP_TRUE_SA2, msg.value.sival_int);
+//				break;
+//			case PSMG_HW_E_STOPP_FALSE_SA1:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_HW_E_STOPP_FALSE_SA1, msg.value.sival_int);
+//				break;
+//			case PSMG_HW_E_STOPP_FALSE_SA2:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_HW_E_STOPP_FALSE_SA2, msg.value.sival_int);
+//				break;
+//			case PSMG_ESTOPP_OK_SA1:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+//				break;
+//			case PSMG_ESTOPP_OK_SA2:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
+//				break;
+//			case PSMG_SW_ESTOPP_QUIT_SA1:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_SW_ESTOPP_QUIT_SA1, msg.value.sival_int);
+//				break;
+//			case PSMG_SW_ESTOPP_QUIT_SA2:
+//				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+//						PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
+//				break;
 			default:
-				printf("Extern received some sort of msg");
+				printf("Extern received " + msg.code);
+				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code,
+						0);
 			}
 		}
 

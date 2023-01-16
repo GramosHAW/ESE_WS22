@@ -59,8 +59,7 @@ int main(int argc, char *argv[]) {
 	Aktorik* akt = Aktorik::GetInstance();
 	ExternDispatcher* externDispatcher = new ExternDispatcher();
 	dispatcher->set_Extern_Ch_Id(externDispatcher->getchid());
-	std::thread externDispatcherThread(&ExternDispatcher::startThread,
-			externDispatcher, argv[1], argv[2]);
+	std::thread externDispatcherThread(&ExternDispatcher::startThread,externDispatcher, argv[1], argv[2]);
 
 	context->start_FSM_PulsResiver_THREAD();
 	dispatcher->start_HAL_PulsResiver_THREAD();
@@ -68,6 +67,7 @@ int main(int argc, char *argv[]) {
 	irh->start_ISR_THREAD();
 	akt->start_aktorik_PulsResiver_THREAD();
 	//adcreader.startthread();
+<<<<<<< HEAD
 	simulationStarter->startSimulation();
 
 	Reihenfolge* rf = new Reihenfolge;
@@ -76,6 +76,8 @@ int main(int argc, char *argv[]) {
 	rf->getQueue();
 
 
+=======
+>>>>>>> 62033aa81a9db006c00dc7cc41689f8ae25bded9
 	while (1) {
 	}
 	return 0;

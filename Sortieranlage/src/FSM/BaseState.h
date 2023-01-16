@@ -66,6 +66,7 @@ protected:
 public:
 	virtual ~BaseState() {}
 	void setData(ContextData *data){this->data = data;}
+	ContextData* getData(){return this->data;};
 	//void setAction(Actions *action){this->action = action;};
 
 	void send_event(int);
@@ -106,6 +107,7 @@ public:
 	//Hoenmesser
 	virtual bool HM_START();
 	virtual bool HM_STOP();
+	virtual bool HM_DATA(int data);
 
 	//Metalsensor
 	virtual bool MSENS_METALL();

@@ -82,6 +82,14 @@ void Dispatcher::handelHALpuls() {
 				//TODO
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_HW_LS_START_BLOCK, 0);
+				if(false){ //SA2
+					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_LS_START_BLOCK_SA2, 0);
+				}
+				break;
+			case PSMG_HW_LS_START_BLOCK_SA2:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_LS_START_BLOCK_SA2, 0);
 				break;
 			case PSMG_HW_LS_SORT_FREI:
 				//TODO
@@ -90,7 +98,6 @@ void Dispatcher::handelHALpuls() {
 				break;
 			case PSMG_HW_LS_SORT_BLOCK:
 				//TODO
-				printf("I am in dispatcher \n");
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_HW_LS_SORT_BLOCK, 0);
 				break;
@@ -150,47 +157,188 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_HW_E_STOPP_TRUE:
 				if(true){ // für SA1
 					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_HW_E_STOPP_TRUE_SA1, 0);
+							PSMG_HW_E_STOPP_TRUE_SA1, 0);
+					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_TRUE_SA1, 0);
 					break;
 				}else{ // für SA2
 					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_HW_E_STOPP_TRUE_SA2, 0);
+							PSMG_HW_E_STOPP_TRUE_SA2, 0);
+					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_TRUE_SA2, 0);
 					break;
 				}
 			case PSMG_HW_E_STOPP_FALSE:
 				if(true){ // für SA1
 					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 							PSMG_HW_E_STOPP_FALSE_SA1, 0);
+					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_FALSE_SA1, 0);
 					break;
 				}else{ //Für SA2
 					MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 							PSMG_HW_E_STOPP_FALSE_SA2, 0);
+					MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_HW_E_STOPP_FALSE_SA2, 0);
 					break;
 				}
+			case PSMG_HW_E_STOPP_TRUE_SA1:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_E_STOPP_TRUE_SA1, 0);
+				break;
+			case PSMG_HW_E_STOPP_TRUE_SA2:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_E_STOPP_TRUE_SA2, 0);
+				break;
+			case PSMG_HW_E_STOPP_FALSE_SA1:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_E_STOPP_FALSE_SA1, 0);
+				break;
+			case PSMG_HW_E_STOPP_FALSE_SA2:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_HW_E_STOPP_FALSE_SA2, 0);
+				break;
 			case PSMG_ESTOPP_OK_SA1:
-				MsgSendPulse(connectionIdHalAktorik,
+				if(true){//SA1
+					MsgSendPulse(externChId,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+				} else {//SA2
+					MsgSendPulse(fsmchid,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+				}
 				break;
 			case PSMG_ESTOPP_OK_SA2:
-				MsgSendPulse(connectionIdHalAktorik,
+				if(true){//SA2
+					MsgSendPulse(externChId,
 						SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
+				} else {//SA1
+					MsgSendPulse(fsmchid,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
+				}
+				break;
+			case PSMG_SW_ESTOPP_QUIT:
+				if(true){
+					MsgSendPulse(externChId,
+							SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_SW_ESTOPP_QUIT_SA1, msg.value.sival_int);
+				} else {
+					MsgSendPulse(externChId,
+							SIGEV_PULSE_PRIO_INHERIT,
+							PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
+				}
+				break;
+			case PSMG_SW_ESTOPP_QUIT_SA1:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_ESTOPP_QUIT, msg.value.sival_int);
+				break;
+			case PSMG_SW_ESTOPP_QUIT_SA2:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_ESTOPP_QUIT, msg.value.sival_int);
 				break;
 				//Hohenmesser//////////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
+				//cout << " HM -starting reding  mesurment" << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_START, 0);
 				break;
 			case PSMG_SW_HM_STOP:
+				//cout << " HM -stoping reding  mesurment" << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_STOP, 0);
 				//TODO
 				break;
 			case PSMG_SW_HM_DATA:
+				//cout << " HM -Messung wert:" << msg.value.sival_int << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_DATA, msg.value.sival_int);
 				//TODO
+				break;
+				///////////LOGIK FÜR ANDERE SEITE///////////////////////////////////////////////
+			case PSMG_SW_BETRIEB:
+				if(true){
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_BETRIEB_SA1, msg.value.sival_int);
+				} else {
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_BETRIEB_SA2, msg.value.sival_int);
+				}
+				break;
+			case PSMG_SW_BETRIEB_SA1:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_BETRIEB, msg.value.sival_int);
+				break;
+			case PSMG_SW_BETRIEB_SA2:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_BETRIEB, msg.value.sival_int);
+				break;
+			case PSMG_SW_RUHE:
+				if(true){
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_RUHE_SA1, msg.value.sival_int);
+				} else {
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_RUHE_SA2, msg.value.sival_int);
+				}
+				break;
+			case PSMG_SW_RUHE_SA1:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_RUHE, msg.value.sival_int);
+				break;
+			case PSMG_SW_RUHE_SA2:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_RUHE, msg.value.sival_int);
+				break;
+			case PSMG_SW_SERVICE:
+				if(true){
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_SERVICE_SA1, msg.value.sival_int);
+				} else {
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_SERVICE_SA2, msg.value.sival_int);
+				}
+				break;
+			case PSMG_SW_SERVICE_SA1:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_SERVICE, msg.value.sival_int);
+				break;
+			case PSMG_SW_SERVICE_SA2:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_SERVICE, msg.value.sival_int);
+				break;
+				/////////////ANDERE LOGIK//////////////////////////////////////////////////////
+			case PSMG_SW_BAND_FREI:
+				MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_BAND_FREI, msg.value.sival_int);
+				break;
+			case PSMG_SW_BAND_FREI_SA2:
+				if(true){ //SA2
+					MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
+				} else {
+					MsgSendPulse(fsmchid,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
+				}
 				break;
 				//TO AKTORIK///////////////////////////////////////////////////////////////////////
 				//AMPEL////////////////////////////////////////////////////////////////////
@@ -269,6 +417,8 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
+			default:
+				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
 			}
 		}
 	}

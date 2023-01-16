@@ -18,3 +18,6 @@ void ContextData::showFlags(){
 	cout << "EStop Flag:" << estopp_true << endl;
 }
 
+ContextData::werkstueck* ContextData::create_new_werckstuck(){
+	return (new werkstueck);
+}

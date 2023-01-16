@@ -10,7 +10,9 @@
 void AddNeuesWs::entry() {
 	showState();
 	//TODO addqueue, createWSW
-	new (subsubstateNeuesWerckstuck) NeuesWsIdle;
+	exit();
+	new (this) NeuesWsIdle;
+	entry();
 }
 void AddNeuesWs::exit() {
 

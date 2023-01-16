@@ -16,6 +16,8 @@ public:
 
 	void entry() override;
 	void exit() override;
+private:
+	void calculateHigt();
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNINGSTATES_HOHENMESSER_HOHEKALKULIEREN_H_ */

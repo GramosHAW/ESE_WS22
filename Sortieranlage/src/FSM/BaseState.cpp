@@ -19,6 +19,7 @@
 
 void BaseState::initSubState(){
     substateSA = new Ruhezustand;
+    substateSA->setData(data);
     substateSA->initSubState();
 //  substateBZ = new BIdle;
     substateEST = new estoppStart;
@@ -152,6 +153,9 @@ bool BaseState::HM_START(){
 	return false;
 }
 bool BaseState::HM_STOP(){
+	return false;
+}
+bool BaseState::HM_DATA(int data) {
 	return false;
 }
 

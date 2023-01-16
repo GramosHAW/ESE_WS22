@@ -8,12 +8,7 @@
 #include <mutex>
 #include <condition_variable>
 
-struct werkstueck{
-int id;
-int heightSA1;
-int heightSA2;
-std::string Typ;
-};
+
 
 template<typename T>
 class ThreadsafeQueue {
