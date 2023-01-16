@@ -8,8 +8,14 @@
 #ifndef SRC_DISPATCHER_EXTERNDISPATCHER_H_
 #define SRC_DISPATCHER_EXTERNDISPATCHER_H_
 
-#define ATTACH_POINT_SORTIERANlAGE_A "SortieranlageA"
-#define ATTACH_POINT_SORTIERANlAGE_B "SortieranlageB"
+#ifdef SIM_TWIN
+#define ATTACH_POINT_CLIENT "Server"
+#define ATTACH_POINT_SERVER "Client"
+#else
+#define ATTACH_POINT_SERVER "Server"
+#define ATTACH_POINT_CLIENT "Client"
+#endif
+
 #define NO_SERVER 0xAA
 #define CONNECTION_OK 0xA0
 #define STR_MSG (_IO_MAX + 1)
@@ -38,8 +44,8 @@ public:
 			const char* attachPointServer);
 	int getchid();
 private:
-	void client(const char*);
-	int server(const char*);
+	void client();
+	int server();
 	int sendMsg(const char* payload, int server_coid, char *returnMsg);
 	std::thread *tExtern;
 	bool run_thread;

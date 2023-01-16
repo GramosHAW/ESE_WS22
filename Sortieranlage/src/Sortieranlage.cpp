@@ -21,6 +21,8 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include "Reihenfolge.h"
+#include "FSM/Oberste_Ebene/ServiceModus/DateiEinlesen.h"
 
 //#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
@@ -36,6 +38,7 @@
 using namespace std::chrono;
 
 Sortieranlage::Sortieranlage() {
+
 }
 ;
 
@@ -65,6 +68,17 @@ int main(int argc, char *argv[]) {
 	irh->start_ISR_THREAD();
 	akt->start_aktorik_PulsResiver_THREAD();
 	//adcreader.startthread();
+
+	simulationStarter->startSimulation();
+
+	//Reihenfolge* rf = new Reihenfolge;
+	//rf->setReihenfolge('f','m','h', "Reihenfolge.txt");
+	//rf->readDatei("Reihenfolge.txt");
+	//rf->getQueue();
+	//DateiEinlesen* dt = new DateiEinlesen;
+//	dt->setReihenfolge('f', 'h', 'l', "Reihefolge.txt");
+
+
 	while (1) {
 	}
 	return 0;
