@@ -18,9 +18,9 @@ ExternDispatcher::ExternDispatcher() {
 ExternDispatcher::~ExternDispatcher() {
 }
 
-void ExternDispatcher::client(const char* attach_point) {
+void ExternDispatcher::client() {
 	do {
-		this->server_coid = name_open(attach_point, NAME_FLAG_ATTACH_GLOBAL);
+		this->server_coid = name_open(ATTACH_POINT_CLIENT, NAME_FLAG_ATTACH_GLOBAL);
 
 	} while (server_coid == -1);
 	printf("Connected to server! \n");
@@ -48,10 +48,10 @@ int ExternDispatcher::sendMsg(const char* payload, int server_coid,
 	}
 	return 0;
 }
-int ExternDispatcher::server(const char* attach_point) {
+int ExternDispatcher::server() {
 	name_attach_t *attach;
 	// Create a unique global name known within the network
-	if ((attach = name_attach(NULL, attach_point, NAME_FLAG_ATTACH_GLOBAL))
+	if ((attach = name_attach(NULL, ATTACH_POINT_SERVER, NAME_FLAG_ATTACH_GLOBAL))
 			== NULL) {
 		perror("Server: name_attach failed");
 		return EXIT_FAILURE;
@@ -151,16 +151,16 @@ int ExternDispatcher::getchid() {
 
 void ExternDispatcher::startThread(const char* attachPointClient,
 		const char* attachPointServer) {
-	if (strcmp(attachPointClient, "barfoo") == 0) {
+#ifdef SIM_TWIN
 		system("slay gns");
 		system("gns -c");
-	} else {
+#else
 		system("slay gns");
 		system("gns -s");
-	}
+#endif
 	printf("Hello from start thread..\n");
-	std::thread client(&ExternDispatcher::client, this, attachPointClient);
-	std::thread server(&ExternDispatcher::server, this, attachPointServer);
+	std::thread client(&ExternDispatcher::client, this);
+	std::thread server(&ExternDispatcher::server, this);
 	Dispatcher* dispatcher = Dispatcher::GetInstance();
 	this->dispatcherServer = ConnectAttach(0, 0, dispatcher->getchid(),
 	_NTO_SIDE_CHANNEL, 0);
