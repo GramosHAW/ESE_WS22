@@ -25,6 +25,7 @@ public:
 	//FOR metalsensor
 	int mejurments[200];
 	int numberOFmejurments = 0;
+
 	enum Werkstucktup{
 			flach,
 			hoch,

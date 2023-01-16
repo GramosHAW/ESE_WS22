@@ -66,6 +66,7 @@ protected:
 public:
 	virtual ~BaseState() {}
 	void setData(ContextData *data){this->data = data;}
+	ContextData* getData(){return this->data;};
 	//void setAction(Actions *action){this->action = action;};
 
 	void send_event(int);

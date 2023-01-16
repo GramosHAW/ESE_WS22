@@ -14,7 +14,7 @@ void NeuesWerkstuck::initSubState(){
 
 void NeuesWerkstuck::entryStartNode() {
 	initSubState();
-	new (subsubstateNeuesWerckstuck) NeuesWs;
+	new (this) NeuesWs;
 	subsubstateNeuesWerckstuck->entry();
 }
 

@@ -4,9 +4,8 @@
  *  Created on: 20 Dec 2022
  *      Author: The Hive
  */
-#include "../../RunningStates/Hohenmesser/DatenEmpfangen.h"
-
-#include "../../RunningStates/Hohenmesser/HoheKalkulieren.h"
+#include "DatenEmpfangen.h"
+#include "HoheKalkulieren.h"
 
 void DatenEmpfangen::entry() {
 }
@@ -14,9 +13,9 @@ void DatenEmpfangen::entry() {
 void DatenEmpfangen::exit() {
 }
 
-bool  DatenEmpfangen::HM_DATA(int messdata) {
-	//data->mejurments[data->numberOFmejurments] = messdata;
-	//data->numberOFmejurments += 1;
+bool DatenEmpfangen::HM_DATA(int messdata) {
+	data->mejurments[data->numberOFmejurments] = messdata;
+	data->numberOFmejurments += 1;
 	return true;
 }
 
