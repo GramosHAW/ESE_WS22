@@ -8,7 +8,7 @@
 #ifndef SRC_DISPATCHER_EXTERNDISPATCHER_H_
 #define SRC_DISPATCHER_EXTERNDISPATCHER_H_
 
-#ifdef SIM_TWIN
+#ifdef SIM_TWIN_B
 #define ATTACH_POINT_CLIENT "Server"
 #define ATTACH_POINT_SERVER "Client"
 #else
@@ -16,8 +16,6 @@
 #define ATTACH_POINT_CLIENT "Client"
 #endif
 
-#define NO_SERVER 0xAA
-#define CONNECTION_OK 0xA0
 #define STR_MSG (_IO_MAX + 1)
 #define DATA_MSG (_IO_MAX + 2)
 
@@ -40,8 +38,7 @@ class ExternDispatcher {
 public:
 	ExternDispatcher();
 	virtual ~ExternDispatcher();
-	void startThread(const char* attachPointClient,
-			const char* attachPointServer);
+	void startThread();
 	int getchid();
 private:
 	void client();
