@@ -135,6 +135,14 @@ void Context::awaitEvent() {
 				state->TST_STOP_LANG();
 				state->showState();
 				break;
+			case PSMG_HW_TST_RESET_KURZ:
+				state->TST_RESET_KURZ();
+				state->showState();
+				break;
+			case PSMG_HW_TST_RESET_LANG:
+				state->TST_RESET_LANG();
+				state->showState();
+				break;
 				//LICHTSCHREKE//////////////////////////////////////////////////
 			case PSMG_HW_LS_START_FREI:
 				state->LS_START_FREI();
@@ -142,6 +150,10 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_HW_LS_START_BLOCK:
 				state->LS_START_BLOCK();
+				state->showState();
+				break;
+			case PSMG_HW_LS_START_BLOCK_SA2:
+				state->LS_START_BLOCK_SA2();
 				state->showState();
 				break;
 			case PSMG_HW_LS_SORT_FREI:
@@ -185,29 +197,41 @@ void Context::awaitEvent() {
 				state->ESTOPP_FALSE_SA2();
 				state->showState();
 				break;
-				//Sofwere//////////////////////////////////////////////////////
-			case PSMG_SW_BAND_FREI:
-				state->BAND_FREI();
-				state->showState();
-				break;
-			case PSMG_SW_BAND_STOP:
-				state->BAND_STOP();
-				state->showState();
-				break;
-			case PSMG_HW_TST_RESET_KURZ:
-				state->TST_RESET_KURZ();
-				state->showState();
-				break;
-			case PSMG_HW_TST_RESET_LANG:
-				state->TST_RESET_LANG();
-				state->showState();
-				break;
 			case PSMG_ESTOPP_OK_SA1:
 				state->ESTOPP_OK_SA1();
 				state->showState();
 				break;
 			case PSMG_ESTOPP_OK_SA2:
 				state->ESTOPP_OK_SA2();
+				state->showState();
+				break;
+			case PSMG_SW_ESTOPP_QUIT:
+				state->ESTOPP_QUIT();
+				state->showState();
+				break;
+				//Sofwere//////////////////////////////////////////////////////
+			case PSMG_SW_BAND_FREI:
+				state->BAND_FREI();
+				state->showState();
+				break;
+			case PSMG_SW_BAND_FREI_SA2:
+				state->BAND_FREI_SA2();
+				state->showState();
+				break;
+			case PSMG_SW_BETRIEB:
+				state->BETRIEB();
+				state->showState();
+				break;
+			case PSMG_SW_RUHE:
+				state->RUHE();
+				state->showState();
+				break;
+			case PSMG_SW_SERVICE:
+				state->SERVICE();
+				state->showState();
+				break;
+			case PSMG_SW_BAND_STOP:
+				state->BAND_STOP();
 				state->showState();
 				break;
 			case PSMG_SW_READDATA_TRUE:
@@ -231,6 +255,7 @@ void Context::awaitEvent() {
 			//DEFOULT/////////////////////////////////////////////////////
 			default:
 				cout << "FSM sais: SAY WAAAAAAAAT?????????????" << endl;
+				cout << "PMSG bekommen: " + msg.code  << endl;
 			}
 		}
 	}

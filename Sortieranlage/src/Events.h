@@ -13,6 +13,7 @@
 #define		PSMG_HW_LS_RUTSCHE_FREI				0x4
 #define		PSMG_HW_LS_ENDE_FREI				0x5
 #define		PSMG_HW_LS_START_BLOCK				0x6
+#define		PSMG_HW_LS_START_BLOCK_SA2			0x3F
 #define		PSMG_HW_LS_HOEHE_BLOCK				0x7
 #define		PSMG_HW_LS_SORT_BLOCK				0x8
 #define		PSMG_HW_LS_RUTSCHE_BLOCK			0x9
@@ -35,6 +36,11 @@
 #define 	PSMG_HW_E_STOPP_TRUE_SA2			0x51
 #define 	PSMG_HW_E_STOPP_FALSE_SA1			0x52
 #define 	PSMG_HW_E_STOPP_FALSE_SA2			0x53
+#define		PSMG_ESTOPP_OK_SA1					0x55
+#define		PSMG_ESTOPP_OK_SA2					0x66
+#define		PSMG_SW_ESTOPP_QUIT					0x60
+#define		PSMG_SW_ESTOPP_QUIT_SA1				0x61
+#define		PSMG_SW_ESTOPP_QUIT_SA2				0x62
 	//Unbekannte Ws
 #define		PSMG_HW_UNKNOWN_WS					0x15
 
@@ -50,8 +56,14 @@
 
 	//Zustände
 #define		PSMG_SW_BETRIEB						0x1A
+#define		PSMG_SW_BETRIEB_SA1					0x63
+#define		PSMG_SW_BETRIEB_SA2					0x64
 #define		PSMG_SW_RUHE						0x1B
+#define		PSMG_SW_RUHE_SA1					0x65
+#define		PSMG_SW_RUHE_SA2					0x67
 #define		PSMG_SW_SERVICE						0x1C
+#define		PSMG_SW_SERVICE_SA1					0x68
+#define		PSMG_SW_SERVICE_SA2					0x69
 
 	//Förderband
 #define		PSMG_SW_BAND_START					0x1D
@@ -59,6 +71,7 @@
 #define		PSMG_SW_BAND_SLOW_AN				0x1F
 #define		PSMG_SW_BAND_SLOW_AUS				0x20
 #define		PSMG_SW_BAND_FREI					0x21
+#define		PSMG_SW_BAND_FREI_SA2				0x54
 #define		PSMG_SW_BAND_VOLL					0x22
 
 	//Hoehenmesser
@@ -108,14 +121,12 @@
 #define		PSMG_SW_FEHLER_QUITTI_FALSE			0x3E
 #define		PSMG_SW_FEHLER_ENDE					0x40
 
-#define		PSMG_ESTOPP_OK_SA1					0x55
-#define		PSMG_ESTOPP_OK_SA2					0x66
  // Interrupt
 #define 	PSMG_INTERRUPT						0xAA//stack owerflow!!!!!!
 
 //Data
 
-#define     PSMG_SW_READDATA_TRUE              0x67
+#define     PSMG_SW_READDATA_TRUE              0x70
 
 
 
