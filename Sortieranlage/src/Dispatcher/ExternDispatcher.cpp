@@ -12,6 +12,7 @@ ExternDispatcher::ExternDispatcher() {
 	this->run_thread = true;
 	this->externChid = ChannelCreate(0);
 	this->server_coid=0;
+	this->dispatcherServer = 0;
 
 }
 

@@ -15,6 +15,7 @@
 #define ATTACH_POINT_SERVER "Server"
 #define ATTACH_POINT_CLIENT "Client"
 #endif
+
 #define NO_SERVER 0xAA
 #define CONNECTION_OK 0xA0
 #define STR_MSG (_IO_MAX + 1)
