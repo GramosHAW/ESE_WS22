@@ -14,7 +14,7 @@ void NeuesWerkstuck::initSubState(){
 
 void NeuesWerkstuck::entryStartNode() {
 	initSubState();
-	new (this) NeuesWs;
+	new (subsubstateNeuesWerckstuck) NeuesWs;
 	subsubstateNeuesWerckstuck->entry();
 }
 
@@ -23,6 +23,7 @@ bool NeuesWerkstuck::LS_START_BLOCK() {
 	bool handled = subsubstateNeuesWerckstuck->LS_START_BLOCK();
 	return handled;
 }
+
 bool NeuesWerkstuck::BAND_FREI() {
 	bool handled = subsubstateNeuesWerckstuck->BAND_FREI();
 	return handled;
