@@ -62,7 +62,7 @@ bool estoppStart::ESTOPP_FALSE_SA1() {
 			entry();
 			return true;
 		}
-		return false
+		return false;
 #endif
 
 }
