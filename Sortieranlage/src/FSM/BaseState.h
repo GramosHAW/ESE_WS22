@@ -50,11 +50,11 @@ protected:
 	BaseState *substateMetallsensor;
 	BaseState *subsubstateMetallsensor;
 
-	BaseState *substateUbergabe;
-	BaseState *subsubstateUbergabe;
-
 	BaseState *substateEntnahme;
 	BaseState *subsubstateEntnahme;
+
+	BaseState *substateUbergabe;
+	BaseState *subsubstateUbergabe;
 
 
 

@@ -29,7 +29,12 @@ void NeuesWs::showState() {
 
 void NeuesWs::addtoQueue() {
 	cout << " NeuesWs added new" << endl;
+	data->Q1.push(data->ubergebeneWS);
+#ifdef SIM_TWIN_B
+
+#else
 	data->Q1.push(new ContextData::werkstueck);
 	data->Q1.front()->id = data->wsID;
 	data->wsID += 1;
+#endif
 }

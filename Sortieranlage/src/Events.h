@@ -85,8 +85,8 @@
 #define     PSMG_SE_SORT_AUSSORTIERT            0x41 // TODO ubenenean
 #define		PSMG_SW_SORT_AUSSORT				0x25
 #define		PSMG_SW_SORT_DURCH					0x26
-#define 	PSMG_SW_SORT_ELMNT_AUSSORT			0x
-#define 	PSMG_SW_SORT_ELMNT_DURCH
+#define 	PSMG_SW_SORT_ELMNT_AUSSORT			0x71
+#define 	PSMG_SW_SORT_ELMNT_DURCH			0x72
 
 	//Rutschen voll
 #define		PSMG_SW_SA1_RUTSCHE_VOLL			0x27
