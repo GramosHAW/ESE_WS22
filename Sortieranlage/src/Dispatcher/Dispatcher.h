@@ -25,7 +25,7 @@ protected:
 public:
 
 	Dispatcher();
-	~Dispatcher();
+	virtual ~Dispatcher();
 	std::string value_;
 
 	/**

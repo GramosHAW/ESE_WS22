@@ -150,14 +150,13 @@ int ExternDispatcher::getchid() {
 	return this->externChid;
 }
 
-void ExternDispatcher::startThread(const char* attachPointClient,
-		const char* attachPointServer) {
-#ifdef SIM_TWIN
-		system("slay gns");
-		system("gns -c");
-#else
+void ExternDispatcher::startThread() {
+#ifdef SIM_TWIN_B
 		system("slay gns");
 		system("gns -s");
+#else
+		system("slay gns");
+		system("gns -c");
 #endif
 	printf("Hello from start thread..\n");
 	std::thread client(&ExternDispatcher::client, this);
@@ -175,7 +174,6 @@ void ExternDispatcher::startThread(const char* attachPointClient,
 	while (1) {
 		int rcvid = MsgReceivePulse(externChid, &msg, sizeof(_pulse), NULL);
 		//int rcvid = MsgReceivePulse(dispatcherServer, &msg, sizeof(_pulse), NULL);
-		printf("2start button in extern \n");
 		if (rcvid != -1) {
 			switch (msg.code) {
 //			case PSMG_HW_TST_START_KURZ:
@@ -216,9 +214,11 @@ void ExternDispatcher::startThread(const char* attachPointClient,
 //						PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
 //				break;
 			default:
-				printf("Extern received " + msg.code);
-				MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code,
-						0);
+				printf("%d", msg.code);
+				if (-1==MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code,
+						0)){
+							perror("Error sending pulse");
+						}
 			}
 		}
 

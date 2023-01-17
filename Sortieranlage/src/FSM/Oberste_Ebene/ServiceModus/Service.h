@@ -26,6 +26,7 @@ class Service : public BaseState {
 	bool TST_RESET_LANG() override;
 	bool TST_START_LANG() override;
 	bool LS_ENDE_BLOCK() override;
+	bool RUHE() override;
 
 	bool HM_START() override;
 	bool LS_START_BLOCK() override;

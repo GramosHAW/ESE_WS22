@@ -34,6 +34,7 @@ void Ruhezustand::exit(){
 bool Ruhezustand::TST_START_KURZ(){
 	exit();
 	new(this) Betrieb;
+	send_event_payload(PSMG_SW_BETRIEB, 0);
 	entry();
 	entryStartNode();
 	return true;
@@ -42,6 +43,7 @@ bool Ruhezustand::TST_START_KURZ(){
 bool Ruhezustand::TST_START_LANG(){
 	exit();
 	new(this) Service;
+	send_event_payload(PSMG_SW_SERVICE, 0);
 	entry();
 	return true;
 }
