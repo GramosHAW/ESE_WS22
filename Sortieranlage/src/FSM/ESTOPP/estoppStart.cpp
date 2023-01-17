@@ -15,7 +15,7 @@
 
 
 void estoppStart::entry(){
-
+	send_event_payload(PSMG_SW_AMPEL_ROT_BLINK, 6);
 }
 
 void estoppStart::exit() {
@@ -24,61 +24,66 @@ void estoppStart::exit() {
 }
 
 bool estoppStart::ESTOPP_TRUE_SA1() {
-	if(true){ // Wenn SA1
+#ifndef SIM_TWIN_B //SA1
 		exit();
 		data->setFlagEStopp(true);
 		data->showFlags();
 		new(this) estoppStart;
 		entry();
 		return true;
-	}
+#endif
+		return false;
 }
 
 bool estoppStart::ESTOPP_TRUE_SA2() {
-	if(true){ // Wenn SA2
+#ifdef SIM_TWIN_B //SA2
 		exit();
 		data->setFlagEStopp(true);
 		data->showFlags();
 		new(this) estoppStart;
 		entry();
 		return true;
-	}
+#endif
+		return false;
 }
 
 bool estoppStart::ESTOPP_FALSE_SA1() {
-	if(true){ //wenn SA1
+#ifndef SIM_TWIN_B //SA1
 		exit();
 		data->setFlagEStopp(false);
 		data->showFlags();
 		new(this) estoppResolved;
 		entry();
 		return true;
-	} else { //wenn SA2
+#else	//SA2
 		if(!data->getEStopp()){
 			exit();
 			new(this) estoppResolved;
 			entry();
 			return true;
 		}
-	}
+		return false;
+#endif
+
 }
 
 bool estoppStart::ESTOPP_FALSE_SA2() {
-	if(true){ //wenn SA2
+#ifdef SIM_TWIN_B //SA2
 		exit();
 		data->setFlagEStopp(false);
 		data->showFlags();
 		new(this) estoppResolved;
 		entry();
 		return true;
-	} else { //wenn SA1
+#else //SA1
 		if(!data->getEStopp()){
 			exit();
 			new(this) estoppResolved;
 			entry();
 			return true;
 		}
-	}
+		return false;
+#endif
 }
 
 

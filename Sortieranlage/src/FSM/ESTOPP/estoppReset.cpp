@@ -17,15 +17,14 @@ void estoppReset::entry() {
 
 void estoppReset::exit() {
 	send_event_payload(PSMG_SW_AMPEL_GRUEN_AUS,0);
-
 }
 
 bool estoppReset::ESTOPP_TRUE_SA1() {
 	exit();
-	if(true){ //SA1
+#ifndef SIM_TWIN_B
 		data->setFlagEStopp(true);
 		data->showFlags();
-	}
+#endif
 	new (this) estoppStart;
 	entry();
 	return true;
@@ -33,10 +32,10 @@ bool estoppReset::ESTOPP_TRUE_SA1() {
 
 bool estoppReset::ESTOPP_TRUE_SA2() {
 	exit();
-	if(true){ //SA2
+#ifdef SIM_TWIN_B
 		data->setFlagEStopp(true);
 		data->showFlags();
-	}
+#endif
 	new (this) estoppStart;
 	entry();
 	return true;

@@ -9,12 +9,13 @@
 #include "../../../SubEnd.h"
 
 bool NeuesWsIdle::LS_START_BLOCK() {
-	cout << " Start BLOCK in NeuesWsIdle!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+	//cout << " Start BLOCK in NeuesWsIdle!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 	exit();
 	new (this) AddNeuesWs;
 	entry();
 	return true;
 }
+
 bool NeuesWsIdle::BAND_FREI() {
 	exit();
 	new(this) SubEnd;

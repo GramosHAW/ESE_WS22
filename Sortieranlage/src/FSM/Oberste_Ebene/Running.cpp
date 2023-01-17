@@ -16,6 +16,7 @@
 #include "RunningStates/Rutsche/Rutsche.h"
 #include "RunningStates/Metallsensor/Metallsensor.h"
 #include "RunningStates/Ubergabe/Ubergabe.h"
+#include "RunningStates/Entnahme/Entnahme.h"
 
 void Running::entry() {
 	// MSG_SEND_PULSE (BAND_START)
@@ -57,11 +58,16 @@ void Running::initSubState() {
 	//substateMetallsensor->entry();
 	substateMetallsensor->setData(data);
 	substateMetallsensor->entryStartNode();
-
+#ifdef SIM_TWIN_B
+	substateEntnahme = new Entnahme();
+	substateEntnahme->setData(data);
+	substateEntnahme->entryStartNode();
+#else
 	substateUbergabe = new Ubergabe();
 	//substateUbergabe->entry();
 	substateUbergabe->setData(data);
 	substateUbergabe->entryStartNode();
+#endif
 }
 
 bool Running::BAND_FREI() {
@@ -89,8 +95,12 @@ bool Running::BAND_FREI() {
 
 bool Running::LS_ENDE_BLOCK() {
 	//TODO Sa1 oder Sa2
+#ifndef SIM_TWIN_B
 	bool handled = substateUbergabe->LS_ENDE_BLOCK();
-	handled = substateEntnahme->LS_ENDE_BLOCK();
+#else
+	bool handled = substateEntnahme->LS_ENDE_BLOCK();
+
+#endif
 	return handled;
 }
 
@@ -113,11 +123,12 @@ bool Running::LS_SORT_BLOCK() {
 	bool handled = substateAussortieren->LS_SORT_BLOCK();
 	return handled;
 }
-
+#ifdef SIM_TWIN_B
 bool Running::LS_ENDE_FREI() {
 	bool handled = substateEntnahme->LS_ENDE_FREI();
 	return handled;
 }
+#endif
 
 bool Running::TST_STOP_KURZ() {
 //	bool handled = substateBZ->TST_STOP_KURZ();
@@ -192,5 +203,10 @@ bool Running::ELMNT_AUSSORT() {
 
 bool Running::RUTSCHE_VOLL_SA1() {
 	bool handled = substateRutsche->RUTSCHE_VOLL_SA1();
+	return handled;
+}
+
+bool Running::LS_ENDE_FREI_SA2(){
+	bool handled = substateUbergabe->LS_ENDE_BLOCK_SA2();
 	return handled;
 }
