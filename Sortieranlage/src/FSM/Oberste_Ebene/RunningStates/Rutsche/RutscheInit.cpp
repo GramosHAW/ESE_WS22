@@ -6,11 +6,20 @@
  */
 
 #include "RutscheInit.h"
-#include "RutscheDataTrasch.h"
 #include "../../../SubEnd.h"
 
 void RutscheInit::entry() {
 	showState();
+#ifdef SIM_TWIN_B
+	if(data->Q1.size()== 0){
+		send_event(PSMG_SW_BAND_FREI);
+		send_event(PSMG_SW_BAND_FREI_SA2);
+	}
+#else
+	if((data->Q1.size()== 0) && (data->Q2.size()== 0) && (data->Q3.size()== 0)){
+		send_event(PSMG_SW_BAND_FREI);
+	}
+#endif
 }
 
 void RutscheInit::exit() {
@@ -30,7 +39,7 @@ bool RutscheInit::BAND_FREI() {
 
 bool RutscheInit::LS_RUTSCHE_BLOCK() {
 	exit();
-	new (this) RutscheDataTrasch;
+	new (this) RutscheInit;
 	entry();
 	return true;
 }

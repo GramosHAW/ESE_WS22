@@ -42,13 +42,13 @@ class Running: public BaseState {
 
 	//Metalsensor
 	bool MSENS_METALL() override;
-	bool MSENS_METALL_OHNE() override;
+	//bool MSENS_METALL_OHNE() override;
 
 	bool ELMNT_DURCH() override;
 	bool ELMNT_AUSSORT() override;
 
 	//bool RUTSCHE_FREI() override;
-	bool RUTSCHE_VOLL_SA1() override;
+	//bool RUTSCHE_VOLL_SA1() override;
 
 };
 

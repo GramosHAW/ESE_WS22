@@ -76,14 +76,26 @@ void BaseState::send_event_payload(int pmsg, int payload) {
 	thread_basestate_pmsg->join();
 }
 
+void BaseState::send_event_payload_WS(int pmsg, ContextData::werkstueck* payload) {
+	_PMSG = pmsg;
+	_payloadWS = payload;
+	thread_basestate_pmsg = new thread(&BaseState::connect_send, this);
+	thread_basestate_pmsg->join();
+}
+
 void BaseState::connect_send() {
 	Dispatcher* disp = Dispatcher::GetInstance();
 	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
 	MsgSendPulse(coid, -1, _PMSG, _payload);
 	ConnectDetach(coid);
-
 }
 
+void BaseState::connect_send_WS() {
+	Dispatcher* disp = Dispatcher::GetInstance();
+	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
+	MsgSendPulse(coid, -1, _PMSG, (uintptr_t) _payloadWS);
+	ConnectDetach(coid);
+}
 
 
 

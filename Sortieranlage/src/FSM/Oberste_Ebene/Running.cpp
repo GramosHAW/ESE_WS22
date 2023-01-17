@@ -83,6 +83,16 @@ bool Running::BAND_FREI() {
 	if (!handled) {
 		return handled;
 	}
+	handled = substateMetallsensor->BAND_FREI();
+	if (!handled) {
+		return handled;
+	}
+#ifndef SIM_TWIN_B
+	handled = substateUbergabe->BAND_FREI();
+	if (!handled) {
+		return handled;
+	}
+#endif
 	handled = substateRutsche->BAND_FREI();
 	return handled;
 }
@@ -99,7 +109,6 @@ bool Running::LS_ENDE_BLOCK() {
 	bool handled = substateUbergabe->LS_ENDE_BLOCK();
 #else
 	bool handled = substateEntnahme->LS_ENDE_BLOCK();
-
 #endif
 	return handled;
 }
@@ -172,22 +181,18 @@ bool Running::MSENS_METALL() {
 	bool handled = substateMetallsensor->MSENS_METALL();
 	return handled;
 }
-
+/*
 bool Running::MSENS_METALL_OHNE() {
 	bool handled = substateMetallsensor->MSENS_METALL_OHNE();
 	return handled;
 }
-
+*/
 bool Running::ELMNT_DURCH() {
 	bool handled = substateAussortieren->ELMNT_DURCH();
 	return handled;
 }
 bool Running::LS_RUTSCHE_FREI() {
-	bool handled = substateRutsche->LS_RUTSCHE_FREI();
-	if (!handled) {
-		return handled;
-	}
-	handled = substateAussortieren->LS_RUTSCHE_FREI();
+	bool handled = substateAussortieren->LS_RUTSCHE_FREI();
 	return handled;
 }
 
@@ -200,13 +205,13 @@ bool Running::ELMNT_AUSSORT() {
 	bool handled = substateAussortieren->ELMNT_AUSSORT();
 	return handled;
 }
-
-bool Running::RUTSCHE_VOLL_SA1() {
-	bool handled = substateRutsche->RUTSCHE_VOLL_SA1();
-	return handled;
-}
-
-bool Running::LS_ENDE_FREI_SA2(){
+/*
+ bool Running::RUTSCHE_VOLL_SA1() {
+ bool handled = substateRutsche->RUTSCHE_VOLL_SA1();
+ return handled;
+ }
+ */
+bool Running::LS_ENDE_FREI_SA2() {
 	bool handled = substateUbergabe->LS_ENDE_BLOCK_SA2();
 	return handled;
 }

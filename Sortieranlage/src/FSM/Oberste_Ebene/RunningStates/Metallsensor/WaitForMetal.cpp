@@ -7,6 +7,7 @@
 
 #include "WaitForMetal.h"
 #include "../../../SubEnd.h"
+#include "../../../contextdata.h"
 
 void WaitForMetal::entry() {
 
@@ -27,5 +28,10 @@ bool WaitForMetal::BAND_FREI() {
 }
 
 bool WaitForMetal::MSENS_METALL() {
-	//TODO change in que
+#ifdef SIM_TWIN_B
+	data->Q1.front()->tup = ContextData::metal;
+#else
+	data->Q2.front()->tup = ContextData::metal;
+#endif
+	return true;
 }

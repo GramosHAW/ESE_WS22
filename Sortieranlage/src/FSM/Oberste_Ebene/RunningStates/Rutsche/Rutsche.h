@@ -22,8 +22,10 @@ public:
 
 	bool BAND_FREI() override;
 	bool LS_RUTSCHE_BLOCK() override;
+	/*
 	bool LS_RUTSCHE_FREI() override;
 	bool RUTSCHE_VOLL_SA1() override;
+	*/
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNINGSTATES_RUTSCHE_RUTSCHE_H_ */

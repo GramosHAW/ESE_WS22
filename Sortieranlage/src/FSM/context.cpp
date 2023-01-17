@@ -9,6 +9,7 @@
 #include "Oberste_Ebene/SA1.h"
 #include "Oberste_Ebene/Ruhezustand.h"
 #include "actions.h"
+#include "Warnung/RutscheVoll.h"
 #include "../HAL/InterruptHandler.h"
 #include "../Events.h"
 #include "WSW/WSWaechter.h"
@@ -48,6 +49,13 @@ Context::Context() {
 	state->entry();
 	state->entryStartNode();
 	state->showState();
+
+	stateWarnungRutsche = new RutscheVoll();
+	stateWarnungRutsche->setData(&data);
+	stateWarnungRutsche->initSubState();
+	stateWarnungRutsche->entry();
+	stateWarnungRutsche->entryStartNode();
+	stateWarnungRutsche->showState();
 
 //	this->initarray();
 //	this->newWSW();
@@ -211,6 +219,7 @@ void Context::awaitEvent() {
 				break;
 				//Sofwere//////////////////////////////////////////////////////
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
+				stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
@@ -244,6 +253,21 @@ void Context::awaitEvent() {
 				state->READDATA_TRUE();
 				state->showState();
 				break;
+			case PSMG_SW_SA1_RUTSCHE_VOLL:
+				stateWarnungRutsche->RUTSCHE_VOLL_SA1();
+				stateWarnungRutsche->showState();
+				break;
+			case PSMG_SW_SA2_RUTSCHE_VOLL:
+				stateWarnungRutsche->RUTSCHE_VOLL_SA2();
+				stateWarnungRutsche->showState();
+				break;
+			case PSMG_SW_RUTSCHE_VOLL_BEIDE:
+				stateWarnungRutsche->RUTSCHE_VOLL_BEIDE();
+				stateWarnungRutsche->showState();
+				break;
+			case PSMG_SW_WS_DATA_SA2:
+				data.ubergebeneWS = (ContextData::werkstueck*) msg.value.sival_ptr;
+				break;
 				//Hoenmesser////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
 				//cout << " HM -starting reding  mesurment" << endl;
@@ -257,6 +281,11 @@ void Context::awaitEvent() {
 				//cout << " HM -Messung wert:" << msg.value.sival_int << endl;
 				state->HM_DATA(msg.value.sival_int);
 				//TODO
+				break;
+				///////////FEHLER/////////////////////////////////////////////////
+			case PSMG_SW_FEHLER_TRUE:
+				state->FEHLER_TRUE();
+				state->showState();
 				break;
 				//DEFOULT/////////////////////////////////////////////////////
 			default:
