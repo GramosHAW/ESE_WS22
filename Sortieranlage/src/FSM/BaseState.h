@@ -56,6 +56,7 @@ protected:
 	BaseState *substateEntnahme;
 	BaseState *subsubstateEntnahme;
 
+	BaseState *substateWARNRUT;
 
 
 	unsigned char _PMSG;

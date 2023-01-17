@@ -9,6 +9,7 @@
 #include "Oberste_Ebene/SA1.h"
 #include "Oberste_Ebene/Ruhezustand.h"
 #include "actions.h"
+#include "Warnung/RutscheVoll.h"
 #include "../HAL/InterruptHandler.h"
 #include "../Events.h"
 #include "WSW/WSWaechter.h"
@@ -48,6 +49,13 @@ Context::Context() {
 	state->entry();
 	state->entryStartNode();
 	state->showState();
+
+	stateWarnungRutsche = new RutscheVoll();
+	stateWarnungRutsche->setData(&data);
+	stateWarnungRutsche->initSubState();
+	stateWarnungRutsche->entry();
+	stateWarnungRutsche->entryStartNode();
+	stateWarnungRutsche->showState();
 
 //	this->initarray();
 //	this->newWSW();
@@ -237,6 +245,18 @@ void Context::awaitEvent() {
 			case PSMG_SW_READDATA_TRUE:
 				state->READDATA_TRUE();
 				state->showState();
+				break;
+			case PSMG_SW_SA1_RUTSCHE_VOLL:
+				stateWarnungRutsche->RUTSCHE_VOLL_SA1();
+				stateWarnungRutsche->showState();
+				break;
+			case PSMG_SW_SA2_RUTSCHE_VOLL:
+				stateWarnungRutsche->RUTSCHE_VOLL_SA2();
+				stateWarnungRutsche->showState();
+				break;
+			case PSMG_SW_RUTSCHE_VOLL_BEIDE:
+				stateWarnungRutsche->RUTSCHE_VOLL_BEIDE();
+				stateWarnungRutsche->showState();
 				break;
 			//Hoenmesser////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
