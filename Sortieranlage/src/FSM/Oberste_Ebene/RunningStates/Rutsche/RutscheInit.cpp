@@ -11,9 +11,14 @@
 void RutscheInit::entry() {
 	showState();
 #ifdef SIM_TWIN_B
-
+	if(data->Q1.size()== 0){
+		send_event(PSMG_SW_BAND_FREI);
+		send_event(PSMG_SW_BAND_FREI_SA2);
+	}
 #else
-
+	if((data->Q1.size()== 0) && (data->Q2.size()== 0) && (data->Q3.size()== 0)){
+		send_event(PSMG_SW_BAND_FREI);
+	}
 #endif
 }
 

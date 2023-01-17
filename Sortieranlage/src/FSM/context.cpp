@@ -265,7 +265,10 @@ void Context::awaitEvent() {
 				stateWarnungRutsche->RUTSCHE_VOLL_BEIDE();
 				stateWarnungRutsche->showState();
 				break;
-			//Hoenmesser////////////////////////////////////////////////////////
+			case PSMG_SW_WS_DATA_SA2:
+				data.ubergebeneWS = (ContextData::werkstueck*) msg.value.sival_ptr;
+				break;
+				//Hoenmesser////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
 				//cout << " HM -starting reding  mesurment" << endl;
 				state->HM_START();
@@ -279,7 +282,7 @@ void Context::awaitEvent() {
 				state->HM_DATA(msg.value.sival_int);
 				//TODO
 				break;
-			///////////FEHLER/////////////////////////////////////////////////
+				///////////FEHLER/////////////////////////////////////////////////
 			case PSMG_SW_FEHLER_TRUE:
 				state->FEHLER_TRUE();
 				state->showState();

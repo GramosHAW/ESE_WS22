@@ -267,17 +267,17 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_HM_DATA:
 				//cout << " HM -Messung wert:" << msg.value.sival_int << endl;
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_HM_DATA, msg.value.sival_int);
+				PSMG_SW_HM_DATA, msg.value.sival_int);
 				//TODO
 				break;
 				//////////RUTSCHE///////////////////////////////////////////////////////////////
 			case PSMG_SW_SA1_RUTSCHE_VOLL:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_SW_SA1_RUTSCHE_VOLL, msg.value.sival_int);
+				PSMG_SW_SA1_RUTSCHE_VOLL, msg.value.sival_int);
 				break;
 			case PSMG_SW_SA2_RUTSCHE_VOLL:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_SA2_RUTSCHE_VOLL, msg.value.sival_int);
+				PSMG_SW_SA2_RUTSCHE_VOLL, msg.value.sival_int);
 				break;
 			case PSMG_SW_RUTSCHE_VOLL_BEIDE:
 #ifdef	SIM_TWIN_B
@@ -285,16 +285,16 @@ void Dispatcher::handelHALpuls() {
 						PSMG_SW_RUTSCHE_VOLL_BEIDE_SA2, msg.value.sival_int);
 #else
 				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_RUTSCHE_VOLL_BEIDE_SA1, msg.value.sival_int);
+				PSMG_SW_RUTSCHE_VOLL_BEIDE_SA1, msg.value.sival_int);
 #endif
 				break;
 			case PSMG_SW_RUTSCHE_VOLL_BEIDE_SA1:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_RUTSCHE_VOLL_BEIDE_SA1, msg.value.sival_int);
+				PSMG_SW_RUTSCHE_VOLL_BEIDE_SA1, msg.value.sival_int);
 				break;
 			case PSMG_SW_RUTSCHE_VOLL_BEIDE_SA2:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_RUTSCHE_VOLL_BEIDE_SA2, msg.value.sival_int);
+				PSMG_SW_RUTSCHE_VOLL_BEIDE_SA2, msg.value.sival_int);
 				break;
 				///////////LOGIK FÜR ANDERE SEITE///////////////////////////////////////////////
 			case PSMG_SW_BETRIEB:
@@ -361,13 +361,18 @@ void Dispatcher::handelHALpuls() {
 				break;
 			case PSMG_SW_SERVICE_SA2:
 				MsgSendPulse(fsmchid,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_SERVICE, msg.value.sival_int);
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SERVICE, msg.value.sival_int);
 				break;
 			case PSMG_SW_WS_DATA:
+				MsgSendPulse(externChId,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_WS_DATA, msg.value.sival_int);
+				break;
+			case PSMG_SW_WS_DATA_SA2:
 				MsgSendPulse(fsmchid,
-					SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_SW_WS_DATA, msg.value.sival_int);
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_WS_DATA_SA2, msg.value.sival_int);
 				break;
 				/////////////ANDERE LOGIK//////////////////////////////////////////////////////
 			case PSMG_SW_SORT_ELMNT_AUSSORT:

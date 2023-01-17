@@ -33,4 +33,5 @@ bool WaitForMetal::MSENS_METALL() {
 #else
 	data->Q2.front()->tup = ContextData::metal;
 #endif
+	return true;
 }
