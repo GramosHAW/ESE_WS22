@@ -72,6 +72,7 @@
 #define		PSMG_SW_BAND_SLOW_AUS				0x20
 #define		PSMG_SW_BAND_FREI					0x21
 #define		PSMG_SW_BAND_FREI_SA2				0x54
+#define 	PSMG_SW_BAND_STATUS					0x45
 #define		PSMG_SW_BAND_VOLL					0x22
 
 	//Hoehenmesser
