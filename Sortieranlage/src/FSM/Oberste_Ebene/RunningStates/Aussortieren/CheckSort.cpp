@@ -34,3 +34,27 @@ bool CheckSort::ELMNT_DURCH() {
 	entry();
 	return true;
 }
+
+void CheckSort::sort(){
+	if(data->getrutsche_voll1()){
+#ifdef SIM_TWIN_B
+
+#else
+		send_event(PSMG_SW_SORT_AUSSORT);
+#endif
+	}
+	else if(data->getrutsche_voll2 ()){
+#ifdef SIM_TWIN_B
+
+#else
+
+#endif
+	}else{
+#ifdef SIM_TWIN_B
+
+#else
+
+#endif
+	}
+
+}

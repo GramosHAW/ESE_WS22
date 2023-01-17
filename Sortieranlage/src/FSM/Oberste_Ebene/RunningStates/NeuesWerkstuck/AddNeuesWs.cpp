@@ -26,5 +26,7 @@ void AddNeuesWs::showState(){
 void AddNeuesWs::addtoQueue() {
 	cout << " AddNeuesWs added new" << endl;
 	data->Q1.push(new ContextData::werkstueck);
+	data->Q1.front()->id = data->wsID;
+	data->wsID += 1;
 }
 

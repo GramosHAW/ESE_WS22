@@ -19,6 +19,8 @@ public:
 
 	bool ELMNT_AUSSORT() override;
 	bool ELMNT_DURCH() override;
+private:
+	void sort();
 
 };
 

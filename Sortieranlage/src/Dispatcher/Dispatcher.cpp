@@ -39,7 +39,7 @@ void Dispatcher::set_FSM_chid(int fsmChid) {
 	this->fsmchid = fsmChid;
 }
 
-void Dispatcher::set_Extern_Ch_Id(int channelId){
+void Dispatcher::set_Extern_Ch_Id(int channelId) {
 	this->externChId = channelId;
 }
 void Dispatcher::start_HAL_PulsResiver_THREAD(void) {
@@ -304,146 +304,149 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_RUHE_SA1, msg.value.sival_int);
 #endif
-
-			break;
+				break;
 			case PSMG_SW_RUHE_SA1:
-			MsgSendPulse(fsmchid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_RUHE, msg.value.sival_int);
-			break;
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_RUHE, msg.value.sival_int);
+				break;
 			case PSMG_SW_RUHE_SA2:
-			MsgSendPulse(fsmchid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_RUHE, msg.value.sival_int);
-			break;
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_RUHE, msg.value.sival_int);
+				break;
 			case PSMG_SW_SERVICE:
 
 #ifdef SIM_TWIN_B
-			MsgSendPulse(externChId,
-					SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_SW_SERVICE_SA2, msg.value.sival_int);
+				MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_SERVICE_SA2, msg.value.sival_int);
 #else //SA1
-			MsgSendPulse(externChId,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_SERVICE_SA1, msg.value.sival_int);
+				MsgSendPulse(externChId,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SERVICE_SA1, msg.value.sival_int);
 #endif
 
-			break;
+				break;
 			case PSMG_SW_SERVICE_SA1:
-			MsgSendPulse(fsmchid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_SERVICE, msg.value.sival_int);
-			break;
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SERVICE, msg.value.sival_int);
+				break;
 			case PSMG_SW_SERVICE_SA2:
-			MsgSendPulse(fsmchid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_SERVICE, msg.value.sival_int);
-			break;
-			/////////////ANDERE LOGIK//////////////////////////////////////////////////////
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SERVICE, msg.value.sival_int);
+				break;
+				/////////////ANDERE LOGIK//////////////////////////////////////////////////////
 			case PSMG_SW_BAND_FREI:
-			MsgSendPulse(fsmchid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_BAND_FREI, msg.value.sival_int);
-			break;
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_FREI, msg.value.sival_int);
+				break;
 			case PSMG_SW_BAND_FREI_SA2:
-			//SA2
+				//SA2
 #ifdef SIM_TWIN_B
-			MsgSendPulse(externChId,
-					SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
+				MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
 
 #else
-			MsgSendPulse(fsmchid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_FREI_SA2, msg.value.sival_int);
 
 #endif
-			break;
-			//TO AKTORIK///////////////////////////////////////////////////////////////////////
-			//AMPEL////////////////////////////////////////////////////////////////////
+				break;
+				//TO AKTORIK///////////////////////////////////////////////////////////////////////
+				//AMPEL////////////////////////////////////////////////////////////////////
 			case PSMG_SW_AMPEL_GRUEN_BLINK:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_GRUEN_BLINK, msg.value.sival_int);
-			//TODO
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GRUEN_BLINK, msg.value.sival_int);
+				//TODO
+				break;
 			case PSMG_SW_AMPEL_GELB_BLINK:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_GELB_BLINK, msg.value.sival_int);
-			//TODO
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GELB_BLINK, msg.value.sival_int);
+				//TODO
+				break;
 			case PSMG_SW_AMPEL_ROT_BLINK:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_ROT_BLINK, msg.value.sival_int);
-			//TODO
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_ROT_BLINK, msg.value.sival_int);
+				//TODO
+				break;
 			case PSMG_SW_AMPEL_ROT_AUS:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_ROT_AUS, msg.value.sival_int);
-			//TODO
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_ROT_AUS, msg.value.sival_int);
+				//TODO
+				break;
 			case PSMG_SW_AMPEL_GRUEN_AUS:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_GRUEN_AUS, msg.value.sival_int);
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GRUEN_AUS, msg.value.sival_int);
+				break;
 			case PSMG_SW_AMPEL_GRUEN_AN:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_GRUEN_AN, msg.value.sival_int);
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GRUEN_AN, msg.value.sival_int);
+				break;
 			case PSMG_SW_AMPEL_GELB_AN:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_GELB_AN, msg.value.sival_int);
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GELB_AN, msg.value.sival_int);
+				break;
 			case PSMG_SW_AMPEL_ROT_AN:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_ROT_AN, msg.value.sival_int);
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_ROT_AN, msg.value.sival_int);
+				break;
 			case PSMG_SW_AMPEL_GELB_AUS:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_AMPEL_GELB_AUS, msg.value.sival_int);
-			break;
-			//BAND///////////////////////////////////////////////////////////////////////
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_AMPEL_GELB_AUS, msg.value.sival_int);
+				break;
+				//BAND///////////////////////////////////////////////////////////////////////
 			case PSMG_SW_BAND_START:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_BAND_START, 0);
-			//TODO
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_START, 0);
+				//TODO
+				break;
 			case PSMG_SW_BAND_STOP:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_BAND_STOP, 0);
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_STOP, 0);
+				break;
 			case PSMG_SW_BAND_SLOW_AN:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_BAND_SLOW_AN, 0);
-			//TODO
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_SLOW_AN, 0);
+				//TODO
+				break;
 			case PSMG_SW_BAND_SLOW_AUS:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_BAND_SLOW_AUS, 0);
-			//TODO
-			break;
-			//SORT//////////////////////////////////////////////////////////////////////
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_SLOW_AUS, 0);
+				//TODO
+				break;
+				//SORT//////////////////////////////////////////////////////////////////////
 			case PSMG_SE_SORT_AUSSORTIERT:
-			MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SE_SORT_AUSSORTIERT, 0);
-			break;
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SE_SORT_AUSSORTIERT, 0);
+				break;
+			case PSMG_SW_SORT_AUSSORT:
+				MsgSendPulse(connectionIdHalAktorik,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SORT_AUSSORT, 0);
+				break;
 			case PSMG_SW_SORT_DURCH:
-			MsgSendPulse(connectionIdHalAktorik,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_SORT_DURCH, 0);
-			break;
+				MsgSendPulse(connectionIdHalAktorik,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SORT_DURCH, 0);
+				break;
 			case PSMG_SW_HM_SETWERT:
-			MsgSendPulse(adcChid,
-			SIGEV_PULSE_PRIO_INHERIT,
-			PSMG_SW_HM_SETWERT, msg.value.sival_int);
-			break;
+				MsgSendPulse(adcChid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_HM_SETWERT, msg.value.sival_int);
+				break;
 			default:
-			cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
+				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
+
 			}
 		}
 	}
 }
-
-
 
 Dispatcher::~Dispatcher() {
 	if (-1 == ConnectDetach(dispatcherChannelId)) {
