@@ -304,7 +304,6 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_RUHE_SA1, msg.value.sival_int);
 #endif
-
 				break;
 			case PSMG_SW_RUHE_SA1:
 				MsgSendPulse(fsmchid,
@@ -443,6 +442,7 @@ void Dispatcher::handelHALpuls() {
 				break;
 			default:
 				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
+
 			}
 		}
 	}

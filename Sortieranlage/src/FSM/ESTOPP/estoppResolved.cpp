@@ -12,11 +12,11 @@
 #include "estoppStart.h"
 
 void estoppResolved::entry() {
-	if(true){ //SA1
-		send_event_payload(PSMG_ESTOPP_OK_SA1,0);
-	} else {  //SA2
+#ifdef SIM_TWIN_B //SA2
 		send_event_payload(PSMG_ESTOPP_OK_SA2,0);
-	}
+#else	//SA1
+		send_event_payload(PSMG_ESTOPP_OK_SA1,0);
+#endif
 }
 
 void estoppResolved::exit() {
@@ -26,10 +26,10 @@ void estoppResolved::exit() {
 
 bool estoppResolved::ESTOPP_TRUE_SA1() {
 	exit();
-	if(true){ //SA1
+#ifndef SIM_TWIN_B
 		data->setFlagEStopp(true);
 		data->showFlags();
-	}
+#endif
 	new (this) estoppStart;
 	entry();
 	return true;
@@ -37,10 +37,10 @@ bool estoppResolved::ESTOPP_TRUE_SA1() {
 
 bool estoppResolved::ESTOPP_TRUE_SA2() {
 	exit();
-	if(true){ //SA2
+#ifdef SIM_TWIN_B
 		data->setFlagEStopp(true);
 		data->showFlags();
-	}
+#endif
 	new (this) estoppStart;
 	entry();
 	return true;
