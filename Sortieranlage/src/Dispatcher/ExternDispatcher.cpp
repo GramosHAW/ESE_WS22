@@ -109,16 +109,19 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		werk.heightSA1 = hdr.value.sival_int;
 		break;
 	case WERKSTUECK3:
-		werk.heightSA1min = hdr.value.sival_int;
+		werk.heightSA1mean = hdr.value.sival_int;
 		break;
 	case WERKSTUECK4:
 	{
 		werk.id = hdr.value.sival_int;
 		werk.heightSA2 = 0;
 		uintptr_t werkPtrInt = uintptr_t(&werk);
-		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA_SA2, SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
-		break;
+		printf("id: %d, heightSA1: %d, heightSA1mean: %d, enum: %d", werk.id,
+				werk.heightSA1, werk.heightSA1mean, (int) werk.tup);
+		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA_SA2,
+				SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
 	}
+		break;
 	default:
 		/* A pulse sent by one of your processes or a
 		 * _PULSE_CODE_COIDDEATH or _PULSE_CODE_THREADDEATH
@@ -189,7 +192,7 @@ void ExternDispatcher::sendWerkstueck(werkstueck* werk) {
 	}
 	if (-1
 			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-					WERKSTUECK3, werk->heightSA1)) {
+					WERKSTUECK3, werk->heightSA1mean)) {
 		perror("Error sending pulse");
 	}
 	if (-1

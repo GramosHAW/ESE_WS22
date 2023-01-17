@@ -51,12 +51,11 @@
 	struct werkstueck {
 		int id;
 		int heightSA1;
-		int heightSA1min;
+		int heightSA1mean;
 		int heightSA2;
 		Werkstucktup tup;
 		int flipt = 0; //auf 1 sezen wenn der WS fipted
 	};
-
 class ExternDispatcher {
 
 public:

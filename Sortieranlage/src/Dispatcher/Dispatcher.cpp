@@ -2,7 +2,7 @@
 #include "../Events.h"
 #include "../HAL/Aktorik.h"
 #include "../FSM/ImpulsHandler.h"
-
+#include "../FSM/contextdata.h"
 Dispatcher* Dispatcher::m_pInstance { nullptr };
 std::mutex Dispatcher::mutex_;
 Dispatcher *Dispatcher::GetInstance() {
@@ -58,6 +58,22 @@ void Dispatcher::set_ADC_chID(int adcChid) {
 }
 
 void Dispatcher::handelHALpuls() {
+	enum Werkstucktup{
+			flach,
+			hoch,
+			loch,
+			metal,
+			undefined
+	};
+
+	struct werkstueck {
+		int id;
+		int heightSA1;
+		int heightSA1mean;
+		int heightSA2;
+		Werkstucktup tup;
+		int flipt = 0; //auf 1 sezen wenn der WS fipted
+	};
 	_pulse msg;
 	this->fsmchid = ConnectAttach(0, 0, fsmchid,
 	_NTO_SIDE_CHANNEL, 0);
@@ -66,6 +82,20 @@ void Dispatcher::handelHALpuls() {
 		printf("Failure to connect extern Channel");
 	}
 	while (true) {
+/* WSW Übergabe Testkonstrukt
+#ifndef SIM_TWIN_B
+		printf("Sending Werkstueck to extern..");
+		werkstueck werkstuekTest = {};
+		werkstuekTest.flipt = 1;
+		werkstuekTest.heightSA1 = 2;
+		werkstuekTest.heightSA1mean = 3;
+		werkstuekTest.id=4;
+		werkstuekTest.tup=flach;
+		uintptr_t werkPtrInt = uintptr_t(&werkstuekTest);
+		MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_WS_DATA, werkPtrInt);
+		sleep(10);
+#endif*/
+
 		int rcvid = MsgReceivePulse(dispatcherChannelId, &msg, sizeof(_pulse),
 		NULL);
 		//std::cout << sizeof(msg);
