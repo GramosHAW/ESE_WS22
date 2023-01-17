@@ -49,6 +49,7 @@ Context::Context() {
 	state->entryStartNode();
 	state->showState();
 
+
 //	this->initarray();
 //	this->newWSW();
 //	this->newWSW();

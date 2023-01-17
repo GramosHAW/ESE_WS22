@@ -112,5 +112,6 @@ bool Service::LS_RUTSCHE_BLOCK() {
 
 void Service::showState(){
 	cout << " SubstateSA: Service" << endl;
+	//substateSERV->showState();
 }
 
