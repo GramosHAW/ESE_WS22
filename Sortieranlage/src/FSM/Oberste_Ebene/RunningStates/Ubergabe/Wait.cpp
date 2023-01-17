@@ -24,6 +24,7 @@ void Wait::showState(){
 }
 
 bool Wait::BAND_FREI_SA2(){
+	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 	exit();
 	new (this) WSUbergeben;
 	entry();

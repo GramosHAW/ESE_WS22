@@ -11,6 +11,9 @@
 #include "../BaseState.h"
 
 class BeideRutschenVoll: public BaseState {
+	void entry() override;
+	void exit() override;
+
 	bool ELMNT_AUSSORT() override;
 
 	void showState() override;

@@ -219,6 +219,7 @@ void Context::awaitEvent() {
 				break;
 				//Sofwere//////////////////////////////////////////////////////
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
+				stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
@@ -277,6 +278,11 @@ void Context::awaitEvent() {
 				//cout << " HM -Messung wert:" << msg.value.sival_int << endl;
 				state->HM_DATA(msg.value.sival_int);
 				//TODO
+				break;
+			///////////FEHLER/////////////////////////////////////////////////
+			case PSMG_SW_FEHLER_TRUE:
+				state->FEHLER_TRUE();
+				state->showState();
 				break;
 				//DEFOULT/////////////////////////////////////////////////////
 			default:

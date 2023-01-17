@@ -14,6 +14,7 @@ void RutscheVoll::entryStartNode(){
 }
 void RutscheVoll::initSubState(){
 	substateWARNRUT = new IdleRutscheVoll;
+	substateWARNRUT->setData(data);
 }
 
 bool RutscheVoll::RUTSCHE_VOLL_SA1(){
