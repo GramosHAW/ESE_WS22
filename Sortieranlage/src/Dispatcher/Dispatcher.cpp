@@ -483,7 +483,7 @@ void Dispatcher::handelHALpuls() {
 				break;
 			default:
 				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
-
+				cout << msg.code << endl;
 			}
 		}
 	}
