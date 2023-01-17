@@ -64,6 +64,8 @@ protected:
 	unsigned char _PMSG;
 	unsigned char _payload;
 
+	ContextData::werkstueck* _payloadWS;
+
 	std::thread *thread_basestate_pmsg;
 
 public:
@@ -74,8 +76,12 @@ public:
 
 	void send_event(int);
 	void connect_send();
+
 	void send_event_payload(int, int);
+	void send_event_payload_WS(int, ContextData::werkstueck*);
 	void newWSW();
+
+
 	virtual void initSubState();
 	virtual bool isSubEndState();
 
