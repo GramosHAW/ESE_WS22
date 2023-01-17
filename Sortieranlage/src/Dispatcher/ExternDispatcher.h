@@ -53,7 +53,7 @@ private:
 	int dispatcherServer;
 
 	static void handle_app_msg(header_t hdr, int rcvid);
-	static void handle_ONX_IO_msg(header_t hdr, int rcvid);
+	static void handle_QNX_IO_msg(header_t hdr, int rcvid);
 	void handle_pulse(header_t hdr, int rcvid);
 };
 typedef struct _pulse header_t;

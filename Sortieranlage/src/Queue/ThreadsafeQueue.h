@@ -5,7 +5,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-
+#include <iostream>
 
 
 template<typename T>
@@ -44,6 +44,15 @@ public:
 	  }
 	  bool empty(){ //Nicht threadsafe :'(
 		  return queue_.empty();
+	  }
+	  void printContents(){
+		  std::unique_lock<std::mutex> mlock(mutex_);
+		  for (size_t i = 0; i < queue_.size(); i++)
+		  {
+		      std::cout << queue_.front() << std::endl;
+		      queue_.push(queue_.front());
+		      queue_.pop();
+		  }
 	  }
 	  ThreadsafeQueue() = default;
 	  ThreadsafeQueue(const ThreadsafeQueue&) = delete;
