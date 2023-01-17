@@ -23,6 +23,7 @@
 #include <chrono>
 #include "Reihenfolge.h"
 #include "FSM/Oberste_Ebene/ServiceModus/DateiEinlesen.h"
+#include <fstream>
 
 //#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
@@ -46,6 +47,8 @@ Sortieranlage::~Sortieranlage() {
 
 }
 ;
+
+
 
 int main(int argc, char *argv[]) {
 	SimulatedADC* simADC = new SimulatedADC();
@@ -77,6 +80,7 @@ int main(int argc, char *argv[]) {
 	//rf->getQueue();
 	//DateiEinlesen* dt = new DateiEinlesen;
 //	dt->setReihenfolge('f', 'h', 'l', "Reihefolge.txt");
+
 
 
 	while (1) {
