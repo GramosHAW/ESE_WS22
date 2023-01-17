@@ -36,7 +36,7 @@ bool ESTOPP::ESTOPP_TRUE_SA1() {
 }
 
 bool ESTOPP::ESTOPP_TRUE_SA2() {
-	bool handled = substateEST->ESTOPP_TRUE_SA1();
+	bool handled = substateEST->ESTOPP_TRUE_SA2();
 	return handled;
 }
 

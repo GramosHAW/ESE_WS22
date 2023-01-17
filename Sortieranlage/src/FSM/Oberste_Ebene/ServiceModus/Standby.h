@@ -17,6 +17,7 @@ class Standby : public BaseState {
 	bool TST_START_KURZ() override;
 	bool TST_STOP_KURZ() override;
 	bool TST_START_LANG() override;
+	bool RUHE() override;
 	void showState() override;
 	void entry() override;
 	void exit() override;

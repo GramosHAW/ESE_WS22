@@ -45,6 +45,13 @@ bool Standby::TST_STOP_KURZ() {
 	return true;
 }
 
+bool Standby::RUHE(){
+	exit();
+	new(this) SubEnd;
+	entry();
+	return true;
+}
+
 bool Standby::TST_START_LANG() {
 	exit();
 	new (this) CheckSA2;

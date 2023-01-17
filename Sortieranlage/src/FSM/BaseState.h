@@ -50,11 +50,11 @@ protected:
 	BaseState *substateMetallsensor;
 	BaseState *subsubstateMetallsensor;
 
-	BaseState *substateUbergabe;
-	BaseState *subsubstateUbergabe;
-
 	BaseState *substateEntnahme;
 	BaseState *subsubstateEntnahme;
+
+	BaseState *substateUbergabe;
+	BaseState *subsubstateUbergabe;
 
 
 
@@ -94,7 +94,6 @@ public:
 	//Lichtschranken
 	virtual bool LS_START_BLOCK();
 	virtual bool LS_START_FREI();
-
 	virtual bool LS_START_BLOCK_SA2();
 	virtual bool LS_SORT_BLOCK();
 	virtual bool LS_SORT_FREI();
@@ -103,6 +102,7 @@ public:
 	virtual bool LS_ENDE_BLOCK();
 	virtual bool LS_ENDE_FREI();
 	virtual bool LS_ENDE_BLOCK_SA2();
+	virtual bool LS_ENDE_FREI_SA2();
 
 	//Hoenmesser
 	virtual bool HM_START();

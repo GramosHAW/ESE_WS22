@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 	Aktorik* akt = Aktorik::GetInstance();
 	ExternDispatcher* externDispatcher = new ExternDispatcher();
 	dispatcher->set_Extern_Ch_Id(externDispatcher->getchid());
-	std::thread externDispatcherThread(&ExternDispatcher::startThread,externDispatcher, argv[1], argv[2]);
+	std::thread externDispatcherThread(&ExternDispatcher::startThread,externDispatcher);
 
 	context->start_FSM_PulsResiver_THREAD();
 	dispatcher->start_HAL_PulsResiver_THREAD();

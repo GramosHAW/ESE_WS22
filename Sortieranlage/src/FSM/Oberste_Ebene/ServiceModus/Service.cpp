@@ -50,11 +50,22 @@ bool Service::TST_STOP_KURZ(){
 		if (substateSERV->isSubEndState()) {
 			exit();
 			new (this) Ruhezustand;
+			send_event_payload(PSMG_SW_RUHE,0);
 			entry();
 			entryStartNode();
 			handled = true;
-
 	}
+	return handled;
+}
+
+bool Service::RUHE(){
+	bool handled = substateSERV->RUHE();
+		if(substateSERV->isSubEndState()){
+			exit();
+			new(this) Ruhezustand;
+			entry();
+			handled = true;
+		}
 	return handled;
 }
 

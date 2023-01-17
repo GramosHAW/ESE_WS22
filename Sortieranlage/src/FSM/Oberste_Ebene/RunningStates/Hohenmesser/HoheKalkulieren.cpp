@@ -11,7 +11,6 @@
 void HoheKalkulieren::entry() {
 	showState();
 	calculateHigt();
-	//printf("%d\n", data->numberOFmejurments);
 	exit();
 	new (this) HohenmesserInit;
 	entry();
@@ -27,7 +26,7 @@ void HoheKalkulieren::showState() {
 }
 
 void HoheKalkulieren::calculateHigt() {
-	ContextData::Werkstucktup werkstucktup;
+	ContextData::Werkstucktup werkstucktup = ContextData::undefined;;
 	int mittelwert_ausen = 0;
 	int mittelwert_mittel = 0;
 	for (int i = 1; i < (data->numberOFmejurments/3)-5; i++) {
@@ -60,6 +59,12 @@ void HoheKalkulieren::calculateHigt() {
 			printf("Undifined \n");
 			werkstucktup = ContextData::undefined;
 		}
+	}
+	if(werkstucktup != ContextData::undefined){
+		ContextData::werkstueck* neuKlasified = data->Q1.pop();
+		neuKlasified->tup = werkstucktup;
+		//TODO data->heightSA1 = TODO;
+		data->Q2.push(neuKlasified);
 	}
 
 }

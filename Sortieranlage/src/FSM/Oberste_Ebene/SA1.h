@@ -33,11 +33,13 @@ public:
 	bool LS_SORT_BLOCK() override;
 	bool LS_START_BLOCK_SA2() override;
 	bool LS_START_BLOCK() override;
-  bool LS_SORT_FREI() override;
+	bool LS_SORT_FREI() override;
 	bool LS_RUTSCHE_BLOCK() override;
 	bool LS_RUTSCHE_FREI() override;
 	bool LS_ENDE_BLOCK() override;
 	bool LS_ENDE_FREI() override;
+	bool LS_ENDE_BLOCK_SA2() override;
+	bool LS_ENDE_FREI_SA2() override;
 
 
 	bool BAND_FREI() override;

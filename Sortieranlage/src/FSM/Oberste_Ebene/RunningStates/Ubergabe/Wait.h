@@ -17,6 +17,8 @@ class Wait: public BaseState {
 	void showState() override;
 
 	bool BAND_FREI_SA2() override;
+	bool LS_ENDE_FREI_SA2() override;
+
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNINGSTATES_UBERGABE_WAIT_H_ */

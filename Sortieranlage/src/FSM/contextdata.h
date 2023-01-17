@@ -18,13 +18,19 @@ private:
 	int mittelwert;
 
 	bool estopp_true = false;
-	bool rutsche_voll;
+	bool rutsche_voll1 = false;
+	bool rutsche_voll2 = false;
+
+	bool uebergabeSendFlag = false;
+	//bool rutsche_voll;
 
 	//ADC_Controller* adc_controller;
 public:
 	//FOR metalsensor
 	int mejurments[200];
 	int numberOFmejurments = 0;
+	int wsID = 1;
+
 
 	enum Werkstucktup{
 			flach,
@@ -42,6 +48,7 @@ public:
 		int flipt = 0; //auf 1 sezen wenn der WS fipted
 	};
 
+	werkstueck* ubergebeneWS;		 //WS was von SA1 kommt
 	ThreadsafeQueue<werkstueck*> Q1; //Queue bis zum Hoenmesser
 	ThreadsafeQueue<werkstueck*> Q2; //Queue von Hoenmesser bis zum Ausortierer
 	ThreadsafeQueue<werkstueck*> Q3; //Queue von Ausortierer bis zum Ende
@@ -49,10 +56,20 @@ public:
 
 	werkstueck* create_new_werckstuck();
 	void setFlagEStopp(bool);
+	void setrutsche_voll1(bool);
+	void setrutsche_voll2(bool);
+	void setuebergabeSendFlag(bool);
 	void showFlags();
 	bool getEStopp() {
 		return this->estopp_true;
 	}
+	bool getrutsche_voll1() {
+			return this->rutsche_voll1;
+	}
+	bool getrutsche_voll2() {
+				return this->rutsche_voll2;
+	}
+	bool getuebergabeSendFlag(){return this->uebergabeSendFlag;}
 };
 
 #endif /* SRC_FSM_CONTEXTDATA_H_ */

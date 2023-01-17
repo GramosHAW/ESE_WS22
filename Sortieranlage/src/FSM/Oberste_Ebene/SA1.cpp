@@ -55,11 +55,10 @@ bool SA1::LS_RUTSCHE_BLOCK() {
 bool SA1::ESTOPP_TRUE_SA1() {
 	bool handled = substateSA->ESTOPP_TRUE_SA1();
 	if (!handled) {
-		if (true) { // Wenn SA1
-			data->showFlags();
+#ifndef SIM_TWIN_B
 			data->setFlagEStopp(true);
 			data->showFlags();
-		}
+#endif
 		exit();
 		new (this) ESTOPP;
 		entry();
@@ -72,10 +71,10 @@ bool SA1::ESTOPP_TRUE_SA1() {
 bool SA1::ESTOPP_TRUE_SA2() {
 	bool handled = substateSA->ESTOPP_TRUE_SA2();
 	if (!handled) {
-		if (true) { // Wenn SA2
+#ifdef SIM_TWIN_B
 			data->setFlagEStopp(true);
 			data->showFlags();
-		}
+#endif
 		exit();
 		new (this) ESTOPP;
 		entry();
@@ -150,6 +149,15 @@ bool SA1::LS_ENDE_BLOCK() {
 
 bool SA1::LS_ENDE_FREI() {
 	bool handled = substateSA->LS_ENDE_FREI();
+	return handled;
+}
+
+bool SA1::LS_ENDE_BLOCK_SA2(){
+	bool handled = substateSA->LS_ENDE_BLOCK_SA2();
+	return handled;
+}
+bool SA1::LS_ENDE_FREI_SA2(){
+	bool handled = substateSA->LS_ENDE_FREI_SA2();
 	return handled;
 }
 
