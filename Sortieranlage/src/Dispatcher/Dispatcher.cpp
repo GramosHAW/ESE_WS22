@@ -339,6 +339,16 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_SERVICE, msg.value.sival_int);
 				break;
 				/////////////ANDERE LOGIK//////////////////////////////////////////////////////
+			case PSMG_SW_SORT_ELMNT_AUSSORT:
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SORT_ELMNT_AUSSORT, msg.value.sival_int);
+				break;
+			case PSMG_SW_SORT_ELMNT_DURCH:
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SORT_ELMNT_DURCH, msg.value.sival_int);
+				break;
 			case PSMG_SW_BAND_FREI:
 				MsgSendPulse(fsmchid,
 				SIGEV_PULSE_PRIO_INHERIT,

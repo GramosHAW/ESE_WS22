@@ -28,7 +28,9 @@ class Running: public BaseState {
 	bool LS_SORT_FREI() override;
 	bool LS_SORT_BLOCK() override;
 	bool LS_ENDE_BLOCK() override;
+#ifdef SIM_TWIN_B
 	bool LS_ENDE_FREI() override;
+#endif
 	bool LS_ENDE_FREI_SA2() override;
 
 	bool TST_STOP_KURZ() override;

@@ -218,6 +218,12 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 				//Sofwere//////////////////////////////////////////////////////
+			case PSMG_SW_SORT_ELMNT_AUSSORT:
+				state->ELMNT_AUSSORT();
+				break;
+			case PSMG_SW_SORT_ELMNT_DURCH:
+				state->ELMNT_DURCH();
+				break;
 			case PSMG_SW_BAND_FREI:
 				state->BAND_FREI();
 				state->showState();
@@ -272,10 +278,10 @@ void Context::awaitEvent() {
 				state->HM_DATA(msg.value.sival_int);
 				//TODO
 				break;
-			//DEFOULT/////////////////////////////////////////////////////
+				//DEFOULT/////////////////////////////////////////////////////
 			default:
 				cout << "FSM sais: SAY WAAAAAAAAT?????????????" << endl;
-				cout << "PMSG bekommen: " + msg.code  << endl;
+				cout << "PMSG bekommen: " + msg.code << endl;
 			}
 		}
 	}

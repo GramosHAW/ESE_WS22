@@ -48,6 +48,7 @@ public:
 		int flipt = 0; //auf 1 sezen wenn der WS fipted
 	};
 
+	werkstueck* ubergebeneWS;		 //WS was von SA1 kommt
 	ThreadsafeQueue<werkstueck*> Q1; //Queue bis zum Hoenmesser
 	ThreadsafeQueue<werkstueck*> Q2; //Queue von Hoenmesser bis zum Ausortierer
 	ThreadsafeQueue<werkstueck*> Q3; //Queue von Ausortierer bis zum Ende
