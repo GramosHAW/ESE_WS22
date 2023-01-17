@@ -46,3 +46,8 @@ bool Ubergabe::LS_START_BLOCK_SA2() {
 	bool handled = subsubstateUbergabe->LS_START_BLOCK_SA2();
 	return handled;
 }
+
+bool Ubergabe::LS_ENDE_FREI_SA2() {
+	bool handled = subsubstateUbergabe->LS_ENDE_FREI_SA2();
+	return handled;
+}

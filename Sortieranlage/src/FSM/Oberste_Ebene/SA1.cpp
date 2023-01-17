@@ -152,6 +152,15 @@ bool SA1::LS_ENDE_FREI() {
 	return handled;
 }
 
+bool SA1::LS_ENDE_BLOCK_SA2(){
+	bool handled = substateSA->LS_ENDE_BLOCK_SA2();
+	return handled;
+}
+bool SA1::LS_ENDE_FREI_SA2(){
+	bool handled = substateSA->LS_ENDE_FREI_SA2();
+	return handled;
+}
+
 bool SA1::RUTSCHE_VOLL_SA1() {
 	bool handled = substateSA->RUTSCHE_VOLL_SA1();
 	return handled;

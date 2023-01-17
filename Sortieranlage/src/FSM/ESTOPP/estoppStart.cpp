@@ -15,7 +15,7 @@
 
 
 void estoppStart::entry(){
-
+	send_event_payload(PSMG_SW_AMPEL_ROT_BLINK, 6);
 }
 
 void estoppStart::exit() {

@@ -10,13 +10,13 @@
 
 void Wait::entry(){
 	showState();
-	//TODO all etrise
+	send_event_payload(PSMG_SW_BAND_STOP, 0);
+	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 }
 
-//TODO do
 
 void Wait::exit(){
-	//TODo all exit
+	send_event_payload(PSMG_SW_BAND_START, 0);
 }
 
 void Wait::showState(){
@@ -29,3 +29,12 @@ bool Wait::BAND_FREI_SA2(){
 	entry();
 	return true;
 }
+
+bool Wait::LS_ENDE_FREI_SA2(){
+	send_event_payload(PSMG_SW_BAND_STATUS, 0);
+	exit();
+	new (this) WSUbergeben;
+	entry();
+	return true;
+}
+

@@ -205,3 +205,8 @@ bool Running::RUTSCHE_VOLL_SA1() {
 	bool handled = substateRutsche->RUTSCHE_VOLL_SA1();
 	return handled;
 }
+
+bool Running::LS_ENDE_FREI_SA2(){
+	bool handled = substateUbergabe->LS_ENDE_BLOCK_SA2();
+	return handled;
+}

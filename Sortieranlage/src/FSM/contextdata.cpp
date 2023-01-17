@@ -26,6 +26,10 @@ void ContextData::setrutsche_voll2(bool seter) {
 	this->rutsche_voll2 = seter;
 }
 
+void ContextData::setuebergabeSendFlag(bool flag){
+	this->uebergabeSendFlag = flag;
+}
+
 ContextData::werkstueck* ContextData::create_new_werckstuck() {
 	return (new werkstueck);
 }

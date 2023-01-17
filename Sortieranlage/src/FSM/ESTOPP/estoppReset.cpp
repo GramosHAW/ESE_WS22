@@ -17,7 +17,6 @@ void estoppReset::entry() {
 
 void estoppReset::exit() {
 	send_event_payload(PSMG_SW_AMPEL_GRUEN_AUS,0);
-
 }
 
 bool estoppReset::ESTOPP_TRUE_SA1() {

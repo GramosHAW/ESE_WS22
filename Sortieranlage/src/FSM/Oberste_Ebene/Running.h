@@ -31,6 +31,7 @@ class Running: public BaseState {
 #ifdef SIM_TWIN_B
 	bool LS_ENDE_FREI() override;
 #endif
+	bool LS_ENDE_FREI_SA2() override;
 
 	bool TST_STOP_KURZ() override;
 

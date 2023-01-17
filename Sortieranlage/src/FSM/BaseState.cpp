@@ -143,6 +143,10 @@ bool BaseState::LS_ENDE_FREI() {
 	return false;
 }
 
+bool BaseState::LS_ENDE_FREI_SA2(){
+	return false;
+}
+
 bool BaseState::LS_ENDE_BLOCK_SA2(){
 	return false;
 }
