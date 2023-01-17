@@ -116,7 +116,7 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		werk.id = hdr.value.sival_int;
 		werk.heightSA2 = 0;
 		uintptr_t werkPtrInt = uintptr_t(&werk);
-		MsgSendPulse(this->dispatcherServer, 123, SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
+		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA_SA2, SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
 		break;
 	}
 	default:
@@ -226,7 +226,7 @@ void ExternDispatcher::startThread() {
 		int rcvid = MsgReceivePulse(externChid, &msg, sizeof(_pulse), NULL);
 		//int rcvid = MsgReceivePulse(dispatcherServer, &msg, sizeof(_pulse), NULL);
 		if(msg.code == PSMG_SW_WS_DATA){
-			sendWerkstueck(msg.)
+			sendWerkstueck(reinterpret_cast<werkstueck*>(msg.value.sival_int));
 		}
 		if (rcvid != -1) {
 			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,msg.code, 0)) {
