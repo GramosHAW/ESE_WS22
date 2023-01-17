@@ -10,7 +10,7 @@
 
 void WSUbergeben::entry(){
 	showState();
-	//TODO sendDataToSA2()
+	send_event_payload_WS(PSMG_SW_WS_DATA, data->Q3.front());
 }
 
 void WSUbergeben::exit(){

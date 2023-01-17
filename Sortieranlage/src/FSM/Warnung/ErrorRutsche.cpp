@@ -8,8 +8,13 @@
 #include "ErrorRutsche.h"
 #include "IdleRutscheVoll.h"
 
+void ErrorRutsche::entry(){
+	send_event_payload(PSMG_SW_FEHLER_TRUE, 0);
+}
+
 bool ErrorRutsche::FEHLER_BEHOBEN(){
 	exit();
+
 	new(this) IdleRutscheVoll;
 	entry();
 	return true;

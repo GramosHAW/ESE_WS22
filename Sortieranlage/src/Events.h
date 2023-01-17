@@ -94,9 +94,12 @@
 #define		PSMG_SW_SA1_RUTSCHE_FREI			0x28
 #define		PSMG_SW_SA2_RUTSCHE_VOLL			0x29
 #define		PSMG_SW_SA2_RUTSCHE_FREI			0x2A
+#define		PSMG_SW_RUTSCHE_VOLL_BEIDE			0x46
+#define		PSMG_SW_RUTSCHE_VOLL_BEIDE_SA1		0x47
+#define		PSMG_SW_RUTSCHE_VOLL_BEIDE_SA2		0x48
 
 	//Werkstücke
-#define		PSMG_SW_WS_REGIS					0x2B
+#define		PSMG_SW_WS_DATA						0x2B
 #define		PSMG_SW_WS_QUEUED					0x2C
 #define		PSMG_SW_WS_SORTED					0x2D
 #define		PSMG_SW_WS_ERHALTEN					0x2E

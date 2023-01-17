@@ -12,6 +12,8 @@
 
 class IdleRutscheVoll: public BaseState {
 
+	void entry() override;
+
 	bool RUTSCHE_VOLL_SA1() override;
 	bool RUTSCHE_VOLL_SA2() override;
 

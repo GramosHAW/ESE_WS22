@@ -11,8 +11,6 @@
 #include "../BaseState.h"
 
 class RutscheVoll: public BaseState {
-protected:
-	BaseState *substateWARNRUT;
 public:
 	void entryStartNode() override;
 	void initSubState() override;

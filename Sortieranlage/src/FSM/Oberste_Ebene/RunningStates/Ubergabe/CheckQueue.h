@@ -15,6 +15,8 @@ public:
 	void entry() override;
 	void exit() override;
 
+	void checkQueue();
+
 	void showState() override;
 
 };

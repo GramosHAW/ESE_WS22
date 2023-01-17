@@ -11,6 +11,8 @@
 #include "../BaseState.h"
 
 class ErrorRutsche: public BaseState {
+	void entry() override;
+
 	bool FEHLER_BEHOBEN() override;
 
 	void showState() override;
