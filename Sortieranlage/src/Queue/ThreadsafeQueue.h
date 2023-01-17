@@ -1,5 +1,3 @@
-
-
 #ifndef SRC_QUEUE_THREADSAFEQUEUE_H_
 #define SRC_QUEUE_THREADSAFEQUEUE_H_
 #include <string.h>
@@ -25,7 +23,7 @@ public:
 	    queue_.pop();
 	    return val;
 	  }
-	  T& front ()
+	  T& front ()//Nicht threadsafe :'(
 	  {
 		  std::unique_lock<std::mutex> mlock(mutex_);
 		  while (queue_.empty())
@@ -40,6 +38,12 @@ public:
 	    queue_.push(item);
 	    mlock.unlock();
 	    cond_.notify_one();
+	  }
+	  int size(){//Auch nicht threadsafe :((
+		  return queue_.size();
+	  }
+	  bool empty(){ //Nicht threadsafe :'(
+		  return queue_.empty();
 	  }
 	  ThreadsafeQueue() = default;
 	  ThreadsafeQueue(const ThreadsafeQueue&) = delete;
