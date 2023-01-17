@@ -58,22 +58,6 @@ void Dispatcher::set_ADC_chID(int adcChid) {
 }
 
 void Dispatcher::handelHALpuls() {
-	enum Werkstucktup{
-			flach,
-			hoch,
-			loch,
-			metal,
-			undefined
-	};
-
-	struct werkstueck {
-		int id;
-		int heightSA1;
-		int heightSA1mean;
-		int heightSA2;
-		Werkstucktup tup;
-		int flipt = 0; //auf 1 sezen wenn der WS fipted
-	};
 	_pulse msg;
 	this->fsmchid = ConnectAttach(0, 0, fsmchid,
 	_NTO_SIDE_CHANNEL, 0);
@@ -82,7 +66,7 @@ void Dispatcher::handelHALpuls() {
 		printf("Failure to connect extern Channel");
 	}
 	while (true) {
-/* WSW Übergabe Testkonstrukt
+/* WSW Übergabe Testkonstrukt + Wenn er das Struct Werkstueck nicht kennt einfach anfang der fkt einfügen, selbe für das Enum.
 #ifndef SIM_TWIN_B
 		printf("Sending Werkstueck to extern..");
 		werkstueck werkstuekTest = {};
