@@ -37,18 +37,37 @@ bool CheckSort::ELMNT_DURCH() {
 }
 
 void CheckSort::sort() {
+#ifdef SIM_TWIN_B
+	ContextData::werkstueck* ws = data->Q1.front();
+#else
 	ContextData::werkstueck* ws = data->Q2.pop();
+#endif
 	if (data->getrutsche_voll1()) {
 #ifdef SIM_TWIN_B
-		//A2 ales ausort
+		if (data->QReihenfolge.front() == ws->tup) {
+			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->QReihenfolge.pop();
+		} else {
+			send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+			data->Q1.pop();
+			//send_event(PSMG_SW_BAND_FREI);
+			//send_event(PSMG_SW_BAND_FREI_SA2);
+		}
 #else
 		send_event(PSMG_SW_SORT_ELMNT_DURCH);
+		data->Q3.push(ws);
 #endif
 	} else if (data->getrutsche_voll2()) {
 #ifdef SIM_TWIN_B
-
+		send_event(PSMG_SW_SORT_ELMNT_DURCH);
 #else
-		//A1 alles ausort
+		if (data->QReihenfolge.front() == ws->tup) {
+			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->QReihenfolge.pop();
+			data->Q3.push(ws);
+		} else {
+			send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+		}
 #endif
 	} else {
 #ifdef SIM_TWIN_B
@@ -59,22 +78,25 @@ void CheckSort::sort() {
 			}
 			else {
 				send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+				data->Q1.pop();
+				//send_event(PSMG_SW_BAND_FREI);
 			}
 		}
 		else {
 			send_event(PSMG_SW_SORT_ELMNT_DURCH);
 		}
-
 #else
 		if (ws->tup == ContextData::flach) {
 			if (data->QReihenfolge.front() == ContextData::flach) {
 				send_event(PSMG_SW_SORT_ELMNT_DURCH);
 				data->QReihenfolge.pop();
+				data->Q3.push(ws);
 			} else {
 				send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
 			}
 		} else {
 			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->Q3.push(ws);
 		}
 #endif
 	}

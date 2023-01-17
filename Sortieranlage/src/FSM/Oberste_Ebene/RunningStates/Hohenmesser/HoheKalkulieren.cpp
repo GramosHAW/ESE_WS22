@@ -26,15 +26,17 @@ void HoheKalkulieren::showState() {
 }
 
 void HoheKalkulieren::calculateHigt() {
-	ContextData::Werkstucktup werkstucktup = ContextData::undefined;;
+	ContextData::Werkstucktup werkstucktup = ContextData::undefined;
+	;
 	int mittelwert_ausen = 0;
 	int mittelwert_mittel = 0;
-	for (int i = 1; i < (data->numberOFmejurments/3)-5; i++) {
+	for (int i = 1; i < (data->numberOFmejurments / 3) - 5; i++) {
 		mittelwert_ausen += data->mejurments[i];
 	}
-	mittelwert_ausen = mittelwert_ausen / ((data->numberOFmejurments/3)-6);
+	mittelwert_ausen = mittelwert_ausen / ((data->numberOFmejurments / 3) - 6);
 	//printf("mittelwert_ausen = %d \n", mittelwert_ausen);
-	for (int i = (data->numberOFmejurments/2)-5; i < (data->numberOFmejurments/2)+5; i++) {
+	for (int i = (data->numberOFmejurments / 2) - 5;
+			i < (data->numberOFmejurments / 2) + 5; i++) {
 		mittelwert_mittel += data->mejurments[i];
 	}
 	mittelwert_mittel = mittelwert_mittel / 10;
@@ -60,11 +62,15 @@ void HoheKalkulieren::calculateHigt() {
 			werkstucktup = ContextData::undefined;
 		}
 	}
-	if(werkstucktup != ContextData::undefined){
-		ContextData::werkstueck* neuKlasified = data->Q1.pop();
-		neuKlasified->tup = werkstucktup;
-		//TODO data->heightSA1 = TODO;
-		data->Q2.push(neuKlasified);
+	if (werkstucktup != ContextData::undefined) {
+		data->Q1.front()->tup = werkstucktup;
+#ifdef SIM_TWIN_B
+		//data->Q1.front()->heightSA2 = TODO;
+#else
+		//data->Q1.front()->heightSA1 = TODO;
+		data->Q2.push(data->Q1.pop());
+#endif
+
 	}
 
 }

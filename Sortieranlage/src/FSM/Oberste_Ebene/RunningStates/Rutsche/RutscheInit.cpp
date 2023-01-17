@@ -6,11 +6,15 @@
  */
 
 #include "RutscheInit.h"
-#include "RutscheDataTrasch.h"
 #include "../../../SubEnd.h"
 
 void RutscheInit::entry() {
 	showState();
+#ifdef SIM_TWIN_B
+
+#else
+
+#endif
 }
 
 void RutscheInit::exit() {
@@ -30,7 +34,7 @@ bool RutscheInit::BAND_FREI() {
 
 bool RutscheInit::LS_RUTSCHE_BLOCK() {
 	exit();
-	new (this) RutscheDataTrasch;
+	new (this) RutscheInit;
 	entry();
 	return true;
 }
