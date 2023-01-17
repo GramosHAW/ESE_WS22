@@ -88,9 +88,14 @@ void BaseState::connect_send() {
 	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
 	MsgSendPulse(coid, -1, _PMSG, _payload);
 	ConnectDetach(coid);
-
 }
 
+void BaseState::connect_send_WS() {
+	Dispatcher* disp = Dispatcher::GetInstance();
+	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
+	MsgSendPulse(coid, -1, _PMSG, (uintptr_t) _payloadWS);
+	ConnectDetach(coid);
+}
 
 
 

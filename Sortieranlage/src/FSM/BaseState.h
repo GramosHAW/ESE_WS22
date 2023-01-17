@@ -76,6 +76,7 @@ public:
 
 	void send_event(int);
 	void connect_send();
+	void connect_send_WS();
 
 	void send_event_payload(int, int);
 	void send_event_payload_WS(int, ContextData::werkstueck*);
