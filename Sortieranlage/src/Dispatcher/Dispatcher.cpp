@@ -128,11 +128,11 @@ void Dispatcher::handelHALpuls() {
 				break;
 			case PSMG_HW_LS_ENDE_FREI:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_LS_ENDE_FREI, 0);
+						PSMG_HW_LS_ENDE_FREI, 0);
 				break;
 			case PSMG_HW_LS_ENDE_BLOCK:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_LS_ENDE_BLOCK, 0);
+						PSMG_HW_LS_ENDE_BLOCK, 0);
 				break;
 				//Taster///////////////////////////////////////////////////////////////
 			case PSMG_HW_TST_START_KURZ:
@@ -481,9 +481,9 @@ void Dispatcher::handelHALpuls() {
 				//TODO
 				break;
 				//SORT//////////////////////////////////////////////////////////////////////
-			case PSMG_SE_SORT_AUSSORTIERT:
+			case PSMG_SW_SORT_AUSSORTIERT:
 				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SE_SORT_AUSSORTIERT, 0);
+				PSMG_SW_SORT_AUSSORTIERT, 0);
 				break;
 			case PSMG_SW_SORT_AUSSORT:
 				MsgSendPulse(connectionIdHalAktorik,

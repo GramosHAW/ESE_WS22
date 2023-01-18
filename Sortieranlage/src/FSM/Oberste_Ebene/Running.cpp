@@ -64,7 +64,7 @@ void Running::initSubState() {
 	substateEntnahme->entryStartNode();
 #else
 	substateUbergabe = new Ubergabe();
-	//substateUbergabe->entry();
+	substateUbergabe->entry();
 	substateUbergabe->setData(data);
 	substateUbergabe->entryStartNode();
 #endif

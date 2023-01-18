@@ -238,6 +238,6 @@ bool SA1::BAND_STATUS() {
 }
 
 bool SA1::ELMNT_AUSSORT() {
-	bool handled = substateSA - ELMNT_AUSSORT();
+	bool handled = substateSA->ELMNT_AUSSORT();
 	return handled;
 }

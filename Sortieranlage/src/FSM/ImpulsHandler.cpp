@@ -73,7 +73,7 @@ void ImpulsHandler::handelFSMpuls() {
 			case PSMG_HW_LS_SORT_FREI:
 				//TODO
 				MsgSendPulse(dispatcherChanel, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SE_SORT_AUSSORTIERT, 0);
+				PSMG_SW_SORT_AUSSORTIERT, 0);
 				break;
 			case PSMG_HW_LS_SORT_BLOCK:
 				//TODO

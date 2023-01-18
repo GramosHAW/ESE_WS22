@@ -16,7 +16,7 @@ void DoAussortieren::entry() {
 
 void DoAussortieren::exit() {
 #ifdef SIM_PUSHER
-	send_event(PSMG_SE_SORT_AUSSORTIERT);
+	send_event(PSMG_SW_SORT_AUSSORTIERT);
 #endif
 }
 
@@ -26,6 +26,7 @@ void DoAussortieren::showState() {
 
 bool DoAussortieren::LS_RUTSCHE_FREI() {
 	exit();
+	printf("hallo Rutsche frei\n");
 	new (this) AussortierenInit;
 	entry();
 	return true;

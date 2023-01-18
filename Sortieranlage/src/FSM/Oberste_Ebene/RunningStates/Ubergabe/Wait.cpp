@@ -9,7 +9,7 @@
 #include "WSUbergeben.h"
 
 void Wait::entry(){
-	showState();
+	//showState();
 	send_event_payload(PSMG_SW_BAND_STOP, 0);
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 }

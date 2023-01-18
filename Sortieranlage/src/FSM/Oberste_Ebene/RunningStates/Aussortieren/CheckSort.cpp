@@ -23,7 +23,8 @@ void CheckSort::showState() {
 }
 
 bool CheckSort::ELMNT_AUSSORT() {
-	exit();
+	//exit();
+	printf("hallo \n");
 	new (this) DoAussortieren;
 	entry();
 	return true;
@@ -38,7 +39,10 @@ bool CheckSort::ELMNT_DURCH() {
 
 void CheckSort::sort() {
 	if(data->QReihenfolge.size() == 0){
-		//TODO
+		data->QReihenfolge.push(data->folge[0]);
+		data->QReihenfolge.push(data->folge[1]);
+		data->QReihenfolge.push(data->folge[2]);
+		data->QReihenfolge.printContents();
 	}
 #ifdef SIM_TWIN_B
 	ContextData::werkstueck* ws = data->Q1.front();
@@ -96,6 +100,7 @@ void CheckSort::sort() {
 		}
 #else
 		if (ws->tup == ContextData::flach) {
+
 			if (data->QReihenfolge.front() == ContextData::flach) {
 				send_event(PSMG_SW_SORT_ELMNT_DURCH);
 				data->QReihenfolge.pop();

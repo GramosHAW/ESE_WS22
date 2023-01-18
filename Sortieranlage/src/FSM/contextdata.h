@@ -32,6 +32,8 @@ public:
 	int wsID = 1;
 
 
+
+
 	enum Werkstucktup{
 			flach,
 			hoch,
@@ -39,6 +41,8 @@ public:
 			metal,
 			undefined
 	};
+
+	Werkstucktup folge[3] = {hoch, loch, hoch};
 
 	struct werkstueck {
 		int id;

@@ -166,11 +166,11 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_HW_LS_SORT_FREI:
 				state->LS_SORT_FREI();
-				state->showState();
+				//state->showState();
 				break;
 			case PSMG_HW_LS_SORT_BLOCK:
 				state->LS_SORT_BLOCK();
-				state->showState();
+				//state->showState();
 				break;
 			case PSMG_HW_LS_RUTSCHE_BLOCK:
 				state->LS_RUTSCHE_BLOCK();
@@ -185,6 +185,7 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 			case PSMG_HW_LS_ENDE_BLOCK:
+				printf("hallo \n");
 				state->LS_ENDE_BLOCK();
 				state->showState();
 				break;
@@ -219,7 +220,7 @@ void Context::awaitEvent() {
 				break;
 				//Sofwere//////////////////////////////////////////////////////
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
-				stateWarnungRutsche->ELMNT_AUSSORT();
+				//stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
