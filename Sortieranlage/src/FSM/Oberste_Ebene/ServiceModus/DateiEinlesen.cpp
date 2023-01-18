@@ -114,6 +114,8 @@ void DateiEinlesen::setReihenfolge(string file) {
 		break;
 	}
 	datei.close();
+	send_event_payload(PSMG_SW_READDATA_TRUE, 0);
+	data->readData = true;
 }
 
 
