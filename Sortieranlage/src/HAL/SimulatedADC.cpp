@@ -56,24 +56,6 @@ SimulatedADC::SimulatedADC() {
 		exit(EXIT_FAILURE);
 	}
 
-	/* ### Waiting for demo. ###
-	 if(DEMO){
-	 printf("Demo time for %d minutes...\n", DEMO_DURATION);
-	 this_thread::sleep_for(chrono::minutes(DEMO_DURATION));	//main thread sleep.
-	 printf("Stopping in...\n");
-	 printf("3\n");
-	 this_thread::sleep_for(chrono::seconds(1));
-	 printf("2\n");
-	 this_thread::sleep_for(chrono::seconds(1));
-	 printf("1\n");
-	 this_thread::sleep_for(chrono::seconds(1));
-	 printf("NOW!\n");
-	 } else {
-	 while(true){
-	 this_thread::sleep_for(chrono::hours(999999));
-	 }
-	 }*/
-
 }
 
 SimulatedADC::~SimulatedADC() {

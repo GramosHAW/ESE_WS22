@@ -10,7 +10,7 @@
 
 void WSUbergeben::entry(){
 	printf("Hallo entry WS uebergeben");
-	send_event_payload_WS(PSMG_SW_WS_DATA, data->Q3.front());
+	connect_send_WS();
 	send_event_payload(PSMG_SW_BAND_START, 0);
 }
 

@@ -7,6 +7,7 @@
 
 #include "Entnahme.h"
 #include "EntnahmeInit.h"
+#include "../../../SubEnd.h"
 
 void Entnahme::entry() {
 }
@@ -17,6 +18,7 @@ void Entnahme::exit() {
 
 void Entnahme::showState() {
 	cout << "  substateEntnahme: Entnahme" << endl;
+	subsubstateEntnahme->showState();
 }
 
 void Entnahme::initSubState() {
@@ -37,5 +39,22 @@ bool Entnahme::LS_ENDE_BLOCK() {
 
 bool Entnahme::LS_ENDE_FREI() {
 	bool handled = subsubstateEntnahme->LS_ENDE_FREI();
+	if(subsubstateEntnahme->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
+	return handled;
+}
+
+bool Entnahme::BAND_FREI() {
+	bool handled = subsubstateEntnahme->BAND_FREI();
+	if(subsubstateEntnahme->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }

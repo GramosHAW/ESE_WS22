@@ -41,7 +41,6 @@ void CheckSort::sort() {
 		data->QReihenfolge.push(data->folge[0]);
 		data->QReihenfolge.push(data->folge[1]);
 		data->QReihenfolge.push(data->folge[2]);
-		data->QReihenfolge.printContents();
 	}
 #ifdef SIM_TWIN_B
 	ContextData::werkstueck* ws = data->Q1.front();

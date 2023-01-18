@@ -49,6 +49,8 @@ Context::Context() {
 	state->entry();
 	state->entryStartNode();
 
+	state->showState();
+	//state->TST_START_LANG();
 
 
 
@@ -295,6 +297,26 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 				//DEFOULT/////////////////////////////////////////////////////
+			case PSMG_WS_DATA_TUP:
+				//data.ubergebeneWS->tup =static_cast<ContextData::Werkstucktup>(msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_FLIPT:
+				cout << "MSG FLIPT VON SA1" << msg.value.sival_int << endl;
+				data.ubergebeneWS = new ContextData::werkstueck;
+				data.ubergebeneWS->flipt = msg.value.sival_int;
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1:
+				cout << "MSG HEIGHTSA1 VON SA1" <<  msg.value.sival_int << endl;
+				data.ubergebeneWS->heightSA1 = msg.value.sival_int;
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1MEAN:
+				cout << "MSG HEIGHTSA1MEAN VON SA1" << msg.value.sival_int << endl;
+				data.ubergebeneWS->heightSA1mean = msg.value.sival_int;
+				break;
+			case PSMG_WS_DATA_ID:
+				cout << "MSG ID VON SA1" << msg.value.sival_int << endl;
+				data.ubergebeneWS->id = msg.value.sival_int;
+				break;
 			default:
 				cout << "FSM sais: SAY WAAAAAAAAT?????????????" << endl;
 				cout << "PMSG bekommen: " + msg.code << endl;

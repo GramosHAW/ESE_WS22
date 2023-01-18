@@ -30,7 +30,6 @@ void Running::entry() {
 void Running::exit() {
 	cout << " Running EXIT | BAND STOP " << endl;
 	send_event_payload(PSMG_SW_BAND_STOP, 0);
-	send_event_payload(PSMG_SW_AMPEL_GRUEN_AUS, 0);
 	// MSG_SEND_PULSE (BAND_STOP)
 }
 

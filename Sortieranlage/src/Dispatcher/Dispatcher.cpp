@@ -512,6 +512,49 @@ void Dispatcher::handelHALpuls() {
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
+#ifndef SIM_TWIN_B
+				case PSMG_WS_DATA_TUP:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_TUP, msg.value.sival_int);
+				break;
+				case PSMG_WS_DATA_FLIPT:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_FLIPT, msg.value.sival_int);
+				break;
+				case PSMG_WS_DATA_HEIGHTSA1:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_HEIGHTSA1, msg.value.sival_int);
+				break;
+				case PSMG_WS_DATA_HEIGHTSA1MEAN:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_HEIGHTSA1MEAN, msg.value.sival_int);
+				break;
+				case PSMG_WS_DATA_ID:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_ID, msg.value.sival_int);
+				break;
+#else
+			case PSMG_WS_DATA_TUP:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_TUP, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_FLIPT:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_FLIPT, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_HEIGHTSA1, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1MEAN:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_WS_DATA_HEIGHTSA1MEAN, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_ID:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT, PSMG_WS_DATA_ID,
+						msg.value.sival_int);
+				break;
+#endif
 			default:
 				printf("%x", msg.code);
 				cout << "Dispacher says: Received uncatched PSMG aka say WAAAT" << endl;
