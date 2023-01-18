@@ -13,7 +13,7 @@
 void SA1::entry() {
 	// MSG_SEND_PULSE (BAND_START)
 	//send_event_payload(PSMG_SW_BAND_START,0);
-	 cout << data << " :data SA1" << endl;
+	 //cout << data << " :data SA1" << endl;
 
 }
 
