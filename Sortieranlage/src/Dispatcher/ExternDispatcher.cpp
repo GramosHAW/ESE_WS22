@@ -124,7 +124,7 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		uintptr_t werkPtrInt = uintptr_t(&werk);
 		printf("id: %d, heightSA1: %d, heightSA1mean: %d, enum: %d", werk.id,
 				werk.heightSA1, werk.heightSA1mean, (int) werk.tup);
-		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA_SA2,
+		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA,
 		SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
 	}
 		break;
