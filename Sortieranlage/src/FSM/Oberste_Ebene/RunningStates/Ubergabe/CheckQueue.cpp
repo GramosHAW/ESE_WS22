@@ -21,13 +21,14 @@ void CheckQueue::exit() {
 
 
 void CheckQueue::checkQueue(){
-	if(data->Q3.size() <= 1){
+	if(data->Q3.size() == 0){
 	 	 exit();
-	 	 new (this) UbergabeInit;
+	 	 send_event_payload(PSMG_SW_BAND_FREI, 0);
+	 	 new (this) SubEnd;
 	 	 entry();
 	} else {
 	 	 exit();
-	 	 new (this) SubEnd;
+	 	 new (this) UbergabeInit;
 	 	 entry();
 	}
 }
