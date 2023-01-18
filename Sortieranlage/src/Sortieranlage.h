@@ -23,6 +23,6 @@ public:
 	Sortieranlage();
 	virtual ~Sortieranlage();
 	ThreadPool givethreadpool() const;
-	ThreadPool threadpool;
+
 };
 #endif

@@ -19,13 +19,13 @@
 
 class DateiEinlesen : BaseState {
 private:
-	ofstream datei;
+	//fstream datei;
 public:
 	void showState() override;
 	void entry() override;
 	void timeOut();
-	void readDatei(string);
-	void setReihenfolge(char, char, char, string);
+	fstream readDatei(string);
+	void setReihenfolge(string);
 
 };
 

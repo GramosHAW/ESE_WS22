@@ -8,107 +8,117 @@
 #include "DateiEinlesen.h"
 #include <iostream>
 #include <stdexcept>
-
+#include <limits>
 
 void DateiEinlesen::entry() {
-	setReihenfolge('f','l','h', "Reihenfolge.txt");
+	setReihenfolge("Reihenfolge.txt");
 }
 
-void DateiEinlesen::setReihenfolge(char a, char b, char c, string file) {
+void DateiEinlesen::setReihenfolge(string file) {
 
 	//ContextData::Werkstucktup wstyp = data->flach;
+	char a;
+	char b;
+	char c;
+	string x;
 
-	readDatei(file);
+	ifstream datei("../tmp/Reihenfolge.txt", ios::in);
 
-	datei.open(file, ios::trunc | ios::in);
+	if (datei.is_open()) {
+		while (datei) {
+			string line;
+			getline(datei, line);
 
-	cout << "data DateiEinlesen: " << data << endl;
+			a = line[0];
+			b = line[1];
+			c = line[2];
 
-	//reihenfolge->push(a);
+			//chars wieder in einen String packen (notwendig)
+			x += a;
+			x += b;
+			x += c;
+		}
 
+	}
+	datei.close();
+
+	//ersten drei chars nehmen
+	a = x.at(0);
+	b = x.at(1);
+	c = x.at(2);
+
+	cout << a << b << c << "TEST"<< endl ;
+
+	// im Switch-Case char checken und in Queue packen
 	switch (a) {
 	case 'f':
-		datei << a << "\n";
-		data->QReihenfolge.push(data->flach);
+		data->folge[0] = data->flach;
+		//data->QReihenfolge.push(data->flach);
 		break;
 	case 'h':
-		data->QReihenfolge.push(data->hoch);
-		datei << a << "\n";
+		//data->QReihenfolge.push(data->hoch);
+		data->folge[0] = data->hoch;
 		break;
 	case 'l':
-		data->QReihenfolge.push(data->loch);
-		datei << a << "\n";
+		//data->QReihenfolge.push(data->loch);
+		data->folge[0] = data->loch;
 		break;
 	case 'm':
-		data->QReihenfolge.push(data->metal);
-		datei << a << "\n";
+		//data->QReihenfolge.push(data->metal);
+		data->folge[0] = data->metal;
 		break;
-	case 'u':
-		data->QReihenfolge.push(data->undefined);
-		datei << a << "\n";
+	default:
+			break;
 	}
 
 	switch (b) {
 	case 'f':
-		data->QReihenfolge.push(data->flach);
-		datei << b << "\n";
+		//data->QReihenfolge.push(data->flach);
+		data->folge[1] = data->flach;
 		break;
 	case 'h':
-		data->QReihenfolge.push(data->hoch);
-		datei << b << "\n";
+		//data->QReihenfolge.push(data->hoch);
+		data->folge[1] = data->hoch;
 		break;
 	case 'l':
-		data->QReihenfolge.push(data->loch);
-		datei << b << "\n";
+		//data->QReihenfolge.push(data->loch);
+		data->folge[1] = data->loch;
 		break;
 	case 'm':
-		data->QReihenfolge.push(data->metal);
-		datei << b << "\n";
+		//data->QReihenfolge.push(data->metal);
+		data->folge[1] = data->metal;
 		break;
-	case 'u':
-		data->QReihenfolge.push(data->undefined);
-		datei << b << "\n";
-		break;
+	default:
+			break;
 	}
 
 	switch (c) {
 	case 'f':
-		data->QReihenfolge.push(data->flach);
-		datei << c << "\n";
+		//data->QReihenfolge.push(data->flach);
+		data->folge[2] = data->flach;
 		break;
 	case 'h':
-		data->QReihenfolge.push(data->hoch);
-		datei << c << "\n";
+		//data->QReihenfolge.push(data->hoch);
+		data->folge[2] = data->hoch;
 		break;
 	case 'l':
-		data->QReihenfolge.push(data->loch);
-		datei << c << "\n";
+		//data->QReihenfolge.push(data->loch);
+		data->folge[2] = data->loch;
 		break;
 	case 'm':
-		data->QReihenfolge.push(data->metal);
-		datei << c << "\n";
+		//data->QReihenfolge.push(data->metal);
+		data->folge[2] = data->metal;
 		break;
-	case 'u':
-		data->QReihenfolge.push(data->undefined);
-		datei << c << "\n";
+	default:
 		break;
 	}
-
-//	data->QReihenfolge.push(data->flach);
-//	//q->push(a);
-//	datei << a << "\n";
-//	//reihenfolge->push(b);
-//	datei << b << "\n";
-//	//reihenfolge->push(c);
-//	datei << c << "\n";
-
 	datei.close();
 }
 
 
-void DateiEinlesen::readDatei(string file) {
+fstream DateiEinlesen::readDatei(string file) {
 	string line;
-	ifstream datei (file);
+	fstream datei (file);
 	if (datei.is_open()) {
 		while (getline(datei,line)) {
 			cout << line << '\n';
@@ -117,7 +127,10 @@ void DateiEinlesen::readDatei(string file) {
 		datei.close();
 	}
 	else cout << "Datei kann nicht geöffnet werden :( " << endl;
+	return datei;
 }
+
+
 
 // TODO
 

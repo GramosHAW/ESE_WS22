@@ -24,7 +24,6 @@ bool NeuesWsIdle::BAND_FREI() {
 }
 
 void NeuesWsIdle::entry() {
-	showState();
 }
 
 void NeuesWsIdle::exit() {

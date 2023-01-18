@@ -9,7 +9,6 @@
 #include "EntnahmeInit.h"
 
 void Entnahme::entry() {
-	showState();
 }
 
 void Entnahme::exit() {

@@ -13,7 +13,6 @@
 
 void NeuesWs::entry() {
 	addtoQueue();
-	//showState();
 	exit();
 	new (this) NeuesWsIdle;
 	entry();

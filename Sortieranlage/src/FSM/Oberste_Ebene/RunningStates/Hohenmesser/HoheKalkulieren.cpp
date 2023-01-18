@@ -9,7 +9,6 @@
 #include "HohenmesserInit.h"
 
 void HoheKalkulieren::entry() {
-	showState();
 	calculateHigt();
 	exit();
 	new (this) HohenmesserInit;

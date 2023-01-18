@@ -24,6 +24,7 @@ public:
 	bool BAND_FREI_SA2() override;
 	bool LS_START_BLOCK_SA2() override;
 	bool LS_ENDE_FREI_SA2() override;
+	bool BAND_FREI() override;
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNINGSTATES_UBERGABE_UBERGABE_H_ */
