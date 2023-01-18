@@ -51,7 +51,7 @@ InterruptHandler *InterruptHandler::GetInstance() {
 InterruptHandler::InterruptHandler() {
 
 	this->gpio_port = (std::shared_ptr<GPIO>) new GPIO(
-			mmap_device_io(0x1000, (uint64_t) 0x44E07000));
+			mmap_device_io(0x1000, (uint64_t ) 0x44E07000));
 	this->my_pulse_code = _PULSE_CODE_MINAVAIL + 1;
 	this->interrupt_id = -1;
 	this->isr_thread = nullptr;
@@ -101,7 +101,7 @@ void InterruptHandler::pulseChannel_init(void) {
 			my_pulse_code, 0);
 	//SIGEV_PULSE_INIT(&event,dispatcherChannelId,SIGEV_PULSE_PRIO_INHERIT,my_pulse_code, 0);
 	this->interrupt_id = InterruptAttachEvent(GPIOINT0B, &event,
-	_NTO_INTR_FLAGS_TRK_MSK);
+			_NTO_INTR_FLAGS_TRK_MSK);
 }
 
 void InterruptHandler::interrupt_init(void) {
@@ -123,8 +123,13 @@ void InterruptHandler::interrupt_init(void) {
 void InterruptHandler::chek_if_ruche_blocked(void) {
 	sleep(1);
 	if (ruche_thread) {
+#ifndef SIM_TWIN_B
 		MsgSendPulse(connectionIdDispacher,
 		SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_SA1_RUTSCHE_VOLL, 0);
+#else
+		MsgSendPulse(connectionIdDispacher,
+				SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_SA2_RUTSCHE_VOLL, 0);
+#endif
 	}
 }
 
@@ -209,10 +214,9 @@ void InterruptHandler::wait_for_event(void) {
 					MsgSendPulse(connectionIdDispacher,
 					SIGEV_PULSE_PRIO_INHERIT, PSMG_HW_LS_RUTSCHE_FREI, 0);
 				} else {
-					//TODO WTF
 					ruche_thread = true;
 					thread chekIFblocked(
-							&InterruptHandler::chek_if_ruche_blocked,this);
+							&InterruptHandler::chek_if_ruche_blocked, this);
 					chekIFblocked.detach();
 					MsgSendPulse(connectionIdDispacher,
 					SIGEV_PULSE_PRIO_INHERIT, PSMG_HW_LS_RUTSCHE_BLOCK, 0);
