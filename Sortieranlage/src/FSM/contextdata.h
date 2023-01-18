@@ -29,6 +29,8 @@ private:
 	bool rutsche_voll1 = false;
 	bool rutsche_voll2 = false;
 
+
+
 	bool uebergabeSendFlag = false;
 
 	//bool rutsche_voll;
@@ -39,7 +41,7 @@ public:
 	int mejurments[200];
 	int numberOFmejurments = 0;
 	int wsID = 1;
-
+	bool readData=false;
 
 	typedef enum Werkstucktup{
 			flach,
