@@ -381,11 +381,7 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_WS_DATA:
 				MsgSendPulse(externChId,
 				SIGEV_PULSE_PRIO_INHERIT,
-<<<<<<< HEAD
 				PSMG_SW_WS_DATA,(uintptr_t) msg.value.sival_ptr);
-=======
-				PSMG_SW_WS_DATA, uintptr_t(msg.value.sival_int));
->>>>>>> cf0c3f5a91eaa892ac4ec5d60dee63961109286c
 				break;
 			case PSMG_SW_WS_DATA_SA2:
 				MsgSendPulse(fsmchid,
@@ -395,10 +391,10 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_BAND_STATUS:
 				MsgSendPulse(externChId,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_BAND_STATUS, msg.value.sival_int);
+				PSMG_SW_BAND_STATUS_SA1, msg.value.sival_int);
 				break;
 			case PSMG_SW_BAND_STATUS_SA1:
-				MsgSendPulse(externChId,
+				MsgSendPulse(fsmchid,
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_BAND_STATUS_SA1, msg.value.sival_int);
 				break;
