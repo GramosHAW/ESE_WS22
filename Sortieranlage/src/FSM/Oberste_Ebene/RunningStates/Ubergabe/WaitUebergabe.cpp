@@ -5,25 +5,26 @@
  *      Author: andre
  */
 
-#include "Wait.h"
+#include "WaitUebergabe.h"
 #include "WSUbergeben.h"
 
-void Wait::entry(){
-	printf("I am Hiere !!!!!!!!!!!!!!!!!!!\n");
+
+void WaitUebergabe::entry(){
+
 	send_event_payload(PSMG_SW_BAND_STOP, 0);
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 }
 
 
-void Wait::exit(){
+void WaitUebergabe::exit(){
 	send_event_payload(PSMG_SW_BAND_START, 0);
 }
 
-void Wait::showState(){
+void WaitUebergabe::showState(){
 	cout << "  subsubstateUbergabe: Wait" << endl;
 }
 
-bool Wait::BAND_FREI_SA2(){
+bool WaitUebergabe::BAND_FREI_SA2(){
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 	exit();
 	new (this) WSUbergeben;
@@ -31,7 +32,7 @@ bool Wait::BAND_FREI_SA2(){
 	return true;
 }
 
-bool Wait::LS_ENDE_FREI_SA2(){
+bool WaitUebergabe::LS_ENDE_FREI_SA2(){
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 	exit();
 	new (this) WSUbergeben;

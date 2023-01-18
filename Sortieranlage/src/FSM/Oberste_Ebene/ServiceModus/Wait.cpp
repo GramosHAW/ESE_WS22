@@ -9,7 +9,7 @@
 #include "Wait.h"
 #include "KalibrierungUebergang.h"
 
-bool Wait::LS_ENDE_BLOCK() {
+bool WaitUebergabe::LS_ENDE_BLOCK() {
 	exit();
 	new (this) KalibrierungUebergang;
 	entry();
