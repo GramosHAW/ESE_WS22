@@ -18,6 +18,7 @@ public:
 	void showState() override;
 
 	bool LS_ENDE_BLOCK() override;
+	bool BAND_FREI() override;
 };
 
 #endif /* SRC_FSM_OBERSTE_EBENE_RUNNINGSTATES_ENTNAHME_ENTNAHMEINIT_H_ */

@@ -7,6 +7,7 @@
 
 #include "EntnahmeInit.h"
 #include "EntnahmeSendData.h"
+#include "../../../SubEnd.h"
 
 void EntnahmeInit::entry() {
 }
@@ -25,3 +26,11 @@ bool EntnahmeInit::LS_ENDE_BLOCK() {
 	entry();
 	return true;
 }
+
+bool EntnahmeInit::BAND_FREI() {
+	exit();
+	new (this) SubEnd;
+	entry();
+	return true;
+}
+
