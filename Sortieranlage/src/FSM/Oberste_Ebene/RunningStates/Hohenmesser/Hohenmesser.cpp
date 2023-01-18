@@ -6,6 +6,7 @@
  */
 #include "../../RunningStates/Hohenmesser/Hohenmesser.h"
 #include "../../RunningStates/Hohenmesser/HohenmesserInit.h"
+#include "../../../SubEnd.h"
 
 void Hohenmesser::initSubState() {
 	subsubstateHoenmesser = new HohenmesserInit;
@@ -19,7 +20,6 @@ void Hohenmesser::entryStartNode() {
 }
 
 void Hohenmesser::entry() {
-	showState();
 }
 
 void Hohenmesser::exit() {
@@ -28,6 +28,12 @@ void Hohenmesser::exit() {
 
 bool Hohenmesser::BAND_FREI() {
 	bool handled = subsubstateHoenmesser->BAND_FREI();
+	if(subsubstateHoenmesser->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }
 

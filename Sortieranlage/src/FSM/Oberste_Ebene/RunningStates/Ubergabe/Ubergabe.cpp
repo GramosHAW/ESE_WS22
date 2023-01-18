@@ -7,9 +7,9 @@
 
 #include "Ubergabe.h"
 #include "UbergabeInit.h"
+#include "../../../SubEnd.h"
 
 void Ubergabe::entry() {
-	showState();
 }
 
 void Ubergabe::exit() {
@@ -18,6 +18,7 @@ void Ubergabe::exit() {
 
 void Ubergabe::showState() {
 	cout << "  substateUbergabe: Ubergabe" << endl;
+	subsubstateUbergabe->showState();
 }
 
 void Ubergabe::initSubState() {
@@ -33,6 +34,17 @@ void Ubergabe::entryStartNode() {
 
 bool Ubergabe::LS_ENDE_BLOCK() {
 	bool handled = subsubstateUbergabe->LS_ENDE_BLOCK();
+	return handled;
+}
+
+bool Ubergabe::BAND_FREI() {
+	bool handled = subsubstateUbergabe->BAND_FREI();
+	if(subsubstateUbergabe->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }
 

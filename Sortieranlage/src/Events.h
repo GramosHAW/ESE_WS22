@@ -73,6 +73,7 @@
 #define		PSMG_SW_BAND_FREI					0x21
 #define		PSMG_SW_BAND_FREI_SA2				0x54
 #define 	PSMG_SW_BAND_STATUS					0x45
+#define 	PSMG_SW_BAND_STATUS_SA1				0x56
 #define		PSMG_SW_BAND_VOLL					0x22
 
 	//Hoehenmesser
@@ -100,7 +101,6 @@
 
 	//Werkstücke
 #define		PSMG_SW_WS_DATA						0x2B
-#define		PSMG_SW_WS_DATA_SA2					0x2C
 #define		PSMG_SW_WS_SORTED					0x2D
 #define		PSMG_SW_WS_ERHALTEN					0x2E
 #define		PSMG_SW_WS_FLIPPED					0x2F

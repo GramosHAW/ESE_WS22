@@ -48,8 +48,7 @@ Context::Context() {
 	state->initSubState();
 	state->entry();
 	state->entryStartNode();
-	state->showState();
-	state->TST_START_LANG();
+
 
 
 
@@ -188,7 +187,6 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 			case PSMG_HW_LS_ENDE_BLOCK:
-				printf("hallo \n");
 				state->LS_ENDE_BLOCK();
 				state->showState();
 				break;
@@ -222,6 +220,10 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 				//Sofwere//////////////////////////////////////////////////////
+			case PSMG_SW_BAND_STATUS:
+				state->BAND_STATUS();
+				state->showState();
+				break;
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
 				//stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
@@ -230,6 +232,7 @@ void Context::awaitEvent() {
 				state->ELMNT_DURCH();
 				break;
 			case PSMG_SW_BAND_FREI:
+				printf("führe band frei aus \n");
 				state->BAND_FREI();
 				state->showState();
 				break;
@@ -269,7 +272,7 @@ void Context::awaitEvent() {
 				stateWarnungRutsche->RUTSCHE_VOLL_BEIDE();
 				stateWarnungRutsche->showState();
 				break;
-			case PSMG_SW_WS_DATA_SA2:
+			case PSMG_SW_WS_DATA:
 				data.ubergebeneWS = (ContextData::werkstueck*) msg.value.sival_ptr;
 				break;
 				//Hoenmesser////////////////////////////////////////////////////////

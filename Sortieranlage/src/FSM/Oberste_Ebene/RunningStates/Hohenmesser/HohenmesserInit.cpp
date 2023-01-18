@@ -9,7 +9,6 @@
 #include "../../RunningStates/Hohenmesser/DatenEmpfangen.h"
 
 void HohenmesserInit::entry() {
-	showState();
 }
 void HohenmesserInit::exit() {
 

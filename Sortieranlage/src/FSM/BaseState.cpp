@@ -86,7 +86,13 @@ void BaseState::send_event_payload_WS(int pmsg, ContextData::werkstueck* payload
 void BaseState::connect_send() {
 	Dispatcher* disp = Dispatcher::GetInstance();
 	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
-	MsgSendPulse(coid, -1, _PMSG, _payload);
+	if (_PMSG == PSMG_SW_WS_DATA) {
+		MsgSendPulse(coid, SIGEV_PULSE_PRIO_INHERIT, _PMSG,
+				uintptr_t(_payloadWS));
+	} else {
+		MsgSendPulse(coid, SIGEV_PULSE_PRIO_INHERIT, _PMSG, _payload);
+	}
+
 	ConnectDetach(coid);
 }
 

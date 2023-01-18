@@ -10,7 +10,6 @@
 #include "../../../contextdata.h"
 
 void CheckSort::entry() {
-	showState();
 	sort();
 }
 

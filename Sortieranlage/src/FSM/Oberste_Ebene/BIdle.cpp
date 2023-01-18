@@ -32,12 +32,12 @@ void BIdle::exit() {
 //}
 
 bool BIdle::LS_START_BLOCK(){
-	if(true){ //Nur für SA1
+#ifndef SIM_TWIN_B
 		exit();
 		new(this) Running;
 		entry();
 		return true;
-	}
+#endif
 }
 
 bool BIdle::TST_STOP_KURZ(){
@@ -55,12 +55,13 @@ bool BIdle::RUHE(){
 }
 
 bool BIdle::BAND_STATUS(){
-	if (true){ //Nur für SA2
+#ifdef SIM_TWIN_B
 		exit();
 		new(this) Respond;
 		entry();
 		return true;
-	}
+#endif
+		return false;
 }
 
 void BIdle::showState(){

@@ -9,7 +9,6 @@
 #include "EntnahmeSendData.h"
 
 void EntnahmeInit::entry() {
-	showState();
 }
 
 void EntnahmeInit::exit() {

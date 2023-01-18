@@ -9,8 +9,9 @@
 #include "CheckQueue.h"
 
 void WSUbergeben::entry(){
-	showState();
+	printf("Hallo entry WS uebergeben");
 	send_event_payload_WS(PSMG_SW_WS_DATA, data->Q3.front());
+	send_event_payload(PSMG_SW_BAND_START, 0);
 }
 
 void WSUbergeben::exit(){
