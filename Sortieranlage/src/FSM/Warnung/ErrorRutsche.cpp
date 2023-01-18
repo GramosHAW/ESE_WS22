@@ -14,7 +14,6 @@ void ErrorRutsche::entry(){
 
 bool ErrorRutsche::FEHLER_BEHOBEN(){
 	exit();
-
 	new(this) IdleRutscheVoll;
 	entry();
 	return true;

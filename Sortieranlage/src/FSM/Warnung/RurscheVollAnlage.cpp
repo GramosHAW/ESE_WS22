@@ -9,28 +9,29 @@
 #include "BeideRutschenVoll.h"
 
 bool RurscheVollAnlage::RUTSCHE_VOLL_SA2(){
-#ifndef SIM_TWIN_B//Nur für SA1
 		exit();
+#ifdef SIM_TWIN_B//Nur für SA1
+		send_event_payload(PSMG_SW_AMPEL_GELB_AN, 2);
+#endif
 		data->setrutsche_voll2(true);
 		new(this) BeideRutschenVoll;
 		entry();
 		return true;
-#endif
-		return false;
 }
 
 bool RurscheVollAnlage::RUTSCHE_VOLL_SA1(){
-#ifdef SIM_TWIN_B
 		exit();
+#ifndef SIM_TWIN_B
+		send_event_payload(PSMG_SW_AMPEL_GELB_AN, 2);
+#endif
 		data->setrutsche_voll1(true);
 		new(this) BeideRutschenVoll;
 		entry();
 		return true;
-#endif
-		return false;
 }
 
 bool RurscheVollAnlage::RUTSCHE_VOLL_BEIDE(){
+	/*
 	exit();
 #ifdef SIM_TWIN_B
 	data->setrutsche_voll1(true);
@@ -40,6 +41,8 @@ bool RurscheVollAnlage::RUTSCHE_VOLL_BEIDE(){
 	new(this) BeideRutschenVoll;
 	entry();
 	return true;
+	*/
+	return false;
 }
 
 void RurscheVollAnlage::showState(){

@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 	//adcreader.startthread();
 
 
-	simulationStarter->startSimulation();
+	//simulationStarter->startSimulation();
 //	const char* topic = "FESTO";
 //	MQTTClient mqttClient;
 //	mqttClient = new MQTTClient();

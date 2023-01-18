@@ -114,11 +114,11 @@ void Dispatcher::handelHALpuls() {
 				break;
 			case PSMG_HW_LS_ENDE_FREI:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_HW_LS_ENDE_FREI, 0);
+				PSMG_HW_LS_ENDE_FREI, 0);
 				break;
 			case PSMG_HW_LS_ENDE_BLOCK:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_HW_LS_ENDE_BLOCK, 0);
+				PSMG_HW_LS_ENDE_BLOCK, 0);
 				break;
 				//Taster///////////////////////////////////////////////////////////////
 			case PSMG_HW_TST_START_KURZ:
@@ -274,10 +274,18 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_SA1_RUTSCHE_VOLL:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_SA1_RUTSCHE_VOLL, msg.value.sival_int);
+#ifndef SIM_TWIN_B
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SA1_RUTSCHE_VOLL, msg.value.sival_int);
+#endif
 				break;
 			case PSMG_SW_SA2_RUTSCHE_VOLL:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_SA2_RUTSCHE_VOLL, msg.value.sival_int);
+#ifdef SIM_TWIN_B
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_SA2_RUTSCHE_VOLL, msg.value.sival_int);
+#endif
 				break;
 			case PSMG_SW_RUTSCHE_VOLL_BEIDE:
 #ifdef	SIM_TWIN_B
@@ -368,12 +376,12 @@ void Dispatcher::handelHALpuls() {
 #ifndef SIM_TWIN_B
 				MsgSendPulse(externChId,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_WS_DATA,(uintptr_t) msg.value.sival_ptr);
+				PSMG_SW_WS_DATA, (uintptr_t) msg.value.sival_ptr);
 				break;
 #else
 				MsgSendPulse(fsmchid,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_WS_DATA, (uintptr_t) msg.value.sival_ptr);
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_WS_DATA, (uintptr_t) msg.value.sival_ptr);
 				break;
 #endif
 			case PSMG_SW_BAND_STATUS:
@@ -499,55 +507,56 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
 #ifndef SIM_TWIN_B
-				case PSMG_WS_DATA_TUP:
+			case PSMG_WS_DATA_TUP:
 				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_TUP, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_FLIPT:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_FLIPT, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_HEIGHTSA1, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1MEAN:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_HEIGHTSA1MEAN, msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_ID:
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_ID, msg.value.sival_int);
+				break;
+#else
+				case PSMG_WS_DATA_TUP:
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_WS_DATA_TUP, msg.value.sival_int);
 				break;
 				case PSMG_WS_DATA_FLIPT:
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_WS_DATA_FLIPT, msg.value.sival_int);
 				break;
 				case PSMG_WS_DATA_HEIGHTSA1:
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_WS_DATA_HEIGHTSA1, msg.value.sival_int);
 				break;
 				case PSMG_WS_DATA_HEIGHTSA1MEAN:
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 						PSMG_WS_DATA_HEIGHTSA1MEAN, msg.value.sival_int);
 				break;
 				case PSMG_WS_DATA_ID:
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_WS_DATA_ID, msg.value.sival_int);
-				break;
-#else
-			case PSMG_WS_DATA_TUP:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_WS_DATA_TUP, msg.value.sival_int);
-				break;
-			case PSMG_WS_DATA_FLIPT:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_WS_DATA_FLIPT, msg.value.sival_int);
-				break;
-			case PSMG_WS_DATA_HEIGHTSA1:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_WS_DATA_HEIGHTSA1, msg.value.sival_int);
-				break;
-			case PSMG_WS_DATA_HEIGHTSA1MEAN:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_WS_DATA_HEIGHTSA1MEAN, msg.value.sival_int);
-				break;
-			case PSMG_WS_DATA_ID:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT, PSMG_WS_DATA_ID,
 						msg.value.sival_int);
 				break;
 #endif
 			case PSMG_SW_READDATA_TRUE:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-					PSMG_SW_READDATA_TRUE, 0);
+				PSMG_SW_READDATA_TRUE, 0);
 				break;
 			default:
 				printf("%x", msg.code);
-				cout << "Dispacher says: Received uncatched PSMG aka say WAAAT" << endl;
+				cout << "Dispacher says: Received uncatched PSMG aka say WAAAT"
+						<< endl;
 				cout << msg.code << endl;
 			}
 		}
