@@ -21,7 +21,7 @@ void CheckQueue::exit() {
 
 
 void CheckQueue::checkQueue(){
-	if(data->Q3.size() == 0){
+	if(data->Q3.size() == 0 && data->Q1.size() == 0 && data->Q2.size() == 0){
 	 	 exit();
 	 	 send_event_payload(PSMG_SW_BAND_FREI, 0);
 	 	 new (this) SubEnd;

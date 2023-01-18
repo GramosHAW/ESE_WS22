@@ -277,6 +277,11 @@ void Context::awaitEvent() {
 			case PSMG_SW_WS_DATA:
 				data.ubergebeneWS = (ContextData::werkstueck*) msg.value.sival_ptr;
 				break;
+			    ///////METALL/////////////////////////////////////////////////////
+			case PSMG_HW_MSENS_METALL:
+				state->MSENS_METALL();
+				state->showState();
+				break;
 				//Hoenmesser////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
 				//cout << " HM -starting reding  mesurment" << endl;

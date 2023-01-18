@@ -37,22 +37,25 @@ bool CheckSort::ELMNT_DURCH() {
 }
 
 void CheckSort::sort() {
-	if(data->QReihenfolge.size() == 0){
+	data->QReihenfolge.printContents();
+
+	if (data->QReihenfolge.size() == 0) {
 		data->QReihenfolge.push(data->folge[0]);
 		data->QReihenfolge.push(data->folge[1]);
 		data->QReihenfolge.push(data->folge[2]);
 	}
+	printf("aktuelle Reihenfolge: \n");
+	data->QReihenfolge.printContents();
 #ifdef SIM_TWIN_B
 	ContextData::werkstueck* ws = data->Q1.front();
 #else
 	ContextData::werkstueck* ws = data->Q2.pop();
 #endif
-	if(data->getrutsche_voll1() && data->getrutsche_voll2()){
-		if (data->QReihenfolge.front() == ws->tup){
+	if (data->getrutsche_voll1() && data->getrutsche_voll2()) {
+		if (data->QReihenfolge.front() == ws->tup) {
 			send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
 		}
-	}
-	else if (data->getrutsche_voll1()) {
+	} else if (data->getrutsche_voll1()) {
 #ifdef SIM_TWIN_B
 		if (data->QReihenfolge.front() == ws->tup) {
 			send_event(PSMG_SW_SORT_ELMNT_DURCH);
@@ -67,7 +70,7 @@ void CheckSort::sort() {
 #endif
 	} else if (data->getrutsche_voll2()) {
 #ifdef SIM_TWIN_B
-		if (data->QReihenfolge.front() == ws->tup){
+		if (data->QReihenfolge.front() == ws->tup) {
 			data->QReihenfolge.pop();
 		}
 		send_event(PSMG_SW_SORT_ELMNT_DURCH);
@@ -107,8 +110,12 @@ void CheckSort::sort() {
 				send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
 			}
 		} else {
+			if (data->QReihenfolge.front() == ws->tup) {
+				data->QReihenfolge.pop();
+			}
 			send_event(PSMG_SW_SORT_ELMNT_DURCH);
 			data->Q3.push(ws);
+
 		}
 #endif
 	}

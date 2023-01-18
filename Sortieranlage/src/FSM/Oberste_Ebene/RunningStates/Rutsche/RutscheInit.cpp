@@ -10,14 +10,19 @@
 
 void RutscheInit::entry() {
 #ifdef SIM_TWIN_B
+	printf("Rusche init SA2 \n");
+	data->Q1.printContents();
 	if(data->Q1.size()== 0){
 		send_event(PSMG_SW_BAND_FREI);
 		send_event(PSMG_SW_BAND_FREI_SA2);
 	}
 #else
+	printf("Rusche init SA1 \n");
+	data->Q1.printContents();
 	if((data->Q1.size()== 0) && (data->Q2.size()== 0) && (data->Q3.size()== 0)){
 		send_event(PSMG_SW_BAND_FREI);
 	}
+
 #endif
 }
 

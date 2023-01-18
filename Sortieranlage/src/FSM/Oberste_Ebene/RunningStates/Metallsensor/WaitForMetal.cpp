@@ -32,6 +32,8 @@ bool WaitForMetal::MSENS_METALL() {
 	data->Q1.front()->tup = ContextData::metal;
 #else
 	data->Q2.front()->tup = ContextData::metal;
+
+	cout << "Werkstueck hat metal: " << data->Q2.front()->tup << endl;
 #endif
 	return true;
 }
