@@ -9,7 +9,6 @@
 #include "../../../SubEnd.h"
 
 void EntnahmeSendData::entry() {
-	showState();
 	//TODO bandstop, getDataReady
 }
 

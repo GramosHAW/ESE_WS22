@@ -9,7 +9,6 @@
 #include "CheckQueue.h"
 
 void WSUbergeben::entry(){
-	showState();
 	send_event_payload_WS(PSMG_SW_WS_DATA, data->Q3.front());
 }
 

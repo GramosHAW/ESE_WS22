@@ -8,7 +8,6 @@
 #include "AussortierenInit.h"
 
 void Durchlassen::entry() {
-	showState();
 #ifndef SIM_PUSHER
 	send_event(PSMG_SW_SORT_DURCH);
 #endif
@@ -16,7 +15,7 @@ void Durchlassen::entry() {
 
 void Durchlassen::exit() {
 #ifndef SIM_PUSHER
-	send_event(PSMG_SE_SORT_AUSSORTIERT);
+	send_event(PSMG_SW_SORT_AUSSORTIERT);
 #endif
 }
 

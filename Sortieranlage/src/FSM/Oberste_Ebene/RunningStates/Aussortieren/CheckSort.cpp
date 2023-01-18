@@ -10,7 +10,6 @@
 #include "../../../contextdata.h"
 
 void CheckSort::entry() {
-	showState();
 	sort();
 }
 
@@ -23,7 +22,8 @@ void CheckSort::showState() {
 }
 
 bool CheckSort::ELMNT_AUSSORT() {
-	exit();
+	//exit();
+	printf("hallo \n");
 	new (this) DoAussortieren;
 	entry();
 	return true;
@@ -98,6 +98,7 @@ void CheckSort::sort() {
 		}
 #else
 		if (ws->tup == ContextData::flach) {
+
 			if (data->QReihenfolge.front() == ContextData::flach) {
 				send_event(PSMG_SW_SORT_ELMNT_DURCH);
 				data->QReihenfolge.pop();

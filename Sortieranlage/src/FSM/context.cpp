@@ -49,6 +49,9 @@ Context::Context() {
 	state->entry();
 	state->entryStartNode();
 	state->showState();
+	//state->TST_START_LANG();
+
+
 
 	stateWarnungRutsche = new RutscheVoll();
 	stateWarnungRutsche->setData(&data);
@@ -166,11 +169,11 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_HW_LS_SORT_FREI:
 				state->LS_SORT_FREI();
-				state->showState();
+				//state->showState();
 				break;
 			case PSMG_HW_LS_SORT_BLOCK:
 				state->LS_SORT_BLOCK();
-				state->showState();
+				//state->showState();
 				break;
 			case PSMG_HW_LS_RUTSCHE_BLOCK:
 				state->LS_RUTSCHE_BLOCK();
@@ -219,13 +222,14 @@ void Context::awaitEvent() {
 				break;
 				//Sofwere//////////////////////////////////////////////////////
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
-				stateWarnungRutsche->ELMNT_AUSSORT();
+				//stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
 				state->ELMNT_DURCH();
 				break;
 			case PSMG_SW_BAND_FREI:
+				printf("führe band frei aus \n");
 				state->BAND_FREI();
 				state->showState();
 				break;

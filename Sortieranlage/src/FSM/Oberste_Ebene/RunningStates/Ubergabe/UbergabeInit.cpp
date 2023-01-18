@@ -7,9 +7,9 @@
 
 #include "UbergabeInit.h"
 #include "Wait.h"
+#include "../../../SubEnd.h"
 
 void UbergabeInit::entry(){
-	showState();
 }
 
 void UbergabeInit::exit(){
@@ -22,7 +22,19 @@ void UbergabeInit::showState(){
 
 bool UbergabeInit::LS_ENDE_BLOCK(){
 	exit();
+	printf("I am Hiere !!!!!!!!!!!!!!!!!!!\n");
+	this->showState();
 	new (this) Wait;
+	printf("I am Hiere !!!!!!!!!!!!!!!!!!!\n");
+	this->showState();
 	entry();
 	return true;
 }
+
+bool UbergabeInit::BAND_FREI() {
+	exit();
+	new (this) SubEnd;
+	entry();
+	return true;
+}
+

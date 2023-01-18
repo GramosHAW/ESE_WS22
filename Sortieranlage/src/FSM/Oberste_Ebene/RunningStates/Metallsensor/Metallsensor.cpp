@@ -7,9 +7,9 @@
 
 #include "Metallsensor.h"
 #include "WaitForMetal.h"
+#include "../../../SubEnd.h"
 
 void Metallsensor::entry() {
-	showState();
 }
 
 void Metallsensor::exit() {
@@ -18,6 +18,7 @@ void Metallsensor::exit() {
 
 void Metallsensor::showState() {
 	cout << "  substateMetallsensor: Metallsensor" << endl;
+	subsubstateMetallsensor->showState();
 }
 
 void Metallsensor::initSubState() {
@@ -33,6 +34,12 @@ void Metallsensor::entryStartNode() {
 
 bool Metallsensor::BAND_FREI() {
 	bool handled = subsubstateMetallsensor->BAND_FREI();
+	if(subsubstateMetallsensor->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }
 

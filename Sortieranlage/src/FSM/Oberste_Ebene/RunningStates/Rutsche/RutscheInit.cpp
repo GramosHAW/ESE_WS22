@@ -9,7 +9,6 @@
 #include "../../../SubEnd.h"
 
 void RutscheInit::entry() {
-	showState();
 #ifdef SIM_TWIN_B
 	if(data->Q1.size()== 0){
 		send_event(PSMG_SW_BAND_FREI);

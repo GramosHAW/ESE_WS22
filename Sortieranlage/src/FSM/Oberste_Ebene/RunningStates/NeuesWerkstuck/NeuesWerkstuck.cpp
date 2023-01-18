@@ -6,6 +6,7 @@
  */
 #include "NeuesWs.h"
 #include "NeuesWerkstuck.h"
+#include "../../../SubEnd.h"
 
 void NeuesWerkstuck::initSubState(){
 	subsubstateNeuesWerckstuck = new NeuesWs;
@@ -25,11 +26,16 @@ bool NeuesWerkstuck::LS_START_BLOCK() {
 
 bool NeuesWerkstuck::BAND_FREI() {
 	bool handled = subsubstateNeuesWerckstuck->BAND_FREI();
+	if(subsubstateNeuesWerckstuck->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }
 
 void NeuesWerkstuck::entry() {
-	showState();
 }
 
 void NeuesWerkstuck::exit() {

@@ -11,6 +11,7 @@
 #include "../../../BaseState.h"
 
 class Wait: public BaseState {
+public:
 	void entry() override;
 	void exit() override;
 

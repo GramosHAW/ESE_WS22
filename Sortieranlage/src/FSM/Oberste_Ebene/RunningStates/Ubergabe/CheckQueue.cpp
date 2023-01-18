@@ -10,7 +10,6 @@
 #include "UbergabeInit.h"
 
 void CheckQueue::entry() {
-	showState();
 	//TODO DeletFirsWs, setCounter,
 	data->Q3.pop();
 	checkQueue();

@@ -18,6 +18,7 @@
 #include "RunningStates/Ubergabe/Ubergabe.h"
 #include "RunningStates/Entnahme/Entnahme.h"
 
+
 void Running::entry() {
 	// MSG_SEND_PULSE (BAND_START)
 	cout << " Running ENTRY | BAND START | GRUEN AN " << endl;
@@ -64,7 +65,7 @@ void Running::initSubState() {
 	substateEntnahme->entryStartNode();
 #else
 	substateUbergabe = new Ubergabe();
-	//substateUbergabe->entry();
+	substateUbergabe->entry();
 	substateUbergabe->setData(data);
 	substateUbergabe->entryStartNode();
 #endif
@@ -78,6 +79,11 @@ bool Running::BAND_FREI() {
 	handled = substateRutsche->BAND_FREI();
 #ifndef SIM_TWIN_B
 	handled = substateUbergabe->BAND_FREI();
+	cout << substateNeuesWerckstuck->isSubEndState() << substateHoenmesser->isSubEndState()
+		<< substateAussortieren->isSubEndState()
+		<< substateMetallsensor->isSubEndState()
+		<< substateRutsche->isSubEndState()
+		<< substateUbergabe->isSubEndState() << endl;
 	if (substateNeuesWerckstuck->isSubEndState()
 			&& substateHoenmesser->isSubEndState()
 			&& substateAussortieren->isSubEndState()
@@ -85,8 +91,10 @@ bool Running::BAND_FREI() {
 			&& substateRutsche->isSubEndState()
 			&& substateUbergabe->isSubEndState()) {
 		exit();
+		printf("zu Idle \n");
 		new (this) BIdle;
 		entry();
+		handled = true;
 	}
 #else
 	handled = substateEntnahme->BAND_FREI();
@@ -161,6 +169,16 @@ bool Running::TST_STOP_KURZ() {
 
 void Running::showState() {
 	cout << "  SubstateBZ: Running" << endl;
+	substateNeuesWerckstuck->showState();
+	substateHoenmesser->showState();
+	substateAussortieren->showState();
+	substateRutsche->showState();
+	substateMetallsensor->showState();
+#ifdef SIM_TWIN_B
+	substateEntnahme->showState();
+#else
+	substateUbergabe->showState();
+#endif
 }
 
 bool Running::LS_START_BLOCK() {

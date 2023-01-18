@@ -9,7 +9,6 @@
 #include "HohenmesserInit.h"
 
 void HoheKalkulieren::entry() {
-	showState();
 	calculateHigt();
 	exit();
 	new (this) HohenmesserInit;
@@ -27,7 +26,6 @@ void HoheKalkulieren::showState() {
 
 void HoheKalkulieren::calculateHigt() {
 	ContextData::Werkstucktup werkstucktup = ContextData::undefined;
-	;
 	int mittelwert_ausen = 0;
 	int mittelwert_mittel = 0;
 	for (int i = 1; i < (data->numberOFmejurments / 3) - 5; i++) {
@@ -65,9 +63,10 @@ void HoheKalkulieren::calculateHigt() {
 	if (werkstucktup != ContextData::undefined) {
 		data->Q1.front()->tup = werkstucktup;
 #ifdef SIM_TWIN_B
-		//data->Q1.front()->heightSA2 = TODO;
+		data->Q1.front()->heightSA2 = (3640-mittelwert_ausen)*0.3;
 #else
-		//data->Q1.front()->heightSA1 = TODO;
+		data->Q1.front()->heightSA1 = (3640-mittelwert_ausen)*0.3;
+		data->Q1.front()->heightSA1mean= (3640-((mittelwert_ausen+mittelwert_mittel)/2))*0.3;
 		data->Q2.push(data->Q1.pop());
 #endif
 

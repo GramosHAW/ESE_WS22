@@ -8,7 +8,6 @@
 #include "AussortierenInit.h"
 
 void DoAussortieren::entry() {
-	showState();
 #ifdef SIM_PUSHER
 	send_event(PSMG_SW_SORT_DURCH);
 #endif
@@ -26,6 +25,7 @@ void DoAussortieren::showState() {
 
 bool DoAussortieren::LS_RUTSCHE_FREI() {
 	exit();
+	printf("hallo Rutsche frei\n");
 	new (this) AussortierenInit;
 	entry();
 	return true;

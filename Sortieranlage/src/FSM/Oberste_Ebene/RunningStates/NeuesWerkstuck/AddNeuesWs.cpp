@@ -9,7 +9,6 @@
 #include "../../../contextdata.h"
 
 void AddNeuesWs::entry() {
-	//showState();
 	addtoQueue();
 	exit();
 	new (this) NeuesWsIdle;
