@@ -301,15 +301,20 @@ void Context::awaitEvent() {
 				//data.ubergebeneWS->tup =static_cast<ContextData::Werkstucktup>(msg.value.sival_int);
 				break;
 			case PSMG_WS_DATA_FLIPT:
+				cout << "MSG FLIPT VON SA1" << msg.value.sival_int << endl;
+				data.ubergebeneWS = new ContextData::werkstueck;
 				data.ubergebeneWS->flipt = msg.value.sival_int;
 				break;
 			case PSMG_WS_DATA_HEIGHTSA1:
+				cout << "MSG HEIGHTSA1 VON SA1" <<  msg.value.sival_int << endl;
 				data.ubergebeneWS->heightSA1 = msg.value.sival_int;
 				break;
 			case PSMG_WS_DATA_HEIGHTSA1MEAN:
+				cout << "MSG HEIGHTSA1MEAN VON SA1" << msg.value.sival_int << endl;
 				data.ubergebeneWS->heightSA1mean = msg.value.sival_int;
 				break;
 			case PSMG_WS_DATA_ID:
+				cout << "MSG ID VON SA1" << msg.value.sival_int << endl;
 				data.ubergebeneWS->id = msg.value.sival_int;
 				break;
 			default:
