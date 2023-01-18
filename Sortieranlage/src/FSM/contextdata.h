@@ -43,7 +43,7 @@ public:
 			undefined
 	} Werkstucktup;
 
-	Werkstucktup folge[3] = {hoch, loch, hoch};
+	Werkstucktup folge[3]= {flach, hoch, metal};
 
 	struct werkstueck {
 		int id;
