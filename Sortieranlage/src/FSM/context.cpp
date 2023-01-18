@@ -185,7 +185,6 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 			case PSMG_HW_LS_ENDE_BLOCK:
-				printf("hallo \n");
 				state->LS_ENDE_BLOCK();
 				state->showState();
 				break;
@@ -227,6 +226,7 @@ void Context::awaitEvent() {
 				state->ELMNT_DURCH();
 				break;
 			case PSMG_SW_BAND_FREI:
+				printf("führe band frei aus \n");
 				state->BAND_FREI();
 				state->showState();
 				break;

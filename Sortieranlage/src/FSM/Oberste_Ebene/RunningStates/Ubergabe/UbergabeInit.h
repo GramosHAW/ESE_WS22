@@ -17,6 +17,7 @@ public:
 
 	void showState() override;
 
+	bool BAND_FREI() override;
 	bool LS_ENDE_BLOCK() override;
 };
 

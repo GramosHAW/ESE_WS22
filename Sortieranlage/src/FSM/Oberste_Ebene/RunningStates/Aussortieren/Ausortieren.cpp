@@ -6,9 +6,9 @@
  */
 #include "Ausortieren.h"
 #include "AussortierenInit.h"
+#include "../../../SubEnd.h"
 
 void Ausortieren::entry() {
-	showState();
 	//TODO checksort()
 }
 
@@ -34,6 +34,12 @@ void Ausortieren::initSubState() {
 
 bool Ausortieren::BAND_FREI() {
 	bool handled = subsubstateAussortieren->BAND_FREI();
+	if(subsubstateAussortieren->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }
 

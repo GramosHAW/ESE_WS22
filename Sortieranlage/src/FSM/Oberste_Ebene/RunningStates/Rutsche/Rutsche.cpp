@@ -7,9 +7,9 @@
 
 #include "Rutsche.h"
 #include "RutscheInit.h"
+#include "../../../SubEnd.h"
 
 void Rutsche::entry() {
-	showState();
 }
 void Rutsche::exit() {
 
@@ -17,6 +17,7 @@ void Rutsche::exit() {
 
 void Rutsche::showState() {
 	cout << "  substateRutsche: Rutsche" << endl;
+	subsubstateRutsche->showState();
 }
 
 void Rutsche::initSubState() {
@@ -32,6 +33,12 @@ void Rutsche::entryStartNode() {
 
 bool Rutsche::BAND_FREI() {
 	bool handled = subsubstateRutsche->BAND_FREI();
+	if(subsubstateRutsche->isSubEndState()){
+		exit();
+		new (this) SubEnd;
+		entry();
+		return true;
+	}
 	return handled;
 }
 

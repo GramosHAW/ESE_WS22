@@ -8,7 +8,6 @@
 #include "AussortierenInit.h"
 
 void DoAussortieren::entry() {
-	showState();
 #ifdef SIM_PUSHER
 	send_event(PSMG_SW_SORT_DURCH);
 #endif
