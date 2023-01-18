@@ -381,7 +381,7 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_WS_DATA:
 				MsgSendPulse(externChId,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_WS_DATA, msg.value.sival_int);
+				PSMG_SW_WS_DATA, uintptr_t(msg.value.sival_int));
 				break;
 			case PSMG_SW_WS_DATA_SA2:
 				MsgSendPulse(fsmchid,
@@ -501,7 +501,7 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
 			default:
-				cout << "Dispacher sais: SAY WAAAAAAAAT?????????????" << endl;
+				cout << "Dispacher says: Received uncatched PSMG aka say WAAAT" << endl;
 				cout << msg.code << endl;
 			}
 		}

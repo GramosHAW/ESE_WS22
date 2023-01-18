@@ -27,7 +27,6 @@ void HoheKalkulieren::showState() {
 
 void HoheKalkulieren::calculateHigt() {
 	ContextData::Werkstucktup werkstucktup = ContextData::undefined;
-	;
 	int mittelwert_ausen = 0;
 	int mittelwert_mittel = 0;
 	for (int i = 1; i < (data->numberOFmejurments / 3) - 5; i++) {
