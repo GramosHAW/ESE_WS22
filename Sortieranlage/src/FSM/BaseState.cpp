@@ -99,7 +99,30 @@ void BaseState::connect_send() {
 void BaseState::connect_send_WS() {
 	Dispatcher* disp = Dispatcher::GetInstance();
 	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
-	MsgSendPulse(coid, -1, _PMSG, (uintptr_t) _payloadWS);
+	if (coid ==-1){
+		perror("Error trying to connect to dispatcher in Basestate during SendWerkstück");
+		return;
+	}
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_FLIPT , data->ubergebeneWS->flipt) == -1){
+		perror("Error sending psmg in Basestate during SendWerkstück");
+		return;
+	}
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1 , data->ubergebeneWS->heightSA1) == -1){
+		perror("Error sending psmg in Basestate during SendWerkstück");
+		return;
+	}
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_TUP , data->ubergebeneWS->tup) == -1){
+		perror("Error sending psmg in Basestate during SendWerkstück");
+		return;
+	}
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1MEAN , data->ubergebeneWS->heightSA1mean) == -1){
+		perror("Error sending psmg in Basestate during SendWerkstück");
+		return;
+	}
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_ID , data->ubergebeneWS->id) == -1){
+		perror("Error sending psmg in Basestate during SendWerkstück");
+		return;
+	}
 	ConnectDetach(coid);
 }
 
