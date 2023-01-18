@@ -72,7 +72,7 @@ void Aktorik::handelHALpuls() {
 			case PSMG_SW_SORT_DURCH:
 				weicheAuf();
 				break;
-			case PSMG_SE_SORT_AUSSORTIERT:
+			case PSMG_SW_SORT_AUSSORTIERT:
 				sleep(1); //TODO thred fure Weiche(Pooling ist schese)
 				weicheZu();
 				break;

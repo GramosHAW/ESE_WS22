@@ -57,6 +57,6 @@ bool Ausortieren::ELMNT_DURCH() {
 }
 
 bool Ausortieren::LS_RUTSCHE_FREI() {
-	bool handled = subsubstateAussortieren->RUTSCHE_FREI();
+	bool handled = subsubstateAussortieren->LS_RUTSCHE_FREI();
 	return handled;
 }
