@@ -220,6 +220,10 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 				//Sofwere//////////////////////////////////////////////////////
+			case PSMG_SW_BAND_STATUS:
+				state->BAND_STATUS();
+				state->showState();
+				break;
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
 				//stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
