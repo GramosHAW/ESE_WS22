@@ -379,24 +379,26 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_SERVICE, msg.value.sival_int);
 				break;
 			case PSMG_SW_WS_DATA:
+#ifndef SIM_TWIN_B
 				MsgSendPulse(externChId,
 				SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_WS_DATA,(uintptr_t) msg.value.sival_ptr);
 				break;
-			case PSMG_SW_WS_DATA_SA2:
+#else
 				MsgSendPulse(fsmchid,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_WS_DATA_SA2, (uintptr_t) msg.value.sival_ptr));
+				PSMG_SW_WS_DATA, (uintptr_t) msg.value.sival_ptr);
 				break;
+#endif
 			case PSMG_SW_BAND_STATUS:
 				MsgSendPulse(externChId,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_BAND_STATUS, msg.value.sival_int);
+				PSMG_SW_BAND_STATUS_SA1, msg.value.sival_int);
 				break;
 			case PSMG_SW_BAND_STATUS_SA1:
-				MsgSendPulse(externChId,
+				MsgSendPulse(fsmchid,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_BAND_STATUS_SA1, msg.value.sival_int);
+				PSMG_SW_BAND_STATUS, msg.value.sival_int);
 				break;
 				/////////////ANDERE LOGIK//////////////////////////////////////////////////////
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
@@ -511,6 +513,7 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_HM_SETWERT, msg.value.sival_int);
 				break;
 			default:
+				printf("%x", msg.code);
 				cout << "Dispacher says: Received uncatched PSMG aka say WAAAT" << endl;
 				cout << msg.code << endl;
 			}
