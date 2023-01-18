@@ -11,7 +11,7 @@
 
 void CheckSort::entry() {
 	showState();
-	//TODO checkFlagRutche(), sort()
+	sort();
 }
 
 void CheckSort::exit() {
@@ -37,18 +37,46 @@ bool CheckSort::ELMNT_DURCH() {
 }
 
 void CheckSort::sort() {
-	ContextData::werkstueck* ws = data->Q2.pop();
-	if (data->getrutsche_voll1()) {
+	if(data->QReihenfolge.size() == 0){
+		//TODO
+	}
 #ifdef SIM_TWIN_B
-		//A2 ales ausort
+	ContextData::werkstueck* ws = data->Q1.front();
+#else
+	ContextData::werkstueck* ws = data->Q2.pop();
+#endif
+	if(data->getrutsche_voll1() && data->getrutsche_voll2()){
+		if (data->QReihenfolge.front() == ws->tup){
+			send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+		}
+	}
+	else if (data->getrutsche_voll1()) {
+#ifdef SIM_TWIN_B
+		if (data->QReihenfolge.front() == ws->tup) {
+			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->QReihenfolge.pop();
+		} else {
+			send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+			data->Q1.pop();
+		}
 #else
 		send_event(PSMG_SW_SORT_ELMNT_DURCH);
+		data->Q3.push(ws);
 #endif
 	} else if (data->getrutsche_voll2()) {
 #ifdef SIM_TWIN_B
-
+		if (data->QReihenfolge.front() == ws->tup){
+			data->QReihenfolge.pop();
+		}
+		send_event(PSMG_SW_SORT_ELMNT_DURCH);
 #else
-		//A1 alles ausort
+		if (data->QReihenfolge.front() == ws->tup) {
+			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->QReihenfolge.pop();
+			data->Q3.push(ws);
+		} else {
+			send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+		}
 #endif
 	} else {
 #ifdef SIM_TWIN_B
@@ -59,22 +87,25 @@ void CheckSort::sort() {
 			}
 			else {
 				send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
+				data->Q1.pop();
 			}
 		}
 		else {
 			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->QReihenfolge.pop();
 		}
-
 #else
 		if (ws->tup == ContextData::flach) {
 			if (data->QReihenfolge.front() == ContextData::flach) {
 				send_event(PSMG_SW_SORT_ELMNT_DURCH);
 				data->QReihenfolge.pop();
+				data->Q3.push(ws);
 			} else {
 				send_event(PSMG_SW_SORT_ELMNT_AUSSORT);
 			}
 		} else {
 			send_event(PSMG_SW_SORT_ELMNT_DURCH);
+			data->Q3.push(ws);
 		}
 #endif
 	}

@@ -82,8 +82,33 @@ bool Betrieb::LS_RUTSCHE_FREI() {
 	return handled;
 }
 
+bool Betrieb::LS_ENDE_BLOCK() {
+	bool handled = substateBZ->LS_ENDE_BLOCK();
+	return handled;
+}
+
 bool Betrieb::LS_RUTSCHE_BLOCK() {
 	bool handled = substateBZ->LS_RUTSCHE_BLOCK();
+	return handled;
+}
+
+bool Betrieb::BAND_FREI_SA2() {
+	bool handled = substateBZ->BAND_FREI_SA2();
+	return handled;
+}
+
+bool Betrieb::LS_START_BLOCK_SA2() {
+	bool handled = substateBZ->LS_START_BLOCK_SA2();
+	return handled;
+}
+
+bool Betrieb::LS_ENDE_FREI_SA2() {
+	bool handled = substateBZ->LS_ENDE_FREI_SA2();
+	return handled;
+}
+
+bool Betrieb::LS_ENDE_FREI() {
+	bool handled = substateBZ->LS_ENDE_FREI();
 	return handled;
 }
 
@@ -110,6 +135,11 @@ bool Betrieb::HM_STOP() {
 
 bool Betrieb::HM_DATA(int data) {
 	bool handled = substateBZ->HM_DATA(data);
+	return handled;
+}
+
+bool Betrieb::MSENS_METALL() {
+	bool handled = substateBZ->MSENS_METALL();
 	return handled;
 }
 

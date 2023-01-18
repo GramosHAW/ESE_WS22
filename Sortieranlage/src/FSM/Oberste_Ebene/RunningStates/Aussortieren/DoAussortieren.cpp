@@ -9,10 +9,15 @@
 
 void DoAussortieren::entry() {
 	showState();
+#ifdef SIM_PUSHER
+	send_event(PSMG_SW_SORT_DURCH);
+#endif
 }
 
 void DoAussortieren::exit() {
-
+#ifdef SIM_PUSHER
+	send_event(PSMG_SE_SORT_AUSSORTIERT);
+#endif
 }
 
 void DoAussortieren::showState() {

@@ -17,8 +17,14 @@ class Betrieb: public BaseState {
 	bool LS_START_BLOCK() override;
 	bool LS_SORT_FREI() override;
 	bool LS_RUTSCHE_FREI() override;
+	bool LS_ENDE_BLOCK() override;
+	bool LS_ENDE_FREI() override;
 	bool ELMNT_AUSSORT() override;
 	bool ELMNT_DURCH() override;
+
+	bool BAND_FREI_SA2() override;
+	bool LS_START_BLOCK_SA2() override;
+	bool LS_ENDE_FREI_SA2() override;
 
 	bool BAND_FREI() override;
 	bool RUHE() override;
@@ -33,6 +39,9 @@ class Betrieb: public BaseState {
 	bool HM_START() override;
 	bool HM_STOP() override;
 	bool HM_DATA(int data) override;
+
+	//Metalsensor
+	bool MSENS_METALL() override;
 
 	void entry() override;
 	void exit() override;

@@ -24,6 +24,8 @@
 #include "Reihenfolge.h"
 #include "FSM/Oberste_Ebene/ServiceModus/DateiEinlesen.h"
 #include <fstream>
+#include "FSM\Oberste_Ebene\ServiceModus\DateiEinlesen.h"
+
 
 //#include "HAL/ADCreader.h"
 #include "./Dispatcher/ExternDispatcher.h"
@@ -73,6 +75,9 @@ int main(int argc, char *argv[]) {
 	//adcreader.startthread();
 
 	simulationStarter->startSimulation();
+
+	DateiEinlesen* dt = new DateiEinlesen;
+	dt->setReihenfolge("Reihenfolge.txt");
 
 	//Reihenfolge* rf = new Reihenfolge;
 	//rf->setReihenfolge('f','m','h', "Reihenfolge.txt");

@@ -39,7 +39,7 @@ bool Rutsche::LS_RUTSCHE_BLOCK() {
 	bool handled = subsubstateRutsche->LS_RUTSCHE_BLOCK();
 	return handled;
 }
-
+/*
 bool Rutsche::LS_RUTSCHE_FREI() {
 	bool handled = subsubstateRutsche->LS_RUTSCHE_FREI();
 	return handled;
@@ -49,4 +49,4 @@ bool Rutsche::RUTSCHE_VOLL_SA1() {
 	bool handled = subsubstateRutsche->RUTSCHE_VOLL_SA1();
 	return handled;
 }
-
+*/

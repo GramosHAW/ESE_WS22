@@ -9,25 +9,34 @@
 #include "BeideRutschenVoll.h"
 
 bool RurscheVollAnlage::RUTSCHE_VOLL_SA2(){
-	if(true){//Nur für SA1
+#ifndef SIM_TWIN_B//Nur für SA1
 		exit();
+		data->setrutsche_voll2(true);
 		new(this) BeideRutschenVoll;
 		entry();
 		return true;
-	}
+#endif
+		return false;
 }
 
 bool RurscheVollAnlage::RUTSCHE_VOLL_SA1(){
-	if(true){//Nur für SA2
+#ifdef SIM_TWIN_B
 		exit();
+		data->setrutsche_voll1(true);
 		new(this) BeideRutschenVoll;
 		entry();
 		return true;
-	}
+#endif
+		return false;
 }
 
 bool RurscheVollAnlage::RUTSCHE_VOLL_BEIDE(){
 	exit();
+#ifdef SIM_TWIN_B
+	data->setrutsche_voll1(true);
+#else
+	data->setrutsche_voll2(true);
+#endif
 	new(this) BeideRutschenVoll;
 	entry();
 	return true;

@@ -22,25 +22,30 @@ void DateiEinlesen::setReihenfolge(string file) {
 	char c;
 	string x;
 
+	ifstream datei("../tmp/Reihenfolge.txt", ios::in);
 
-	//fstream file_X = readDatei(file);
-	string line;
-		fstream datei(file);
-		if (datei.is_open()) {
-			while (getline(datei,line)) {
-			a = line.at(0);
-			cout << a << " : "<< endl;
+	if (datei.is_open()) {
+		while (datei) {
+			string line;
+			getline(datei, line);
+
+			a = line[0];
+			b = line[1];
+			c = line[2];
+
 			x += a;
-			}
-			//cout << x << y << z << endl;
-			cout << x << " is X" << endl;
+			x += b;
+			x += c;
 		}
-		datei.close();
-		//datei.open(file, ios::in);
+
+	}
+	datei.close();
 
 	a = x.at(0);
 	b = x.at(1);
 	c = x.at(2);
+
+	cout << a << b << c << "TEST"<< endl ;
 
 	switch (a) {
 	case 'f':
@@ -104,7 +109,6 @@ void DateiEinlesen::setReihenfolge(string file) {
 	default:
 		break;
 	}
-
 	datei.close();
 }
 

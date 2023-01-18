@@ -9,11 +9,15 @@
 
 void Durchlassen::entry() {
 	showState();
-	//TODO SortAuf()
+#ifndef SIM_PUSHER
+	send_event(PSMG_SW_SORT_DURCH);
+#endif
 }
 
 void Durchlassen::exit() {
-	//TODO SortZu()
+#ifndef SIM_PUSHER
+	send_event(PSMG_SE_SORT_AUSSORTIERT);
+#endif
 }
 
 void Durchlassen::showState() {

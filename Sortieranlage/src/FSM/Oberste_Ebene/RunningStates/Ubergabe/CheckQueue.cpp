@@ -11,25 +11,28 @@
 
 void CheckQueue::entry() {
 	showState();
-	//TODO DeletFirsWs, setCounter, checkQueue
-	/*
-	 if(quesize > 0){
-	 	 exit();
-	 	 new (this) UbergabeInit;
-	 	 entry();
-	 }
-	 else{
-	 	 exit();
-	 	 new (this) SubEnd;
-	 	 entry();
-	 }
-	 */
-
+	//TODO DeletFirsWs, setCounter,
+	data->Q3.pop();
+	checkQueue();
 }
 
 void CheckQueue::exit() {
 	//TODO Send WSW_OK
 }
+
+
+void CheckQueue::checkQueue(){
+	if(data->Q3.size() <= 1){
+	 	 exit();
+	 	 new (this) UbergabeInit;
+	 	 entry();
+	} else {
+	 	 exit();
+	 	 new (this) SubEnd;
+	 	 entry();
+	}
+}
+
 
 void CheckQueue::showState() {
 	cout << "  subsubstateUbergabe: CheckQueue" << endl;
