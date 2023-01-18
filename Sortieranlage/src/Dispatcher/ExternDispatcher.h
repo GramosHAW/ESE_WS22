@@ -39,23 +39,9 @@
 #include <sys/netmgr.h>
 #include "../Events.h"
 #include <cstdint>
+#include "../FSM/contextdata.h"
 
-	enum Werkstucktup{
-			flach,
-			hoch,
-			loch,
-			metal,
-			undefined
-	};
 
-	struct werkstueck {
-		int id;
-		int heightSA1;
-		int heightSA1mean;
-		int heightSA2;
-		Werkstucktup tup;
-		int flipt = 0; //auf 1 sezen wenn der WS fipted
-	};
 class ExternDispatcher {
 
 public:
@@ -74,11 +60,11 @@ private:
 
 	int server_coid;
 	int dispatcherServer;
-	werkstueck werk;
+	ContextData::werkstueck werk;
 	static void handle_app_msg(header_t hdr, int rcvid);
 	static void handle_QNX_IO_msg(header_t hdr, int rcvid);
 	void handle_pulse(header_t hdr, int rcvid);
-	void sendWerkstueck(werkstueck* );
+	void sendWerkstueck(ContextData::werkstueck* );
 };
 typedef struct _pulse header_t;
 /* Second header: used by application - if required */
