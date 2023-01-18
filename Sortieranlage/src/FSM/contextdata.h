@@ -9,6 +9,9 @@
 #define SRC_FSM_CONTEXTDATA_H_
 
 #include "../Queue/ThreadsafeQueue.h"
+#include "../MQTT/json.hpp"
+#include <iostream>
+
 
 class ContextData {
 private:
@@ -32,15 +35,13 @@ public:
 	int wsID = 1;
 
 
-
-
-	enum Werkstucktup{
+	typedef enum Werkstucktup{
 			flach,
 			hoch,
 			loch,
 			metal,
 			undefined
-	};
+	} Werkstucktup;
 
 	Werkstucktup folge[3] = {hoch, loch, hoch};
 
@@ -75,6 +76,8 @@ public:
 				return this->rutsche_voll2;
 	}
 	bool getuebergabeSendFlag(){return this->uebergabeSendFlag;}
+
+	void createJSON(int id, Werkstucktup type, int, int);
 };
 
 #endif /* SRC_FSM_CONTEXTDATA_H_ */

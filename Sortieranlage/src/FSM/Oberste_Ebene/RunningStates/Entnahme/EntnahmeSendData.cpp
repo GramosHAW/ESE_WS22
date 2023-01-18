@@ -9,10 +9,16 @@
 #include "../../../SubEnd.h"
 
 void EntnahmeSendData::entry() {
+
+	showState();
+	send_event(PSMG_SW_BAND_STOP);
+
 	//TODO bandstop, getDataReady
 }
 
 void EntnahmeSendData::exit() {
+	data->createJSON(data->Q1.front()->id, data->Q1.front()->tup, data->Q1.front()->heightSA1mean,
+				data->Q1.front()->heightSA2);
 	//TODO sendDataToBroker
 	// send BAND_FREI, WSW_OK
 }
