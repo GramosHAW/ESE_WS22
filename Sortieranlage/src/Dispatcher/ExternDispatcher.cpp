@@ -92,6 +92,9 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		 * terminated. */
 		ConnectDetach(hdr.scoid);
 		break;
+	case _PULSE_CODE_COIDDEATH:
+		printf("Pulse COIDDEATH received\n");
+		break;
 	case _PULSE_CODE_UNBLOCK:
 		printf("Server received _PULSE_CODE_UNBLOCK\n");
 		/* REPLY blocked client wants to unblock (was hit by
