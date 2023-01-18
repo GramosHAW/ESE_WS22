@@ -101,32 +101,30 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		 * a signal or timed out). It's up to you if you
 		 * reply now or later. */
 		break;
-	case WERKSTUECK0:
+	case PSMG_WS_DATA_TUP:
 		printf("PMSG Werkstueck 0 %d", hdr.value.sival_int);
-		werk.tup=static_cast<ContextData::Werkstucktup>(hdr.value.sival_int);
+		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_TUP, hdr.value.sival_int);
 		break;
-	case WERKSTUECK1:
+	case PSMG_WS_DATA_FLIPT:
 		printf("PMSG Werkstueck 1 %d", hdr.value.sival_int);
-		werk.flipt = hdr.value.sival_int;
+		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_FLIPT, hdr.value.sival_int);
 		break;
-	case WERKSTUECK2:
+	case PSMG_WS_DATA_HEIGHTSA1:
 		printf("PMSG Werkstueck 2 %d", hdr.value.sival_int);
-		werk.heightSA1 = hdr.value.sival_int;
+		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_HEIGHTSA1, hdr.value.sival_int);
 		break;
-	case WERKSTUECK3:
+	case PSMG_WS_DATA_HEIGHTSA1MEAN:
 		printf("PMSG Werkstueck 3: %d", hdr.value.sival_int);
-		werk.heightSA1mean = hdr.value.sival_int;
+		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_WS_DATA_HEIGHTSA1MEAN, hdr.value.sival_int);
 		break;
-	case WERKSTUECK4:
-	{
-		werk.id = hdr.value.sival_int;
-		werk.heightSA2 = 0;
-		uintptr_t werkPtrInt = uintptr_t(&werk);
-		printf("id: %d, heightSA1: %d, heightSA1mean: %d, enum: %d", werk.id,
-				werk.heightSA1, werk.heightSA1mean, (int) werk.tup);
-		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA,
-		SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
-	}
+	case PSMG_WS_DATA_ID:
+		MsgSendPulse(this->dispatcherServer,
+		SIGEV_PULSE_PRIO_INHERIT, PSMG_WS_DATA_HEIGHTSA1MEAN,
+				hdr.value.sival_int);
 		break;
 	default:
 		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT, hdr.code,
@@ -176,39 +174,6 @@ int ExternDispatcher::getchid() {
 	return this->externChid;
 }
 
-void ExternDispatcher::sendWerkstueck(ContextData::werkstueck* werk) {
-	//printf("PMSG Werkstueck 0 %d", werk->tup);
-	if (-1
-			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-					WERKSTUECK0, werk->tup)) {
-		perror("Error sending pulse");
-	}
-	//printf("PMSG Werkstueck 1 %d", werk->tup);
-	if (-1
-			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-					WERKSTUECK1, werk->flipt)) {
-		perror("Error sending pulse");
-	}
-	printf("PMSG Werkstueck 2 heigh: %d\n", werk->heightSA1);
-	if (-1
-			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-					WERKSTUECK2, werk->heightSA1)) {
-		perror("Error sending pulse");
-	}
-	printf("PMSG Werkstueck 3\n");
-	if (-1
-			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-					WERKSTUECK3, werk->heightSA1mean)) {
-		perror("Error sending pulse");
-	}
-	printf("PMSG Werkstueck 4 ID: %d \n", werk->id);
-	if (-1
-			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
-					WERKSTUECK4, werk->id)) {
-		perror("Error sending pulse");
-	}
-	return;
-}
 
 
 void ExternDispatcher::startThread() {
@@ -238,8 +203,8 @@ void ExternDispatcher::startThread() {
 			perror("Extern error receiving pulse");
 			continue;
 		}
-		if(msg.code == PSMG_SW_WS_DATA){
-			sendWerkstueck(reinterpret_cast<ContextData::werkstueck*>(msg.value.sival_int));
+		if(msg.code >= 0x49 && msg.code <= 0x4D){
+			MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, msg.value.sival_int);
 			continue;
 		}
 		if (rcvid != -1) {
