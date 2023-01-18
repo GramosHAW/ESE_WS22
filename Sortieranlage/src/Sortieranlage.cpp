@@ -76,8 +76,8 @@ int main(int argc, char *argv[]) {
 
 	simulationStarter->startSimulation();
 
-	DateiEinlesen* dt = new DateiEinlesen;
-	dt->setReihenfolge("Reihenfolge.txt");
+//	DateiEinlesen* dt = new DateiEinlesen;
+//	dt->setReihenfolge("Reihenfolge.txt");
 
 	//Reihenfolge* rf = new Reihenfolge;
 	//rf->setReihenfolge('f','m','h', "Reihenfolge.txt");

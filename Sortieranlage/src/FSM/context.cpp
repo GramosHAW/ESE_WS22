@@ -48,8 +48,7 @@ Context::Context() {
 	state->initSubState();
 	state->entry();
 	state->entryStartNode();
-	state->showState();
-	state->TST_START_LANG();
+
 
 
 

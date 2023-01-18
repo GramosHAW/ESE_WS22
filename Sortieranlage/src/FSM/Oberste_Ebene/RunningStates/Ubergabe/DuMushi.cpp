@@ -1,29 +1,23 @@
 /*
- * Wait.cpp
+ * DuMushi.cpp
  *
- *  Created on: 28 Dec 2022
- *      Author: andre
+ *  Created on: 18.01.2023
+ *      Author: 2nerd
  */
 
-#include "Wait.h"
+#include "DuMushi.h"
 #include "WSUbergeben.h"
 
-void Wait::entry(){
-
+void DuMushi::entry(){
 	send_event_payload(PSMG_SW_BAND_STOP, 0);
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 }
 
+void DuMushi::exit(){
 
-void Wait::exit(){
-	send_event_payload(PSMG_SW_BAND_START, 0);
 }
 
-void Wait::showState(){
-	cout << "  subsubstateUbergabe: Wait" << endl;
-}
-
-bool Wait::BAND_FREI_SA2(){
+bool DuMushi::BAND_FREI_SA2(){
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 	exit();
 	new (this) WSUbergeben;
@@ -31,7 +25,7 @@ bool Wait::BAND_FREI_SA2(){
 	return true;
 }
 
-bool Wait::LS_ENDE_FREI_SA2(){
+bool DuMushi::LS_ENDE_FREI_SA2(){
 	send_event_payload(PSMG_SW_BAND_STATUS, 0);
 	exit();
 	new (this) WSUbergeben;
@@ -39,3 +33,6 @@ bool Wait::LS_ENDE_FREI_SA2(){
 	return true;
 }
 
+void DuMushi::showState(){
+	cout << "  subsubstateUbergabe: DuMushi" << endl;
+}
