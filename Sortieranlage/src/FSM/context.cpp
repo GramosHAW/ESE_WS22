@@ -295,6 +295,21 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 				//DEFOULT/////////////////////////////////////////////////////
+			case PSMG_WS_DATA_TUP:
+				//data.ubergebeneWS->tup =static_cast<ContextData::Werkstucktup>(msg.value.sival_int);
+				break;
+			case PSMG_WS_DATA_FLIPT:
+				data.ubergebeneWS->flipt = msg.value.sival_int;
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1:
+				data.ubergebeneWS->heightSA1 = msg.value.sival_int;
+				break;
+			case PSMG_WS_DATA_HEIGHTSA1MEAN:
+				data.ubergebeneWS->heightSA1mean = msg.value.sival_int;
+				break;
+			case PSMG_WS_DATA_ID:
+				data.ubergebeneWS->id = msg.value.sival_int;
+				break;
 			default:
 				cout << "FSM sais: SAY WAAAAAAAAT?????????????" << endl;
 				cout << "PMSG bekommen: " + msg.code << endl;

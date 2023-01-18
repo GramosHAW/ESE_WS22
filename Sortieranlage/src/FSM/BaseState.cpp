@@ -99,27 +99,31 @@ void BaseState::connect_send() {
 void BaseState::connect_send_WS() {
 	Dispatcher* disp = Dispatcher::GetInstance();
 	int coid = ConnectAttach(0, 0, disp->getchid(), _NTO_SIDE_CHANNEL, 0);
+	if (data->Q3.empty()){
+		perror("Trying to send from empty queue");
+	}
+	printf("Werkstück Höhe: %d, WerkstückID: %d \n",data->Q3.front()->heightSA1, data->Q3.front()->id);
 	if (coid ==-1){
 		perror("Error trying to connect to dispatcher in Basestate during SendWerkstück");
 		return;
 	}
-	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_FLIPT , data->ubergebeneWS->flipt) == -1){
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_FLIPT ,(int32_t) data->Q3.front()->flipt) == -1){
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;
 	}
-	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1 , data->ubergebeneWS->heightSA1) == -1){
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1 ,(int32_t) data->Q3.front()->heightSA1) == -1){
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;
 	}
-	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_TUP , data->ubergebeneWS->tup) == -1){
+	/*if (MsgSendPulse(coid, -1, PSMG_WS_DATA_TUP , data->Q3.front()->tup) == -1){
+		perror("Error sending psmg in Basestate during SendWerkstück");
+		return;
+	}*/
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1MEAN , (int32_t)data->Q3.front()->heightSA1mean) == -1){
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;
 	}
-	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1MEAN , data->ubergebeneWS->heightSA1mean) == -1){
-		perror("Error sending psmg in Basestate during SendWerkstück");
-		return;
-	}
-	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_ID , data->ubergebeneWS->id) == -1){
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_ID , (int32_t) data->Q3.front()->id) == -1){
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;
 	}

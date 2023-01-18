@@ -204,6 +204,7 @@ void ExternDispatcher::startThread() {
 			continue;
 		}
 		if(msg.code >= 0x49 && msg.code <= 0x4D){
+			printf("Werkstueckdata: %d \n", msg.value.sival_int);
 			MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, msg.value.sival_int);
 			continue;
 		}
