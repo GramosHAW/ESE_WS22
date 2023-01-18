@@ -104,7 +104,12 @@
 #define		PSMG_SW_WS_SORTED					0x2D
 #define		PSMG_SW_WS_ERHALTEN					0x2E
 #define		PSMG_SW_WS_FLIPPED					0x2F
-
+//Werkstückdaten
+#define 	PSMG_WS_DATA_TUP 					0x49
+#define 	PSMG_WS_DATA_FLIPT 					0x4A
+#define 	PSMG_WS_DATA_HEIGHTSA1 				0x4B
+#define 	PSMG_WS_DATA_HEIGHTSA1MEAN 			0x4C
+#define 	PSMG_WS_DATA_ID 					0x4D
 	//Ampel
 #define		PSMG_SW_AMPEL_GRUEN_AN				0x30
 #define		PSMG_SW_AMPEL_GRUEN_BLINK			0x31
