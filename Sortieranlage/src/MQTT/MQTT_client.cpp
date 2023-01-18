@@ -7,6 +7,7 @@
 
 
 #include "MQTT_client.h"
+#include "json.hpp"
 
 
 //MQTT_Broker::MQTTBroker() {
@@ -24,8 +25,6 @@ void MQTT_Client::clientConnect() {
 }
 
 int MQTT_Client::publish() {
-
-
 
 	printf("Running simple MQTT client publish example ");
 	fflush (stdout);

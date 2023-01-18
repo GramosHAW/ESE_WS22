@@ -78,6 +78,7 @@ int main(int argc, char *argv[]) {
 
 	DateiEinlesen* dt = new DateiEinlesen;
 	dt->setReihenfolge("Reihenfolge.txt");
+	context->printarray();
 
 	//Reihenfolge* rf = new Reihenfolge;
 	//rf->setReihenfolge('f','m','h', "Reihenfolge.txt");

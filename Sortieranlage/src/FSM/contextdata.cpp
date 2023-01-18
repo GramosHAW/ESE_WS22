@@ -6,9 +6,11 @@
  */
 
 #include "contextdata.h"
-#include <iostream>
+
 
 using namespace std;
+using json = nlohmann::json;
+
 
 void ContextData::setFlagEStopp(bool flag) {
 	this->estopp_true = flag;
@@ -32,4 +34,14 @@ void ContextData::setuebergabeSendFlag(bool flag){
 
 ContextData::werkstueck* ContextData::create_new_werckstuck() {
 	return (new werkstueck);
+}
+
+void ContextData::createJSON(int id, Werkstucktup type, int meanheight, int heightSA2) {
+
+	json j;
+	j["team"] = 1.2;
+	j["id"] = id;
+	j["type"] = type;
+	j["meanheight"] = meanheight;
+	j["heightSA2"] = heightSA2;
 }
