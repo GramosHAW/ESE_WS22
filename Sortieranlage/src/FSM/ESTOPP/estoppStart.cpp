@@ -19,6 +19,9 @@ void estoppStart::entry(){
 	while(data->Q1.size() != 0){
 		data->Q1.pop();
 	}
+	while(data->QReihenfolge.size() != 0){
+		data->QReihenfolge.pop();
+	}
 #ifndef SIM_TWIN_B
 	while(data->Q2.size() != 0){
 		data->Q2.pop();

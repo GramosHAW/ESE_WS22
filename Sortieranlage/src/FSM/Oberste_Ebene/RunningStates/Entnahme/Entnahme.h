@@ -20,6 +20,7 @@ public:
 
 	void entryStartNode() override;
 
+	bool BAND_FREI() override;
 	bool LS_ENDE_BLOCK() override;
 	bool LS_ENDE_FREI() override;
 };
