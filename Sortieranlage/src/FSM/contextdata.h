@@ -11,7 +11,11 @@
 #include "../Queue/ThreadsafeQueue.h"
 #include "../MQTT/json.hpp"
 #include <iostream>
+#include "../MQTT/MQTT_client.h"
+#include "../MQTTpaho/MQTTclient.h"
+#include "../MQTT/infoClient.h"
 
+using json = nlohmann::json;
 
 class ContextData {
 private:
@@ -19,12 +23,14 @@ private:
 	int band_hoehe;
 
 	int mittelwert;
+	json j;
 
 	bool estopp_true = false;
 	bool rutsche_voll1 = false;
 	bool rutsche_voll2 = false;
 
 	bool uebergabeSendFlag = false;
+
 	//bool rutsche_voll;
 
 	//ADC_Controller* adc_controller;
@@ -77,7 +83,13 @@ public:
 	}
 	bool getuebergabeSendFlag(){return this->uebergabeSendFlag;}
 
-	void createJSON(int id, Werkstucktup type, int, int);
+	json createJSON(int id, Werkstucktup type, int, int);
+
+	void sendJSON();
+
+
+
+
 };
 
 #endif /* SRC_FSM_CONTEXTDATA_H_ */

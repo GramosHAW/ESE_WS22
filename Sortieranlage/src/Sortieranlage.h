@@ -16,6 +16,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <limits.h>
+#include "MQTT/MQTT_client.h"
+#include "MQTTpaho/MQTTclient.h"
+#include "MQTT/infoClient.h"
 
 class Sortieranlage{
 public:

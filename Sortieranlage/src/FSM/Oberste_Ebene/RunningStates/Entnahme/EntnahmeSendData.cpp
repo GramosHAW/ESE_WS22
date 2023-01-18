@@ -19,6 +19,8 @@ void EntnahmeSendData::entry() {
 void EntnahmeSendData::exit() {
 	data->createJSON(data->Q1.front()->id, data->Q1.front()->tup, data->Q1.front()->heightSA1mean,
 				data->Q1.front()->heightSA2);
+	data->sendJSON();
+
 	//TODO sendDataToBroker
 	// send BAND_FREI, WSW_OK
 }

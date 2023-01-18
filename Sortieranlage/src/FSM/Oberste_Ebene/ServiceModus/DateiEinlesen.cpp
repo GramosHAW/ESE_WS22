@@ -113,21 +113,14 @@ void DateiEinlesen::setReihenfolge(string file) {
 		break;
 	}
 	datei.close();
+
+	send_event_payload(PSMG_SW_READDATA_TRUE, 1);
+
 }
 
 
-fstream DateiEinlesen::readDatei(string file) {
-	string line;
-	fstream datei (file);
-	if (datei.is_open()) {
-		while (getline(datei,line)) {
-			cout << line << '\n';
-
-		}
-		datei.close();
-	}
-	else cout << "Datei kann nicht geöffnet werden :( " << endl;
-	return datei;
+bool DateiEinlesen::readDatei() {
+	return false;
 }
 
 

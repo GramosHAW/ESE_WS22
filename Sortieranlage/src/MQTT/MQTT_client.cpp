@@ -10,31 +10,32 @@
 #include "json.hpp"
 
 
-//MQTT_Broker::MQTTBroker() {
-//	// TODO Auto-generated constructor stub
-//
-//}
-//
-//MQTT_Broker::~MQTTBroker() {
-//	// TODO Auto-generated destructor stub
-//}
+MQTT_client::MQTT_client(const char* broker_addr) {
+	this->brokerAddr = broker_addr;
+}
 
-void MQTT_Client::clientConnect() {
+MQTT_client::~MQTT_client() {
+
+}
+
+void MQTT_client::clientConnect() {
 
 
 }
 
-int MQTT_Client::publish() {
+int MQTT_client::publish(infoClient& cl, const char *topic, json payload) {
 
 	printf("Running simple MQTT client publish example ");
 	fflush (stdout);
-	MQTTClient client;
+
+	MQTTClient client = cl.getMQTTClient();
+	const char* client_id = cl.getClientID();
 	MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
 	int rc;
 
-	if ((rc = MQTTClient_create(&client, ADDRESS, CLIENTID,
+	if ((rc = MQTTClient_create(&client, brokerAddr, client_id,
 			MQTTCLIENT_PERSISTENCE_NONE, NULL)) != MQTTCLIENT_SUCCESS) {
 		printf("Failed to create client, return code %d\n", rc);
 		exit(EXIT_FAILURE);
@@ -47,12 +48,12 @@ int MQTT_Client::publish() {
 		exit(EXIT_FAILURE);
 	}
 
-	char payload[20] = "Hello World!";
-	pubmsg.payload = payload;
-	pubmsg.payloadlen = (int) strlen(payload);
+
+	pubmsg.payload = &payload;
+	pubmsg.payloadlen = sizeof(payload);
 	pubmsg.qos = QOS;
 	pubmsg.retained = 0;
-	if ((rc = MQTTClient_publishMessage(client, TOPIC, &pubmsg, &token))
+	if ((rc = MQTTClient_publishMessage(client, topic, &pubmsg, &token))
 			!= MQTTCLIENT_SUCCESS) {
 		printf("Failed to publish message, return code %d\n", rc);
 		exit(EXIT_FAILURE);

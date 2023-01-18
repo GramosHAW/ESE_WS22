@@ -9,7 +9,7 @@
 
 
 using namespace std;
-using json = nlohmann::json;
+#define BROKER_ADR "192.168.178.85" // Kramus
 
 
 void ContextData::setFlagEStopp(bool flag) {
@@ -36,12 +36,25 @@ ContextData::werkstueck* ContextData::create_new_werckstuck() {
 	return (new werkstueck);
 }
 
-void ContextData::createJSON(int id, Werkstucktup type, int meanheight, int heightSA2) {
+json ContextData::createJSON(int id, Werkstucktup type, int meanheight, int heightSA2) {
 
-	json j;
+
 	j["team"] = 1.2;
 	j["id"] = id;
 	j["type"] = type;
 	j["meanheight"] = meanheight;
 	j["heightSA2"] = heightSA2;
+	return j;
 }
+
+void ContextData::sendJSON() {
+	const char* topic = "FESTO";
+		MQTTClient mqttClient;
+		mqttClient = new MQTTClient();
+		infoClient* info_client = new infoClient(mqttClient, "lappytoppy");
+		MQTT_client* cl = new MQTT_client(BROKER_ADR);
+
+		cl->publish(*info_client, topic, createJSON(j.at("id"),j.at("type"), j.at("meanheight"), j.at("heightSA2")));
+}
+
+

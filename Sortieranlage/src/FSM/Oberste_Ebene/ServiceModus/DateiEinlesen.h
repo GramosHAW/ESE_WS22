@@ -24,7 +24,7 @@ public:
 	void showState() override;
 	void entry() override;
 	void timeOut();
-	fstream readDatei(string);
+	bool readDatei();
 	void setReihenfolge(string);
 
 };

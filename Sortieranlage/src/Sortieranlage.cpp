@@ -35,6 +35,7 @@
 #include "simqnxirqapi.h"
 #include "simqnxgpioapi.h" // must be last include !!!
 
+#define BROKER_ADR "192.168.178.85" // Kramus
 
 //#ifndef RUN_TESTS
 
@@ -53,6 +54,9 @@ Sortieranlage::~Sortieranlage() {
 
 
 int main(int argc, char *argv[]) {
+
+	using json = nlohmann::json;
+
 	SimulatedADC* simADC = new SimulatedADC();
 	simADC->startthread();
 	//ADCreader adcreader;
@@ -74,7 +78,16 @@ int main(int argc, char *argv[]) {
 	akt->start_aktorik_PulsResiver_THREAD();
 	//adcreader.startthread();
 
+
 	simulationStarter->startSimulation();
+//	const char* topic = "FESTO";
+//	MQTTClient mqttClient;
+//	mqttClient = new MQTTClient();
+//	infoClient* info_client = new infoClient(mqttClient, "lappytoppy");
+//	MQTT_client* cl = new MQTT_client(BROKER_ADR);
+
+//  cl->publish(*info_client, topic, json j);
+
 
 
 	while (1) {
