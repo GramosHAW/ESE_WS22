@@ -18,6 +18,11 @@
 
 #define STR_MSG (_IO_MAX + 1)
 #define DATA_MSG (_IO_MAX + 2)
+#define WERKSTUECK0 0x49
+#define WERKSTUECK1 0x4A
+#define WERKSTUECK2 0x4B
+#define WERKSTUECK3 0x4C
+#define WERKSTUECK4 0x4D
 
 #include <stdio.h>
 #include <errno.h>
@@ -33,6 +38,24 @@
 #include <sys/neutrino.h>
 #include <sys/netmgr.h>
 #include "../Events.h"
+#include <cstdint>
+
+	enum Werkstucktup{
+			flach,
+			hoch,
+			loch,
+			metal,
+			undefined
+	};
+
+	struct werkstueck {
+		int id;
+		int heightSA1;
+		int heightSA1mean;
+		int heightSA2;
+		Werkstucktup tup;
+		int flipt = 0; //auf 1 sezen wenn der WS fipted
+	};
 class ExternDispatcher {
 
 public:
@@ -51,10 +74,11 @@ private:
 
 	int server_coid;
 	int dispatcherServer;
-
+	werkstueck werk;
 	static void handle_app_msg(header_t hdr, int rcvid);
 	static void handle_QNX_IO_msg(header_t hdr, int rcvid);
 	void handle_pulse(header_t hdr, int rcvid);
+	void sendWerkstueck(werkstueck* );
 };
 typedef struct _pulse header_t;
 /* Second header: used by application - if required */

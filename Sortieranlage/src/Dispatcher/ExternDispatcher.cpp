@@ -13,6 +13,7 @@ ExternDispatcher::ExternDispatcher() {
 	this->externChid = ChannelCreate(0);
 	this->server_coid=0;
 	this->dispatcherServer = 0;
+	this->werk={};
 
 }
 
@@ -98,6 +99,29 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		 * a signal or timed out). It's up to you if you
 		 * reply now or later. */
 		break;
+	case WERKSTUECK0:
+		werk.tup=static_cast<Werkstucktup>(hdr.value.sival_int);
+		break;
+	case WERKSTUECK1:
+		werk.flipt = hdr.value.sival_int;
+		break;
+	case WERKSTUECK2:
+		werk.heightSA1 = hdr.value.sival_int;
+		break;
+	case WERKSTUECK3:
+		werk.heightSA1mean = hdr.value.sival_int;
+		break;
+	case WERKSTUECK4:
+	{
+		werk.id = hdr.value.sival_int;
+		werk.heightSA2 = 0;
+		uintptr_t werkPtrInt = uintptr_t(&werk);
+		printf("id: %d, heightSA1: %d, heightSA1mean: %d, enum: %d", werk.id,
+				werk.heightSA1, werk.heightSA1mean, (int) werk.tup);
+		MsgSendPulse(this->dispatcherServer, PSMG_SW_WS_DATA_SA2,
+		SIGEV_PULSE_PRIO_INHERIT, werkPtrInt);
+	}
+		break;
 	default:
 		/* A pulse sent by one of your processes or a
 		 * _PULSE_CODE_COIDDEATH or _PULSE_CODE_THREADDEATH
@@ -150,14 +174,45 @@ int ExternDispatcher::getchid() {
 	return this->externChid;
 }
 
+void ExternDispatcher::sendWerkstueck(werkstueck* werk) {
+	if (-1
+			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+					WERKSTUECK0, werk->tup)) {
+		perror("Error sending pulse");
+	}
+	if (-1
+			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+					WERKSTUECK1, werk->flipt)) {
+		perror("Error sending pulse");
+	}
+	if (-1
+			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+					WERKSTUECK2, werk->heightSA1)) {
+		perror("Error sending pulse");
+	}
+	if (-1
+			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+					WERKSTUECK3, werk->heightSA1mean)) {
+		perror("Error sending pulse");
+	}
+	if (-1
+			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
+					WERKSTUECK4, werk->id)) {
+		perror("Error sending pulse");
+	}
+	return;
+}
+
+
 void ExternDispatcher::startThread() {
+	/*
 #ifdef SIM_TWIN_B
 		system("slay gns");
 		system("gns -s");
 #else
 		system("slay gns");
 		system("gns -c");
-#endif
+#endif */
 	printf("Hello from start thread..\n");
 	std::thread client(&ExternDispatcher::client, this);
 	std::thread server(&ExternDispatcher::server, this);
@@ -174,8 +229,12 @@ void ExternDispatcher::startThread() {
 	while (1) {
 		int rcvid = MsgReceivePulse(externChid, &msg, sizeof(_pulse), NULL);
 		//int rcvid = MsgReceivePulse(dispatcherServer, &msg, sizeof(_pulse), NULL);
+		if(msg.code == PSMG_SW_WS_DATA){
+			sendWerkstueck(reinterpret_cast<werkstueck*>(msg.value.sival_int));
+			continue;
+		}
 		if (rcvid != -1) {
-			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,msg.code, 0)) {
+			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, 0)) {
 				perror("Error sending pulse");
 			}
 		}

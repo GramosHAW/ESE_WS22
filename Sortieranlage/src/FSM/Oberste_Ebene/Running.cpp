@@ -72,28 +72,36 @@ void Running::initSubState() {
 
 bool Running::BAND_FREI() {
 	bool handled = substateNeuesWerckstuck->BAND_FREI();
-	if (!handled) {
-		return handled;
-	}
 	handled = substateHoenmesser->BAND_FREI();
-	if (!handled) {
-		return handled;
-	}
 	handled = substateAussortieren->BAND_FREI();
-	if (!handled) {
-		return handled;
-	}
 	handled = substateMetallsensor->BAND_FREI();
-	if (!handled) {
-		return handled;
-	}
+	handled = substateRutsche->BAND_FREI();
 #ifndef SIM_TWIN_B
 	handled = substateUbergabe->BAND_FREI();
-	if (!handled) {
-		return handled;
+	if (substateNeuesWerckstuck->isSubEndState()
+			&& substateHoenmesser->isSubEndState()
+			&& substateAussortieren->isSubEndState()
+			&& substateMetallsensor->isSubEndState()
+			&& substateRutsche->isSubEndState()
+			&& substateUbergabe->isSubEndState()) {
+		exit();
+		new (this) BIdle;
+		entry();
+	}
+#else
+	handled = substateEntnahme->BAND_FREI();
+	if(substateNeuesWerckstuck->isSubEndState()
+			&&substateHoenmesser->isSubEndState()
+			&&substateAussortieren->isSubEndState()
+			&&substateMetallsensor->isSubEndState()
+			&&substateRutsche->isSubEndState()
+			&&substateEntnahme->isSubEndState()) {
+		exit();
+		new (this) BIdle;
+		entry();
 	}
 #endif
-	handled = substateRutsche->BAND_FREI();
+
 	return handled;
 }
 /*
@@ -182,11 +190,11 @@ bool Running::MSENS_METALL() {
 	return handled;
 }
 /*
-bool Running::MSENS_METALL_OHNE() {
-	bool handled = substateMetallsensor->MSENS_METALL_OHNE();
-	return handled;
-}
-*/
+ bool Running::MSENS_METALL_OHNE() {
+ bool handled = substateMetallsensor->MSENS_METALL_OHNE();
+ return handled;
+ }
+ */
 bool Running::ELMNT_DURCH() {
 	bool handled = substateAussortieren->ELMNT_DURCH();
 	return handled;

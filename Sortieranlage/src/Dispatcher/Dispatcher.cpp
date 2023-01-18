@@ -2,7 +2,7 @@
 #include "../Events.h"
 #include "../HAL/Aktorik.h"
 #include "../FSM/ImpulsHandler.h"
-
+#include "../FSM/contextdata.h"
 Dispatcher* Dispatcher::m_pInstance { nullptr };
 std::mutex Dispatcher::mutex_;
 Dispatcher *Dispatcher::GetInstance() {
@@ -66,6 +66,20 @@ void Dispatcher::handelHALpuls() {
 		printf("Failure to connect extern Channel");
 	}
 	while (true) {
+/* WSW Übergabe Testkonstrukt + Wenn er das Struct Werkstueck nicht kennt einfach anfang der fkt einfügen, selbe für das Enum.
+#ifndef SIM_TWIN_B
+		printf("Sending Werkstueck to extern..");
+		werkstueck werkstuekTest = {};
+		werkstuekTest.flipt = 1;
+		werkstuekTest.heightSA1 = 2;
+		werkstuekTest.heightSA1mean = 3;
+		werkstuekTest.id=4;
+		werkstuekTest.tup=flach;
+		uintptr_t werkPtrInt = uintptr_t(&werkstuekTest);
+		MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_WS_DATA, werkPtrInt);
+		sleep(10);
+#endif*/
+
 		int rcvid = MsgReceivePulse(dispatcherChannelId, &msg, sizeof(_pulse),
 		NULL);
 		//std::cout << sizeof(msg);
