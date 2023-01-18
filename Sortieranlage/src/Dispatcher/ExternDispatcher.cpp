@@ -205,13 +205,14 @@ void ExternDispatcher::sendWerkstueck(werkstueck* werk) {
 
 
 void ExternDispatcher::startThread() {
+	/*
 #ifdef SIM_TWIN_B
 		system("slay gns");
 		system("gns -s");
 #else
 		system("slay gns");
 		system("gns -c");
-#endif
+#endif */
 	printf("Hello from start thread..\n");
 	std::thread client(&ExternDispatcher::client, this);
 	std::thread server(&ExternDispatcher::server, this);
@@ -230,9 +231,10 @@ void ExternDispatcher::startThread() {
 		//int rcvid = MsgReceivePulse(dispatcherServer, &msg, sizeof(_pulse), NULL);
 		if(msg.code == PSMG_SW_WS_DATA){
 			sendWerkstueck(reinterpret_cast<werkstueck*>(msg.value.sival_int));
+			continue;
 		}
 		if (rcvid != -1) {
-			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,msg.code, 0)) {
+			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, 0)) {
 				perror("Error sending pulse");
 			}
 		}

@@ -18,11 +18,11 @@
 
 #define STR_MSG (_IO_MAX + 1)
 #define DATA_MSG (_IO_MAX + 2)
-#define WERKSTUECK0 99
-#define WERKSTUECK1 98
-#define WERKSTUECK2 97
-#define WERKSTUECK3 96
-#define WERKSTUECK4 95
+#define WERKSTUECK0 0x49
+#define WERKSTUECK1 0x4A
+#define WERKSTUECK2 0x4B
+#define WERKSTUECK3 0x4C
+#define WERKSTUECK4 0x4D
 
 #include <stdio.h>
 #include <errno.h>
