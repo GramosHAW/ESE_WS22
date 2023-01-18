@@ -11,6 +11,7 @@
 #include <limits>
 
 void DateiEinlesen::entry() {
+	showState();
 	setReihenfolge("Reihenfolge.txt");
 }
 
@@ -47,7 +48,7 @@ void DateiEinlesen::setReihenfolge(string file) {
 	b = x.at(1);
 	c = x.at(2);
 
-	cout << a << b << c << "TEST"<< endl ;
+	cout <<"Reihenfolge: "<< a << b << c << endl ;
 
 	// im Switch-Case char checken und in Queue packen
 	switch (a) {
@@ -113,7 +114,10 @@ void DateiEinlesen::setReihenfolge(string file) {
 		break;
 	}
 	datei.close();
+	send_event_payload(PSMG_SW_READDATA_TRUE, 0);
+	data->readData = true;
 }
+
 
 
 fstream DateiEinlesen::readDatei(string file) {
@@ -133,6 +137,16 @@ fstream DateiEinlesen::readDatei(string file) {
 
 
 // TODO
+bool DateiEinlesen::TST_STOP_KURZ(){
+	if (data->readData) {
+		exit();
+		new (this) Standby;
+		entry();
+		return true;
+	}
+	return false;
+}
+
 
 
 void DateiEinlesen::timeOut() {
