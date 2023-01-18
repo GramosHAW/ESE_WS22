@@ -386,7 +386,7 @@ void Dispatcher::handelHALpuls() {
 			case PSMG_SW_WS_DATA_SA2:
 				MsgSendPulse(fsmchid,
 				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_WS_DATA_SA2, msg.value.sival_int);
+				PSMG_SW_WS_DATA_SA2, (uintptr_t) msg.value.sival_ptr));
 				break;
 			case PSMG_SW_BAND_STATUS:
 				MsgSendPulse(externChId,
