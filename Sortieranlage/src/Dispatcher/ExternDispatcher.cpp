@@ -177,31 +177,31 @@ int ExternDispatcher::getchid() {
 }
 
 void ExternDispatcher::sendWerkstueck(ContextData::werkstueck* werk) {
-	printf("PMSG Werkstueck 0");
+	//printf("PMSG Werkstueck 0 %d", werk->tup);
 	if (-1
 			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
 					WERKSTUECK0, werk->tup)) {
 		perror("Error sending pulse");
 	}
-	printf("PMSG Werkstueck 1");
+	//printf("PMSG Werkstueck 1 %d", werk->tup);
 	if (-1
 			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
 					WERKSTUECK1, werk->flipt)) {
 		perror("Error sending pulse");
 	}
-	printf("PMSG Werkstueck 2");
+	printf("PMSG Werkstueck 2 heigh: %d\n", werk->heightSA1);
 	if (-1
 			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
 					WERKSTUECK2, werk->heightSA1)) {
 		perror("Error sending pulse");
 	}
-	printf("PMSG Werkstueck 3");
+	printf("PMSG Werkstueck 3\n");
 	if (-1
 			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
 					WERKSTUECK3, werk->heightSA1mean)) {
 		perror("Error sending pulse");
 	}
-	printf("PMSG Werkstueck 4");
+	printf("PMSG Werkstueck 4 ID: %d \n", werk->id);
 	if (-1
 			== MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT,
 					WERKSTUECK4, werk->id)) {
