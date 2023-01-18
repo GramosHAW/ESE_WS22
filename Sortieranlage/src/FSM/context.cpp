@@ -274,7 +274,7 @@ void Context::awaitEvent() {
 				stateWarnungRutsche->RUTSCHE_VOLL_BEIDE();
 				stateWarnungRutsche->showState();
 				break;
-			case PSMG_SW_WS_DATA_SA2:
+			case PSMG_SW_WS_DATA:
 				data.ubergebeneWS = (ContextData::werkstueck*) msg.value.sival_ptr;
 				break;
 				//Hoenmesser////////////////////////////////////////////////////////
