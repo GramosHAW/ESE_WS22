@@ -38,7 +38,9 @@ bool CheckSort::ELMNT_DURCH() {
 
 void CheckSort::sort() {
 	if(data->QReihenfolge.size() == 0){
-		//TODO
+		data->QReihenfolge.push(data->folge[0]);
+		data->QReihenfolge.push(data->folge[1]);
+		data->QReihenfolge.push(data->folge[2]);
 	}
 #ifdef SIM_TWIN_B
 	ContextData::werkstueck* ws = data->Q1.front();

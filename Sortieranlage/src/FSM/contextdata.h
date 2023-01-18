@@ -40,6 +40,8 @@ public:
 			undefined
 	};
 
+	Werkstucktup folge[3]= {flach, hoch, metal};
+
 	struct werkstueck {
 		int id;
 		int heightSA1;

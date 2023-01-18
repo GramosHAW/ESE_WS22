@@ -83,7 +83,7 @@
 #define 	PSMG_SW_HM_SETWERT 		            0x44
 
 	//Sortierelement
-#define     PSMG_SE_SORT_AUSSORTIERT            0x41 // TODO ubenenean
+#define     PSMG_SW_SORT_AUSSORTIERT            0x41 // TODO ubenenean
 #define		PSMG_SW_SORT_AUSSORT				0x25
 #define		PSMG_SW_SORT_DURCH					0x26
 #define 	PSMG_SW_SORT_ELMNT_AUSSORT			0x71
