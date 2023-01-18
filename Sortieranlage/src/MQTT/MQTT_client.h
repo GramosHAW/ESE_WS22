@@ -14,26 +14,33 @@
 #include <fstream>
 #include <string.h>
 #include "../MQTTpaho/MQTTclient.h"
+#include "json.hpp"
+#include "infoClient.h"
 
 
+
+using json = nlohmann::json;
 //#include <mosquittopp.h>
 
-class MQTT_Client{
+class MQTT_client{
 	//static int disp_coid = -1;
 private:
-	const char* brockerAdr;
+	const char* brokerAddr;
 
 public:
 
 #define ADDRESS 	"tcp://localhost:1883"
 #define	CLIENTID 	"TestClient"
-#define TOPIC 		"WERKSTUECK INFO"
+#define TOPIC 		"FESTO/"
 #define PAYLOAD 	"HELLO WERKSTÜCK"
 #define QOS 		1
 #define TIMEOUT 	10000L
 
 
-	int publish();
+	MQTT_client(const char*);
+	virtual ~MQTT_client();
+
+	int publish(infoClient&, const char*, json);
 	void clientConnect();
 
 

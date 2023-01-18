@@ -16,6 +16,8 @@
 #include <fstream>
 #include "../../Queue/ThreadsafeQueue.h"
 #include "../../contextdata.h"
+#include "Standby.h"
+#include "../../context.h"
 
 class DateiEinlesen : BaseState {
 private:
@@ -23,8 +25,9 @@ private:
 public:
 	void showState() override;
 	void entry() override;
+	bool TST_STOP_KURZ() override;
 	void timeOut();
-	fstream readDatei(string);
+
 	void setReihenfolge(string);
 
 };
