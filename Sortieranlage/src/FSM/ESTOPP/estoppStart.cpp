@@ -16,6 +16,17 @@
 
 void estoppStart::entry(){
 	send_event_payload(PSMG_SW_AMPEL_ROT_BLINK, 6);
+	while(data->Q1.size() != 0){
+		data->Q1.pop();
+	}
+#ifndef SIM_TWIN_B
+	while(data->Q2.size() != 0){
+		data->Q2.pop();
+	}
+	while(data->Q3.size() != 0){
+		data->Q3.pop();
+	}
+#endif
 }
 
 void estoppStart::exit() {
