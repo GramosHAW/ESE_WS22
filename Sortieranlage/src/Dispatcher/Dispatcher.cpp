@@ -72,6 +72,104 @@ void Dispatcher::handelHALpuls() {
 		if (rcvid != -1) {
 			//printf("by Dispatcher resived %d\n", msg.value);
 			switch (msg.code) {
+			//E-Stopp////////////////////////////////////////////////////////////////////
+		case PSMG_HW_E_STOPP_TRUE:
+#ifdef SIM_TWIN_B
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_E_STOPP_TRUE_SA2, 0);
+			MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_E_STOPP_TRUE_SA2, 0);
+			break;
+#else
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_TRUE_SA1, 0);
+			MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_TRUE_SA1, 0);
+			break;
+#endif
+		case PSMG_HW_E_STOPP_FALSE:
+#ifdef SIM_TWIN_B
+			//Für SA2
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_E_STOPP_FALSE_SA2, 0);
+			MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_HW_E_STOPP_FALSE_SA2, 0);
+			break;
+#else
+			// für SA1
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_FALSE_SA1, 0);
+			MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_FALSE_SA1, 0);
+			break;
+#endif
+		case PSMG_HW_E_STOPP_TRUE_SA1:
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_TRUE_SA1, 0);
+			break;
+		case PSMG_HW_E_STOPP_TRUE_SA2:
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_TRUE_SA2, 0);
+			break;
+		case PSMG_HW_E_STOPP_FALSE_SA1:
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_FALSE_SA1, 0);
+			break;
+		case PSMG_HW_E_STOPP_FALSE_SA2:
+			MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_HW_E_STOPP_FALSE_SA2, 0);
+			break;
+		case PSMG_ESTOPP_OK_SA1:
+
+#ifdef SIM_TWIN_B
+			//SA2
+			MsgSendPulse(fsmchid,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+#else
+			//SA1
+			MsgSendPulse(externChId,
+			SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
+#endif
+			break;
+		case PSMG_ESTOPP_OK_SA2:
+#ifdef SIM_TWIN_B
+			//SA2
+			MsgSendPulse(externChId,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
+#else				//SA1
+			MsgSendPulse(fsmchid,
+			SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
+
+#endif
+			break;
+		case PSMG_SW_ESTOPP_QUIT:
+			//SA1
+
+#ifdef SIM_TWIN_B
+			MsgSendPulse(externChId,
+					SIGEV_PULSE_PRIO_INHERIT,
+					PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
+#else
+			MsgSendPulse(externChId,
+			SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_SW_ESTOPP_QUIT_SA1, msg.value.sival_int);
+#endif
+
+			break;
+		case PSMG_SW_ESTOPP_QUIT_SA1:
+			MsgSendPulse(fsmchid,
+			SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_SW_ESTOPP_QUIT, msg.value.sival_int);
+			break;
+		case PSMG_SW_ESTOPP_QUIT_SA2:
+			MsgSendPulse(fsmchid,
+			SIGEV_PULSE_PRIO_INHERIT,
+			PSMG_SW_ESTOPP_QUIT, msg.value.sival_int);
+			break;
 			//Lichtschranke///////////////////////////////////////////////////////
 			case PSMG_HW_LS_START_FREI:
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
@@ -153,104 +251,6 @@ void Dispatcher::handelHALpuls() {
 				break;
 			case PSMG_HW_MSENS_KEIN_METALL:
 				//TODO
-				break;
-				//E-Stopp////////////////////////////////////////////////////////////////////
-			case PSMG_HW_E_STOPP_TRUE:
-#ifdef SIM_TWIN_B
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_HW_E_STOPP_TRUE_SA2, 0);
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_HW_E_STOPP_TRUE_SA2, 0);
-				break;
-#else
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_TRUE_SA1, 0);
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_TRUE_SA1, 0);
-				break;
-#endif
-			case PSMG_HW_E_STOPP_FALSE:
-#ifdef SIM_TWIN_B
-				//Für SA2
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_HW_E_STOPP_FALSE_SA2, 0);
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_HW_E_STOPP_FALSE_SA2, 0);
-				break;
-#else
-				// für SA1
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_FALSE_SA1, 0);
-				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_FALSE_SA1, 0);
-				break;
-#endif
-			case PSMG_HW_E_STOPP_TRUE_SA1:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_TRUE_SA1, 0);
-				break;
-			case PSMG_HW_E_STOPP_TRUE_SA2:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_TRUE_SA2, 0);
-				break;
-			case PSMG_HW_E_STOPP_FALSE_SA1:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_FALSE_SA1, 0);
-				break;
-			case PSMG_HW_E_STOPP_FALSE_SA2:
-				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_HW_E_STOPP_FALSE_SA2, 0);
-				break;
-			case PSMG_ESTOPP_OK_SA1:
-
-#ifdef SIM_TWIN_B
-				//SA2
-				MsgSendPulse(fsmchid,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
-#else
-				//SA1
-				MsgSendPulse(externChId,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_ESTOPP_OK_SA1, msg.value.sival_int);
-#endif
-				break;
-			case PSMG_ESTOPP_OK_SA2:
-#ifdef SIM_TWIN_B
-				//SA2
-				MsgSendPulse(externChId,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
-#else				//SA1
-				MsgSendPulse(fsmchid,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_ESTOPP_OK_SA2, msg.value.sival_int);
-
-#endif
-				break;
-			case PSMG_SW_ESTOPP_QUIT:
-				//SA1
-
-#ifdef SIM_TWIN_B
-				MsgSendPulse(externChId,
-						SIGEV_PULSE_PRIO_INHERIT,
-						PSMG_SW_ESTOPP_QUIT_SA2, msg.value.sival_int);
-#else
-				MsgSendPulse(externChId,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_ESTOPP_QUIT_SA1, msg.value.sival_int);
-#endif
-
-				break;
-			case PSMG_SW_ESTOPP_QUIT_SA1:
-				MsgSendPulse(fsmchid,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_ESTOPP_QUIT, msg.value.sival_int);
-				break;
-			case PSMG_SW_ESTOPP_QUIT_SA2:
-				MsgSendPulse(fsmchid,
-				SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_ESTOPP_QUIT, msg.value.sival_int);
 				break;
 				//Hohenmesser//////////////////////////////////////////////////////////////
 			case PSMG_SW_HM_START:
@@ -424,6 +424,32 @@ void Dispatcher::handelHALpuls() {
 
 #endif
 				break;
+
+				//////FEHLER////////////////////////////////////////////////////////////
+			case PSMG_SW_FEHLER_TRUE:
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_FEHLER_TRUE, msg.value.sival_int);
+#ifdef SIM_TWIN_B
+				MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_FEHLER_TRUE_SA2, msg.value.sival_int);
+#else
+				MsgSendPulse(externChId,
+						SIGEV_PULSE_PRIO_INHERIT,
+						PSMG_SW_FEHLER_TRUE_SA1, msg.value.sival_int);
+#endif
+				break;
+			case PSMG_SW_FEHLER_TRUE_SA1:
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_FEHLER_TRUE, msg.value.sival_int);
+				break;
+			case PSMG_SW_FEHLER_TRUE_SA2:
+				MsgSendPulse(fsmchid,
+				SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_FEHLER_TRUE, msg.value.sival_int);
+				break;
 				//TO AKTORIK///////////////////////////////////////////////////////////////////////
 				//AMPEL////////////////////////////////////////////////////////////////////
 			case PSMG_SW_AMPEL_GRUEN_BLINK:
@@ -467,14 +493,14 @@ void Dispatcher::handelHALpuls() {
 				PSMG_SW_AMPEL_GELB_AUS, msg.value.sival_int);
 				break;
 				//BAND///////////////////////////////////////////////////////////////////////
+			case PSMG_SW_BAND_STOP:
+				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
+				PSMG_SW_BAND_STOP, 0);
+				break;
 			case PSMG_SW_BAND_START:
 				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_BAND_START, 0);
 				//TODO
-				break;
-			case PSMG_SW_BAND_STOP:
-				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,
-				PSMG_SW_BAND_STOP, 0);
 				break;
 			case PSMG_SW_BAND_SLOW_AN:
 				MsgSendPulse(connectionIdHalAktorik, SIGEV_PULSE_PRIO_INHERIT,

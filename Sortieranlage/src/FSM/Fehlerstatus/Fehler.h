@@ -11,6 +11,7 @@
 #include "../BaseState.h"
 
 class Fehler : public BaseState {
+	void entry() override;
 
 	void entryStartNode() override;
 

@@ -21,6 +21,25 @@ void ESTOPP::entry() {
 	cout << " ESTOPP::entry() | AMPEL ROT AN BLINK, 6hz" << endl;
 	send_event_payload(PSMG_SW_AMPEL_ROT_BLINK, 6);
 	send_event_payload(PSMG_SW_BAND_STOP, 0);
+	send_event_payload(PSMG_SW_AMPEL_ROT_BLINK, 6);
+	while(data->Q1.size() != 0){
+		data->Q1.pop();
+	}
+	while(data->QReihenfolge.size() != 0){
+		data->QReihenfolge.pop();
+	}
+#ifndef SIM_TWIN_B
+	while(data->Q2.size() != 0){
+		data->Q2.pop();
+	}
+	while(data->Q3.size() != 0){
+		data->Q3.pop();
+	}
+#endif
+	data->setrutsche_voll1(false);
+	data->setrutsche_voll2(false);
+	send_event(PSMG_SW_BAND_SLOW_AUS);
+	send_event(PSMG_SW_SORT_AUSSORTIERT);
 	// Sort Zu
 }
 

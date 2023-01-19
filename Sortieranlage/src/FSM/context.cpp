@@ -130,6 +130,35 @@ void Context::awaitEvent() {
 		//printf("Pulse: %d\n", msg.code);
 		if (rcvid != -1) {
 			switch (msg.code) {
+			//ESTOP//////////////////////////////////////////////////////////
+		case PSMG_HW_E_STOPP_TRUE_SA1:
+			state->ESTOPP_TRUE_SA1();
+			state->showState();
+			break;
+		case PSMG_HW_E_STOPP_TRUE_SA2:
+			state->ESTOPP_TRUE_SA2();
+			state->showState();
+			break;
+		case PSMG_HW_E_STOPP_FALSE_SA1:
+			state->ESTOPP_FALSE_SA1();
+			state->showState();
+			break;
+		case PSMG_HW_E_STOPP_FALSE_SA2:
+			state->ESTOPP_FALSE_SA2();
+			state->showState();
+			break;
+		case PSMG_ESTOPP_OK_SA1:
+			state->ESTOPP_OK_SA1();
+			state->showState();
+			break;
+		case PSMG_ESTOPP_OK_SA2:
+			state->ESTOPP_OK_SA2();
+			state->showState();
+			break;
+		case PSMG_SW_ESTOPP_QUIT:
+			state->ESTOPP_QUIT();
+			state->showState();
+			break;
 			//TASTEN////////////////////////////////////////////////////////
 			case PSMG_HW_TST_START_KURZ:
 				state->TST_START_KURZ();
@@ -192,42 +221,13 @@ void Context::awaitEvent() {
 				state->LS_ENDE_BLOCK();
 				state->showState();
 				break;
-				//ESTOP//////////////////////////////////////////////////////////
-			case PSMG_HW_E_STOPP_TRUE_SA1:
-				state->ESTOPP_TRUE_SA1();
-				state->showState();
-				break;
-			case PSMG_HW_E_STOPP_TRUE_SA2:
-				state->ESTOPP_TRUE_SA2();
-				state->showState();
-				break;
-			case PSMG_HW_E_STOPP_FALSE_SA1:
-				state->ESTOPP_FALSE_SA1();
-				state->showState();
-				break;
-			case PSMG_HW_E_STOPP_FALSE_SA2:
-				state->ESTOPP_FALSE_SA2();
-				state->showState();
-				break;
-			case PSMG_ESTOPP_OK_SA1:
-				state->ESTOPP_OK_SA1();
-				state->showState();
-				break;
-			case PSMG_ESTOPP_OK_SA2:
-				state->ESTOPP_OK_SA2();
-				state->showState();
-				break;
-			case PSMG_SW_ESTOPP_QUIT:
-				state->ESTOPP_QUIT();
-				state->showState();
-				break;
 				//Sofwere//////////////////////////////////////////////////////
 			case PSMG_SW_BAND_STATUS:
 				state->BAND_STATUS();
 				state->showState();
 				break;
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
-				//stateWarnungRutsche->ELMNT_AUSSORT();
+				stateWarnungRutsche->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
