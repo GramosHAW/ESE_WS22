@@ -61,6 +61,7 @@ void HoheKalkulieren::calculateHigt() {
 		}
 	}
 	if (werkstucktup != ContextData::undefined) {
+
 #ifdef SIM_TWIN_B
 		if (werkstucktup !=data->Q1.front()->tup ){
 			data->Q1.front()->flipt=1;
