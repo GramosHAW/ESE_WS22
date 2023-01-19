@@ -61,10 +61,15 @@ void HoheKalkulieren::calculateHigt() {
 		}
 	}
 	if (werkstucktup != ContextData::undefined) {
-		data->Q1.front()->tup = werkstucktup;
 #ifdef SIM_TWIN_B
+		if (werkstucktup !=data->Q1.front()->tup ){
+			data->Q1.front()->flipt=1;
+			send_event(PSMG_SW_WS_FLIPPED);
+		}
+		data->Q1.front()->tup = werkstucktup;
 		data->Q1.front()->heightSA2 = (3640-mittelwert_ausen)*0.3;
 #else
+		data->Q1.front()->tup = werkstucktup;
 		data->Q1.front()->heightSA1 = (3640-mittelwert_ausen)*0.3;
 		data->Q1.front()->heightSA1mean= (3640-((mittelwert_ausen+mittelwert_mittel)/2))*0.3;
 		data->Q2.push(data->Q1.pop());

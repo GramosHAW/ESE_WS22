@@ -203,8 +203,8 @@ void ExternDispatcher::startThread() {
 			perror("Extern error receiving pulse");
 			continue;
 		}
-		if(msg.code >= 0x49 && msg.code <= 0x4D){
-			printf("Werkstueckdata: %d \n", msg.value.sival_int);
+		if(msg.code >= PSMG_WS_DATA_TUP && msg.code <= PSMG_WS_DATA_ID){
+			printf("Werkstueckdata: %d PMSG: %x \n", msg.value.sival_int, msg.code);
 			MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, msg.value.sival_int);
 			continue;
 		}
