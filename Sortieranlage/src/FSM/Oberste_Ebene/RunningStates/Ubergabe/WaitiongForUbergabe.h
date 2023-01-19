@@ -10,7 +10,7 @@
 
 #include "../../../BaseState.h"
 
-class DuMushi: public BaseState {
+class WaitiongForUbergabe: public BaseState {
 	void entry() override;
 	void exit() override;
 

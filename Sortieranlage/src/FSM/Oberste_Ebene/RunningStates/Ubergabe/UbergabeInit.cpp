@@ -7,8 +7,8 @@
 
 #include "UbergabeInit.h"
 #include "WaitUebergabe.h"
-#include "DuMushi.h"
 #include "../../../SubEnd.h"
+#include "WaitiongForUbergabe.h"
 
 void UbergabeInit::entry(){
 }
@@ -23,7 +23,7 @@ void UbergabeInit::showState(){
 
 bool UbergabeInit::LS_ENDE_BLOCK(){
 	exit();
-	new(this) DuMushi;
+	new(this) WaitiongForUbergabe;
 	entry();
 	return true;
 }
