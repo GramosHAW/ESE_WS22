@@ -61,17 +61,11 @@ void HoheKalkulieren::calculateHigt() {
 		}
 	}
 	if (werkstucktup != ContextData::undefined) {
-<<<<<<< HEAD
-#ifdef SIM_TWIN_B
-		if (werkstucktup !=data->Q1.front()->tup ){
-			data->Q1.front()->flipt=1;
-=======
-		printf("Flipt value: %d\n", data->Q1.front()->flipt);
+
 #ifdef SIM_TWIN_B
 		if (werkstucktup !=data->Q1.front()->tup ){
 			data->Q1.front()->flipt=1;
 			printf("Flipt value: %d\n", data->Q1.front()->flipt);
->>>>>>> f2b6871c796d20fb324fa9cbe6582632cb89f09d
 			send_event(PSMG_SW_WS_FLIPPED);
 		}
 		data->Q1.front()->tup = werkstucktup;

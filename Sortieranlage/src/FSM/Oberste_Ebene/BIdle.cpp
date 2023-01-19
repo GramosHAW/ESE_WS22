@@ -38,6 +38,7 @@ bool BIdle::LS_START_BLOCK(){
 		entry();
 		return true;
 #endif
+		return false;
 }
 
 bool BIdle::TST_STOP_KURZ(){
