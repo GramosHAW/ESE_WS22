@@ -246,7 +246,6 @@ void Context::awaitEvent() {
 			case PSMG_SW_BAND_FREI:
 				printf("führe band frei aus \n");
 				state->BAND_FREI();
-				stateWarnungFlipped->BAND_FREI();
 				state->showState();
 				break;
 			case PSMG_SW_BAND_FREI_SA2:
