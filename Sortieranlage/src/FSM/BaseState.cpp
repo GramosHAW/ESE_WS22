@@ -115,10 +115,10 @@ void BaseState::connect_send_WS() {
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;
 	}
-	/*if (MsgSendPulse(coid, -1, PSMG_WS_DATA_TUP , data->Q3.front()->tup) == -1){
+	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_TUP ,(int32_t) data->Q3.front()->tup) == -1){
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;
-	}*/
+	}
 	if (MsgSendPulse(coid, -1, PSMG_WS_DATA_HEIGHTSA1MEAN , (int32_t)data->Q3.front()->heightSA1mean) == -1){
 		perror("Error sending psmg in Basestate during SendWerkstück");
 		return;

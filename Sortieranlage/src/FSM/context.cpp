@@ -303,7 +303,7 @@ void Context::awaitEvent() {
 				break;
 				//DEFOULT/////////////////////////////////////////////////////
 			case PSMG_WS_DATA_TUP:
-				//data.ubergebeneWS->tup =static_cast<ContextData::Werkstucktup>(msg.value.sival_int);
+				data.ubergebeneWS->tup =static_cast<ContextData::Werkstucktup>(msg.value.sival_int);
 				break;
 			case PSMG_WS_DATA_FLIPT:
 				cout << "MSG FLIPT VON SA1" << msg.value.sival_int << endl;
