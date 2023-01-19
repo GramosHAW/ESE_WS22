@@ -59,7 +59,7 @@ protected:
 
 
 	BaseState *substateWARNRUT;
-
+	BaseState *substateWARNFLIP;
 
 	unsigned char _PMSG;
 	unsigned char _payload;

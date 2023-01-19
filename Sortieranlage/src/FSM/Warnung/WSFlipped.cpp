@@ -25,7 +25,7 @@ bool WSFlipped::WS_FLIPPED(){
 	bool handled = substateWARNFLIP->WS_FLIPPED();
 	return handled;
 }
-bool WSFlipped::WSW_OK(){
+bool WSFlipped::BAND_FREI(){
 	bool handled = substateWARNFLIP->WSW_OK();
 	return handled;
 }

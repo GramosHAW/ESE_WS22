@@ -11,7 +11,10 @@
 #include "../BaseState.h"
 
 class WSumgedreht: public BaseState {
-	bool WSW_OK() override;
+	void entry() override;
+	void exit() override;
+
+	bool BAND_FREI() override;
 	bool ELMNT_AUSSORT() override;
 
 	void showState() override;

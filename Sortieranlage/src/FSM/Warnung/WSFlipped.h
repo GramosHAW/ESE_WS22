@@ -18,7 +18,7 @@ public:
 	void initSubState() override;
 
 	bool WS_FLIPPED() override;
-	bool WSW_OK() override;
+	bool BAND_FREI() override;
 	bool ELMNT_AUSSORT() override;
 
 	void showState() override;

@@ -10,6 +10,7 @@
 #include "Oberste_Ebene/Ruhezustand.h"
 #include "actions.h"
 #include "Warnung/RutscheVoll.h"
+#include "Warnung/WSFlipped.h"
 #include "../HAL/InterruptHandler.h"
 #include "../Events.h"
 #include "WSW/WSWaechter.h"
@@ -60,6 +61,14 @@ Context::Context() {
 	stateWarnungRutsche->entry();
 	stateWarnungRutsche->entryStartNode();
 	stateWarnungRutsche->showState();
+
+	stateWarnungFlipped = new WSFlipped();
+	stateWarnungFlipped->setData(&data);
+	stateWarnungFlipped->initSubState();
+	stateWarnungFlipped->entry();
+	stateWarnungFlipped->entryStartNode();
+	stateWarnungFlipped->showState();
+
 
 //	this->initarray();
 //	this->newWSW();
@@ -228,6 +237,7 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
 				stateWarnungRutsche->ELMNT_AUSSORT();
+				stateWarnungFlipped->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
@@ -236,6 +246,7 @@ void Context::awaitEvent() {
 			case PSMG_SW_BAND_FREI:
 				printf("führe band frei aus \n");
 				state->BAND_FREI();
+				stateWarnungFlipped->BAND_FREI();
 				state->showState();
 				break;
 			case PSMG_SW_BAND_FREI_SA2:
@@ -283,6 +294,10 @@ void Context::awaitEvent() {
 				state->showState();
 				break;
 				//Hoenmesser////////////////////////////////////////////////////////
+			case PSMG_SW_WS_FLIPPED:
+				stateWarnungFlipped->WS_FLIPPED();
+				stateWarnungFlipped->showState();
+				break;
 			case PSMG_SW_HM_START:
 				//cout << " HM -starting reding  mesurment" << endl;
 				state->HM_START();
