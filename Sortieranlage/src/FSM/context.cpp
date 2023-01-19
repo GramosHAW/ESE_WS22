@@ -62,12 +62,12 @@ Context::Context() {
 	stateWarnungRutsche->entryStartNode();
 	stateWarnungRutsche->showState();
 
-	stateWarnungFlipped = new WSFlipped();
-	stateWarnungFlipped->setData(&data);
-	stateWarnungFlipped->initSubState();
-	stateWarnungFlipped->entry();
-	stateWarnungFlipped->entryStartNode();
-	stateWarnungFlipped->showState();
+//	stateWarnungFlipped = new WSFlipped();
+//	stateWarnungFlipped->setData(&data);
+//	stateWarnungFlipped->initSubState();
+//	stateWarnungFlipped->entry();
+//	stateWarnungFlipped->entryStartNode();
+//	stateWarnungFlipped->showState();
 
 
 //	this->initarray();
@@ -237,7 +237,7 @@ void Context::awaitEvent() {
 				break;
 			case PSMG_SW_SORT_ELMNT_AUSSORT:
 				stateWarnungRutsche->ELMNT_AUSSORT();
-				stateWarnungFlipped->ELMNT_AUSSORT();
+		//		stateWarnungFlipped->ELMNT_AUSSORT();
 				state->ELMNT_AUSSORT();
 				break;
 			case PSMG_SW_SORT_ELMNT_DURCH:
@@ -294,8 +294,8 @@ void Context::awaitEvent() {
 				break;
 				//Hoenmesser////////////////////////////////////////////////////////
 			case PSMG_SW_WS_FLIPPED:
-				stateWarnungFlipped->WS_FLIPPED();
-				stateWarnungFlipped->showState();
+		//		stateWarnungFlipped->WS_FLIPPED();
+		//		stateWarnungFlipped->showState();
 				break;
 			case PSMG_SW_HM_START:
 				//cout << " HM -starting reding  mesurment" << endl;

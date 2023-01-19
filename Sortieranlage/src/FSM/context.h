@@ -20,7 +20,7 @@ private:
 	BaseState *WSWarray[10];
 	BaseState *state;
 	BaseState *stateWarnungRutsche;
-	BaseState *stateWarnungFlipped;
+//BaseState *stateWarnungFlipped;
 	Actions *action;
 	ContextData data;
 	std::thread* dispatcher_thread;
