@@ -39,7 +39,6 @@ bool Standby::TST_START_KURZ() {
 
 bool Standby::TST_STOP_KURZ() {
 	// RAUS TRANSITION
-	cout<<"TST stop fkt in standy"<<endl;
 	exit();
 	new (this) SubEnd;
 	entry();
