@@ -125,6 +125,8 @@
 
 	//Fehler
 #define		PSMG_SW_FEHLER_TRUE					0x39
+#define		PSMG_SW_FEHLER_TRUE_SA1				0x4E
+#define		PSMG_SW_FEHLER_TRUE_SA2				0x4F
 #define		PSMG_SW_FEHLER_WS_FEHLT				0x3A
 #define		PSMG_SW_FEHLER_WS_EXTRA				0x3B
 #define		PSMG_SW_FEHLER_BEHOBEN 				0x3C

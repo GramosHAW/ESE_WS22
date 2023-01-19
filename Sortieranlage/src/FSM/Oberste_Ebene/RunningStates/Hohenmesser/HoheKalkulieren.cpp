@@ -65,7 +65,6 @@ void HoheKalkulieren::calculateHigt() {
 #ifdef SIM_TWIN_B
 		if (werkstucktup !=data->Q1.front()->tup ){
 			data->Q1.front()->flipt=1;
-			printf("Flipt value: %d\n", data->Q1.front()->flipt);
 			send_event(PSMG_SW_WS_FLIPPED);
 		}
 		data->Q1.front()->tup = werkstucktup;

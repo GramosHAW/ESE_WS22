@@ -9,7 +9,7 @@
 
 
 using namespace std;
-#define BROKER_ADR "192.168.178.85" // Kramus
+#define BROKER_ADR "192.168.0.194:1883" // Kramus
 
 
 void ContextData::setFlagEStopp(bool flag) {

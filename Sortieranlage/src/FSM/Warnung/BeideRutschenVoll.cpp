@@ -9,7 +9,7 @@
 #include "ErrorRutsche.h"
 
 void BeideRutschenVoll::entry(){
-	send_event_payload(PSMG_SW_RUTSCHE_VOLL_BEIDE, 0);
+	//send_event_payload(PSMG_SW_RUTSCHE_VOLL_BEIDE, 0);
 }
 
 void BeideRutschenVoll::exit(){

@@ -9,6 +9,13 @@
 #include "../Oberste_Ebene/SA1.h"
 #include "AnstehendUnquitert.h"
 
+void Fehler::entry() {
+	send_event(PSMG_SW_AMPEL_GELB_AUS);
+	send_event(PSMG_SW_BAND_STOP);
+	send_event(PSMG_SW_AMPEL_ROT_AN);
+	//TODO bandstop, getDataReady
+}
+
 void Fehler::entryStartNode() {
 	new (substateFEHL) AnstehendUnquitert;
 	substateFEHL->entry();

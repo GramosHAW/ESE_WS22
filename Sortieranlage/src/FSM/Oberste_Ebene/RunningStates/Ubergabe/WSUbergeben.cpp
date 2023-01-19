@@ -11,7 +11,9 @@
 void WSUbergeben::entry(){
 	printf("Hallo entry WS uebergeben");
 	connect_send_WS();
-	send_event_payload(PSMG_SW_BAND_START, 0);
+	if(!data->getEStopp()){
+		send_event_payload(PSMG_SW_BAND_START, 0);
+	}
 }
 
 void WSUbergeben::exit(){
