@@ -51,73 +51,41 @@ void DateiEinlesen::setReihenfolge(string file) {
 	cout <<"Reihenfolge: "<< a << b << c << endl ;
 
 	// im Switch-Case char checken und in Queue packen
-	switch (a) {
-	case 'f':
-		data->folge[0] = data->flach;
-		//data->QReihenfolge.push(data->flach);
-		break;
-	case 'h':
-		//data->QReihenfolge.push(data->hoch);
-		data->folge[0] = data->hoch;
-		break;
-	case 'l':
-		//data->QReihenfolge.push(data->loch);
-		data->folge[0] = data->loch;
-		break;
-	case 'm':
-		//data->QReihenfolge.push(data->metal);
-		data->folge[0] = data->metal;
-		break;
-	default:
-			break;
-	}
+	putINarray(a,0);
+	putINarray(b,1);
+	putINarray(c,2);
 
-	switch (b) {
-	case 'f':
-		//data->QReihenfolge.push(data->flach);
-		data->folge[1] = data->flach;
-		break;
-	case 'h':
-		//data->QReihenfolge.push(data->hoch);
-		data->folge[1] = data->hoch;
-		break;
-	case 'l':
-		//data->QReihenfolge.push(data->loch);
-		data->folge[1] = data->loch;
-		break;
-	case 'm':
-		//data->QReihenfolge.push(data->metal);
-		data->folge[1] = data->metal;
-		break;
-	default:
-			break;
-	}
-
-	switch (c) {
-	case 'f':
-		//data->QReihenfolge.push(data->flach);
-		data->folge[2] = data->flach;
-		break;
-	case 'h':
-		//data->QReihenfolge.push(data->hoch);
-		data->folge[2] = data->hoch;
-		break;
-	case 'l':
-		//data->QReihenfolge.push(data->loch);
-		data->folge[2] = data->loch;
-		break;
-	case 'm':
-		//data->QReihenfolge.push(data->metal);
-		data->folge[2] = data->metal;
-		break;
-	default:
-		break;
-	}
 	datei.close();
 	send_event_payload(PSMG_SW_READDATA_TRUE, 0);
 	data->readData = true;
 }
 
+void DateiEinlesen::putINarray(char letter, int plaz){
+	switch (letter) {
+		case 'f':
+			//data->QReihenfolge.push(data->flach);
+			data->folge[plaz] = data->flach;
+			send_event_payload(PSMG_SW_WS_SEND_ARRAY,data->flach);
+			break;
+		case 'h':
+			//data->QReihenfolge.push(data->hoch);
+			data->folge[plaz] = data->hoch;
+			send_event_payload(PSMG_SW_WS_SEND_ARRAY,data->hoch);
+			break;
+		case 'l':
+			//data->QReihenfolge.push(data->loch);
+			data->folge[plaz] = data->loch;
+			send_event_payload(PSMG_SW_WS_SEND_ARRAY,data->loch);
+			break;
+		case 'm':
+			//data->QReihenfolge.push(data->metal);
+			data->folge[plaz] = data->metal;
+			send_event_payload(PSMG_SW_WS_SEND_ARRAY,data->metal);
+			break;
+		default:
+			break;
+		}
+}
 
 
 

@@ -29,7 +29,8 @@ public:
 	void timeOut();
 
 	void setReihenfolge(string);
-
+private:
+	void putINarray(char letter, int plaz);
 };
 
 

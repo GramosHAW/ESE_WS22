@@ -584,6 +584,15 @@ void Dispatcher::handelHALpuls() {
 				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT,
 				PSMG_SW_READDATA_TRUE, 0);
 				break;
+			case PSMG_SW_WS_SEND_ARRAY:
+#ifdef SIM_TWIN_B
+				MsgSendPulse(fsmchid, SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_WS_SEND_ARRAY,
+										msg.value.sival_int);
+#else
+				MsgSendPulse(externChId, SIGEV_PULSE_PRIO_INHERIT, PSMG_SW_WS_SEND_ARRAY,
+										msg.value.sival_int);
+#endif
+				break;
 			default:
 				printf("%x", msg.code);
 				cout << "Dispacher says: Received uncatched PSMG aka say WAAAT"

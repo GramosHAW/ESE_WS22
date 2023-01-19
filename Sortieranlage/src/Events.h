@@ -101,7 +101,7 @@
 
 	//Werkstücke
 #define		PSMG_SW_WS_DATA						0x2B
-#define		PSMG_SW_WS_SORTED					0x2D
+#define		PSMG_SW_WS_SEND_ARRAY				0x2D
 #define		PSMG_SW_WS_ERHALTEN					0x2E
 #define		PSMG_SW_WS_FLIPPED					0x2F
 //Werkstückdaten

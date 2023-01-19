@@ -16,7 +16,7 @@
 
 class Context {
 private:
-
+	int a = 0;
 	BaseState *WSWarray[10];
 	BaseState *state;
 	BaseState *stateWarnungRutsche;

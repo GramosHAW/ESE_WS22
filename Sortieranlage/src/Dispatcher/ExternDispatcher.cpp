@@ -128,7 +128,7 @@ void ExternDispatcher::handle_pulse(header_t hdr, int rcvid) {
 		break;
 	default:
 		MsgSendPulse(this->dispatcherServer, SIGEV_PULSE_PRIO_INHERIT, hdr.code,
-				0);
+				hdr.value.sival_int);
 		break;
 	}
 }
@@ -209,7 +209,7 @@ void ExternDispatcher::startThread() {
 			continue;
 		}
 		if (rcvid != -1) {
-			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, 0)) {
+			if (-1 == MsgSendPulse(this->server_coid, SIGEV_PULSE_PRIO_INHERIT, msg.code, msg.value.sival_int)) {
 				perror("Error sending pulse");
 			}
 		}

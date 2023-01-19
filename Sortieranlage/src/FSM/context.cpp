@@ -336,6 +336,14 @@ void Context::awaitEvent() {
 				cout << "MSG ID VON SA1" << msg.value.sival_int << endl;
 				data.ubergebeneWS->id = msg.value.sival_int;
 				break;
+			case PSMG_SW_WS_SEND_ARRAY:
+				cout << "Array DATA RECIWED IN SA2:" << msg.value.sival_int << endl;
+				data.folge[a]= (ContextData::Werkstucktup)msg.value.sival_int;
+				a++;
+				if(a==3){
+					a=0;
+				}
+				break;
 			default:
 				cout << "FSM sais: SAY WAAAAAAAAT?????????????" << endl;
 				cout << "PMSG bekommen: " + msg.code << endl;
